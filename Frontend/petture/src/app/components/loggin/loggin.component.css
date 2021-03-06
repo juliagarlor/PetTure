@@ -1,0 +1,26 @@
+div, form{
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+h1{
+    margin: auto;
+    margin-top: 10%;
+    padding: 20px;
+}
+
+form{
+    width: 30%;
+    margin: auto;
+    /* margin-top: 10%; */
+    padding: 20px;
+    border: 1px solid rgb(156, 156, 156);
+    border-radius: 10px;
+}
+
+button{
+    background-color: rgb(255, 187, 0);
+    color: white;
+}

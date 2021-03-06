@@ -1,0 +1,25 @@
+<div>
+    <h1>Petture</h1>
+
+    <form class="example-form" (ngSubmit)="onSubmit(formDirective)" [formGroup]="form" #formDirective = "ngForm">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Username</mat-label>
+            <input type="text" matInput formControlName="username" placeholder="fluffy16">
+            <mat-error *ngIf="username.hasError('required')">
+            Please enter a valid username
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password">
+            <mat-error *ngIf="username.hasError('required')">
+            Password can not be empty
+            </mat-error>
+        </mat-form-field>
+
+        <button mat-flat-button type="submit" [disabled]="form.invalid">Log in</button>
+    </form>  
+
+</div>

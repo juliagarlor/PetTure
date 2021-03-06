@@ -1,0 +1,15 @@
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(221, 221, 221);
+    color: white;
+}
+
+p, h3{
+    margin: auto;
+    text-align: center;
+}
+div{
+    padding: 30px 0 50px 0;
+}

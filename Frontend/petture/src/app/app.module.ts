@@ -8,18 +8,25 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LogginComponent } from './components/loggin/loggin.component';
 import {MatInputModule} from '@angular/material/input'; 
 import {MatButtonModule} from '@angular/material/button';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent } from './components/home/home.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { PostCardComponent } from './components/post-card/post-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    LogginComponent
+    LogginComponent,
+    HomeComponent,
+    NavBarComponent,
+    PostCardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule

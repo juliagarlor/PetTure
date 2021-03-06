@@ -1,0 +1,32 @@
+header{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: rgb(221, 221, 221);
+    color: white;
+}
+
+div{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.logo, .links{
+    flex: 1;
+    padding: 10px
+}
+.logo{
+    display: table;
+}
+.links{
+    justify-content: end;
+}
+
+h3{
+    display: table-cell;
+}
+
+a{
+    padding-left: 5px;
+}

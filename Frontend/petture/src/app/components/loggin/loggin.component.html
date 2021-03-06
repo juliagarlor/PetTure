@@ -19,7 +19,15 @@
             </mat-error>
         </mat-form-field>
 
-        <button mat-flat-button type="submit" [disabled]="form.invalid">Log in</button>
+        
+        <button mat-flat-button type="submit" [disabled]="form.invalid" [routerLink] = "'/home'">
+            <!-- <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> -->
+            Log in
+        <!-- </a> -->
+        </button>
+        
+        <p>Don't have an account? <a href="home-page">Register here.</a> </p>
+        <p>Or explore <a href="home-page">without login.</a> </p>
     </form>  
 
 </div>

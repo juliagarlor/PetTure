@@ -1,0 +1,17 @@
+div{
+    display: flex;
+    width: 50%;
+    margin: auto;
+}
+.pic{
+    flex: 2;
+}
+
+.body{
+    flex: 1;
+}
+
+img{
+    max-height: 100%;
+    max-width: 100%;
+}

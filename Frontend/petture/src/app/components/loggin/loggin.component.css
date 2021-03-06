@@ -14,7 +14,6 @@ h1{
 form{
     width: 30%;
     margin: auto;
-    /* margin-top: 10%; */
     padding: 20px;
     border: 1px solid rgb(156, 156, 156);
     border-radius: 10px;
@@ -23,4 +22,16 @@ form{
 button{
     background-color: rgb(255, 187, 0);
     color: white;
+}
+
+p{
+    margin: auto;
+    padding-top: 10px;
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+    font-weight: 500;
+    color: rgb(43, 177, 43);
 }

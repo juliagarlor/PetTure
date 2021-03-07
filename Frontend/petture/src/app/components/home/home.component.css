@@ -1,6 +1,19 @@
 div{
     display: flex;
     justify-content: center;
-    flex-direction: row;
-    margin-top: 60px;
+    flex-direction: column;
+}
+
+.newpic{
+    margin-top: 80px;
+}
+
+.posts{
+    margin-top: 10px;
+    margin-bottom: 200px;
+}
+
+button{
+    color: #fb8c65;
+    margin: auto;
 }

@@ -17,7 +17,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { SearchComponent } from './components/search/search.component';
 import { ProfileCardComponent } from './components/profile-card/profile-card.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import {MatGridListModule} from '@angular/material/grid-list'; 
+import {MatGridListModule} from '@angular/material/grid-list';
+import { IncomingRequestsComponent } from './components/incoming-requests/incoming-requests.component'; 
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     PostCardComponent,
     SearchComponent,
     ProfileCardComponent,
-    ProfileComponent
+    ProfileComponent,
+    IncomingRequestsComponent
   ],
   imports: [
     BrowserModule,

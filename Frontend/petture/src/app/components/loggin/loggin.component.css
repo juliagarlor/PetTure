@@ -15,12 +15,12 @@ form{
     width: 30%;
     margin: auto;
     padding: 20px;
-    border: 1px solid rgb(156, 156, 156);
+    border: 1px solid #8cb3af;
     border-radius: 10px;
 }
 
 button{
-    background-color: rgb(255, 187, 0);
+    background-color: #58805f;
     color: white;
 }
 
@@ -33,5 +33,5 @@ p{
 a{
     text-decoration: none;
     font-weight: 500;
-    color: rgb(43, 177, 43);
+    color: #2d4441;
 }

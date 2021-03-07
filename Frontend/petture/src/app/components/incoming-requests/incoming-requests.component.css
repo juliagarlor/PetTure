@@ -1,22 +1,16 @@
-div{
-    font-size: 16px;
+.container{
+    font-size: large;
     display: flex;
     justify-content: center;
     flex-direction: column;
-}
-
-.container{
-    margin-top: 60px;
-    margin-bottom: 200px; 
-}
-
-.searchinput{
-    width: 25%;
-    margin: auto;
+    margin-top: 80px;
+    margin-bottom: 200px;
 }
 
 .searchcard{
+    display: flex;
     flex-direction: row;
+    justify-content: space-around;
     width: 50%;
     margin: auto;
     border: 1px solid #8cb3af;
@@ -34,9 +28,14 @@ div{
 
 .buttons{
     flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    margin: auto;
 }
 
 button{
     background-color: #b4281e;
     color: white;
+    font-size: large;
+    margin: 10px;
 }

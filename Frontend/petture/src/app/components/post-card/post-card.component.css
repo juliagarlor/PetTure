@@ -5,7 +5,7 @@ div{
     /* min-height: 20%; */
     height: 400px;
     margin: auto;
-    border: 1px solid rgb(156, 156, 156);
+    border: 1px solid #8cb3af;
     border-radius: 5px;
     margin-top: 10px;
 }

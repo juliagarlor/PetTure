@@ -1,3 +1,8 @@
+.container{
+    margin-top: 7%;
+    margin-bottom: 10%;
+}
+
 div, form{
     font-size: 16px;
     display: flex;
@@ -5,10 +10,22 @@ div, form{
     flex-direction: column;
 }
 
+h1, mat-icon{
+    color: #442f51;
+}
+
 h1{
     margin: auto;
-    margin-top: 10%;
-    padding: 20px;
+    padding: 40px;
+    font-size: 525%;
+    font-family: Brush Script MT, Brush Script Std, cursive;
+}
+
+mat-icon{
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+    padding: 5px;
 }
 
 form{
@@ -20,7 +37,7 @@ form{
 }
 
 button{
-    background-color: #58805f;
+    background-color: #b4281e;
     color: white;
 }
 
@@ -33,5 +50,5 @@ p{
 a{
     text-decoration: none;
     font-weight: 500;
-    color: #2d4441;
+    color: #fb8c65;
 }

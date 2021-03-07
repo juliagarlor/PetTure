@@ -1,33 +1,32 @@
-package com.ironhack.pictureservice.model;
+package com.ironhack.pictureservice.utils.dtos;
 
-import com.ironhack.pictureservice.utils.dtos.*;
+import com.ironhack.pictureservice.model.*;
 
-import javax.persistence.*;
+import javax.validation.constraints.*;
 
-@Entity
-public class Picture {
+public class PictureDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty(message = "A picture must have a name")
     private String pictureName;
+    @NotEmpty(message = "A picture must belong to an user")
     private String userName;
+    @Min(value = 0, message = "You are beautiful!")
     private int licks;
 
 //    Constructors
 
-    public Picture() {
-    }
-
-//    When posting a new picture, it does not have licks yet
-    public Picture(String pictureName, String userName) {
+    public PictureDTO(@NotEmpty(message = "A picture must have a name") String pictureName,
+                      @NotEmpty(message = "A picture must belong to an user") String userName,
+                      @Min(value = 0, message = "You are beautiful!") int licks) {
         this.pictureName = pictureName;
         this.userName = userName;
-        this.licks = 0;
+        this.licks = licks;
     }
 
-    public Picture(PictureDTO pictureDTO) {
-        this(pictureDTO.getPictureName(), pictureDTO.getUserName());
+    public PictureDTO(Picture picture) {
+        this(picture.getPictureName(), picture.getUserName(), picture.getLicks());
+        this.id = picture.getId();
     }
 
 //    Getters and Setters

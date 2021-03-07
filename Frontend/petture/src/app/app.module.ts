@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,6 +13,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
+import {MatIconModule} from '@angular/material/icon';
+import { SearchComponent } from './components/search/search.component';
+import { ProfileCardComponent } from './components/profile-card/profile-card.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import {MatGridListModule} from '@angular/material/grid-list'; 
+
 
 @NgModule({
   declarations: [
@@ -20,7 +27,10 @@ import { PostCardComponent } from './components/post-card/post-card.component';
     LogginComponent,
     HomeComponent,
     NavBarComponent,
-    PostCardComponent
+    PostCardComponent,
+    SearchComponent,
+    ProfileCardComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +39,9 @@ import { PostCardComponent } from './components/post-card/post-card.component';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

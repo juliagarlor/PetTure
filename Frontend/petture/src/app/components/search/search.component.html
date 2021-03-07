@@ -1,0 +1,19 @@
+<app-nav-bar></app-nav-bar>
+<div>
+    <mat-form-field class="searchinput">
+        <input matInput type="text" [(ngModel)]="value">
+        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+          <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <div class="searchcard">
+        <div class="details"><app-profile-card></app-profile-card></div>
+        <div class="buttons">
+            <button mat-flat-button>
+                Send request
+            </button>
+        </div>
+    </div>
+
+</div>

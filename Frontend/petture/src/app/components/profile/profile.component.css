@@ -1,0 +1,42 @@
+.container{
+    width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    margin-bottom: 200px;
+}
+
+.details{
+    display: grid;
+    height: 200px;
+    grid-template-columns: auto auto;
+    column-gap: 10p;
+}
+.profileimg{
+    overflow: hidden;
+    max-width: 200px;
+    height: 200px;
+    border-radius: 200px;
+    margin: auto;
+}
+
+.info{
+    display: grid;
+    grid-template-rows: auto auto;
+    align-content: space-around;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+h2, p{
+    vertical-align: middle; 
+}
+
+.pics{
+    margin-top: 40px;
+}

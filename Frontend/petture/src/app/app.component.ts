@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +11,6 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'petture';
 
-  router: string;
-
-  constructor(private _router: Router){
-    this.router = _router.url;
-    console.log(this.router + (this.router.length < 2));
+  constructor(){
   }
 }

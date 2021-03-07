@@ -1,0 +1,38 @@
+div{
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 60px;
+}
+
+.searchinput{
+    width: 25%;
+    margin: auto;
+}
+
+.searchcard{
+    flex-direction: row;
+    width: 50%;
+    margin: auto;
+    border: 1px solid rgb(156, 156, 156);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.details, .buttons{
+    margin: 0;
+}
+
+.details{
+    flex: 2;
+}
+
+.buttons{
+    flex: 1;
+}
+
+button{
+    background-color: rgb(255, 187, 0);
+    color: white;
+}

@@ -2,19 +2,19 @@ package com.ironhack.edgeservice.utils.dtos;
 
 public class PictureDTO {
 
-    private Long id;
+    private Long picId;
     private String pictureName;
     private String userName;
     private int licks;
 
 //    Getters and Setters
 
-    public Long getId() {
-        return id;
+    public Long getPicId() {
+        return picId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPicId(Long picId) {
+        this.picId = picId;
     }
 
     public String getPictureName() {

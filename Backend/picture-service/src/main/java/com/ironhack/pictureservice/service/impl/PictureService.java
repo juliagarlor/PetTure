@@ -28,6 +28,11 @@ public class PictureService implements IPictureService {
         return output;
     }
 
+    public PictureDTO getPicById(Long id) {
+        Picture pic = checkId(id);
+        return new PictureDTO(pic);
+    }
+
     public PictureDTO newPic(PictureDTO pictureDTO) {
         Picture newPic = new Picture(pictureDTO);
         pictureRepository.save(newPic);

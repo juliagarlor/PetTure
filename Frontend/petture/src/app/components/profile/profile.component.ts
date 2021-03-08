@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Picture } from 'src/app/models/picture';
+import { PictureServiceService } from 'src/app/services/picture-service.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  pictureList: Picture[] = [];
+
+  constructor(
+    private pictureService: PictureServiceService
+  ) { }
 
   ngOnInit(): void {
+    this.pictureService.getPicsByUser('perryThePlatypus').subscribe(result => {
+      this.pictureList = result;
+    })
   }
 
 }

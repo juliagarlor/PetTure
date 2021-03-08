@@ -1,5 +1,7 @@
 package com.ironhack.postservice.model;
 
+import com.ironhack.postservice.utils.dtos.*;
+
 import javax.persistence.*;
 
 @Entity

@@ -16,6 +16,8 @@ public class EdgeService implements IEdgeService {
 
     @Autowired
     private PictureClient pictureClient;
+    @Autowired
+    private PostClient postClient;
 
     private final CircuitBreakerFactory circuitBreakerFactory = new Resilience4JCircuitBreakerFactory();
     private FallBack fallBack = new FallBack();
@@ -38,5 +40,51 @@ public class EdgeService implements IEdgeService {
 
     public void removePic(Long id) {
         pictureClient.removePic(id);
+    }
+
+//    Posts part
+    public PostDTO getPostAndPic(Long postId) {
+        CircuitBreaker pictureCircuitBreaker = circuitBreakerFactory.create("picture-service");
+        CircuitBreaker postCircuitBreaker = circuitBreakerFactory.create("post-service");
+
+        PostDTO post = postCircuitBreaker.run(() -> postClient.getPostsById(postId), throwable -> fallBack.postFallBack());
+        PictureDTO pic = pictureCircuitBreaker.run(() -> pictureClient.getPicById(post.getPictureId()),
+                throwable -> fallBack.picFallBack());
+        post.setPicture(pic);
+        post.setCommentaries(new ArrayList<>());
+        return post;
+    }
+
+    public List<CommentaryDTO> getCommentariesInPost(Long postId) {
+        CircuitBreaker postCircuitBreaker = circuitBreakerFactory.create("post-service");
+        return postCircuitBreaker.run(() -> postClient.getCommentariesInPost(postId),
+                throwable -> fallBack.commentListFallBack());
+    }
+
+    public PostDTO newPost(PostDTO postDTO) {
+        CircuitBreaker postCircuitBreaker = circuitBreakerFactory.create("post-service");
+
+        PictureDTO pic = newPic(postDTO.getPicture());
+        postDTO.setPicture(pic);
+        postDTO.setPictureId(pic.getPicId());
+        PostDTO newPost = postCircuitBreaker.run(() -> postClient.newPost(postDTO), throwable -> fallBack.postFallBack());
+        postDTO.setPostId(newPost.getPostId());
+        postDTO.setCommentaries(new ArrayList<>());
+        return postDTO;
+    }
+
+    public CommentaryDTO addCommentary(CommentaryDTO commentaryDTO) {
+        CircuitBreaker postCircuitBreaker = circuitBreakerFactory.create("post-service");
+
+        return postCircuitBreaker.run(() -> postClient.addCommentary(commentaryDTO),
+                throwable -> fallBack.commentFallBack());
+    }
+
+    public void removePost(Long postId) {
+        CircuitBreaker postCircuitBreaker = circuitBreakerFactory.create("post-service");
+
+        Long picId = postCircuitBreaker.run(() -> postClient.removePost(postId),
+                throwable -> fallBack.picIdFallBack());
+        pictureClient.removePic(picId);
     }
 }

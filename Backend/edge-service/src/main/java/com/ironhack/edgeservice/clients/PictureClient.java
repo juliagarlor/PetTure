@@ -13,6 +13,10 @@ public interface PictureClient {
     @GetMapping("/pics/{userName}")
     List<PictureDTO> getPicsByUser(@PathVariable String userName);
 
+//    Return a picture by id
+    @GetMapping("/pic/{id}")
+    PictureDTO getPicById(@PathVariable Long id);
+
 //    Post a new picture
     @PostMapping("/pic")
     PictureDTO newPic(@RequestBody PictureDTO pictureDTO);

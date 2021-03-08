@@ -12,10 +12,7 @@
 
    <div class="pics">
     <mat-grid-list cols="3" rowHeight="1:1">
-        <mat-grid-tile><img src="assets/images/perry.jpg"></mat-grid-tile>
-        <mat-grid-tile><img src="assets/images/perry.jpg"></mat-grid-tile>
-        <mat-grid-tile><img src="assets/images/perry.jpg"></mat-grid-tile>
-        <mat-grid-tile><img src="assets/images/perry.jpg"></mat-grid-tile>
+        <mat-grid-tile *ngFor = "let pic of pictureList"><img src="{{pic.pictureName}}"></mat-grid-tile>
     </mat-grid-list>      
    </div> 
 </div>

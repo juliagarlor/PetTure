@@ -19,6 +19,7 @@ import { ProfileCardComponent } from './components/profile-card/profile-card.com
 import { ProfileComponent } from './components/profile/profile.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { IncomingRequestsComponent } from './components/incoming-requests/incoming-requests.component'; 
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { IncomingRequestsComponent } from './components/incoming-requests/incomi
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatInputModule,
     MatButtonModule,
     MatIconModule,

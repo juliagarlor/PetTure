@@ -23,7 +23,13 @@ public class PictureController implements IPictureController {
         return pictureService.getPicsByUser(userName);
     }
 
-//    Post a new picture
+//    Return a picture by id
+    @GetMapping("/pic/{id}")
+    public PictureDTO getPicById(@PathVariable Long id) {
+        return pictureService.getPicById(id);
+    }
+
+    //    Post a new picture
     @PostMapping("/pic")
     @ResponseStatus(HttpStatus.OK)
     public PictureDTO newPic(@RequestBody @Valid PictureDTO pictureDTO){

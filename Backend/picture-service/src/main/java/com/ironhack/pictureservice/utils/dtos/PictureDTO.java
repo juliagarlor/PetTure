@@ -6,7 +6,7 @@ import javax.validation.constraints.*;
 
 public class PictureDTO {
 
-    private Long id;
+    private Long picId;
     @NotEmpty(message = "A picture must have a name")
     private String pictureName;
     @NotEmpty(message = "A picture must belong to an user")
@@ -26,17 +26,16 @@ public class PictureDTO {
 
     public PictureDTO(Picture picture) {
         this(picture.getPictureName(), picture.getUserName(), picture.getLicks());
-        this.id = picture.getId();
+        this.picId = picture.getId();
     }
 
 //    Getters and Setters
-
-    public Long getId() {
-        return id;
+    public Long getPicId() {
+        return picId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPicId(Long picId) {
+        this.picId = picId;
     }
 
     public String getPictureName() {

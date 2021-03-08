@@ -1,5 +1,7 @@
 package com.ironhack.postservice.model;
 
+import com.ironhack.postservice.utils.dtos.*;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -11,19 +13,19 @@ public class Post {
     private Long id;
     private String body;
     private Long pictureId;
-    @OneToMany(mappedBy = "post")
-    private List<Commentary> commentaries;
 
 //    Constructors
 
     public Post() {
     }
 
-//    When posting a new photo, we do not have commentaries at the moment
-
     public Post(String body, Long pictureId) {
         this.body = body;
         this.pictureId = pictureId;
+    }
+
+    public Post(PostDTO postDTO){
+        this(postDTO.getPostBody(), postDTO.getPictureId());
     }
 
 //    Getters and Setters
@@ -52,11 +54,4 @@ public class Post {
         this.pictureId = pictureId;
     }
 
-    public List<Commentary> getCommentaries() {
-        return commentaries;
-    }
-
-    public void setCommentaries(List<Commentary> commentaries) {
-        this.commentaries = commentaries;
-    }
 }

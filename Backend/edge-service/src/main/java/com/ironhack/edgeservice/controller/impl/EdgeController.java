@@ -81,4 +81,26 @@ public class EdgeController implements IEdgeController {
     public void removePost(@PathVariable Long postId){
         edgeService.removePost(postId);
     }
+
+//    User part:
+//    Get buddies
+    @GetMapping("/user/{userName}/buddies")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProfileDTO> getBuddies(@PathVariable String userName){
+        return edgeService.getBuddies(userName);
+    }
+
+//    Get requests
+    @GetMapping("/user/{userName}/requests")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProfileDTO> getRequests(@PathVariable String userName){
+        return edgeService.getRequests(userName);
+    }
+
+//    Add new buddy
+    @PutMapping("/user/{userName}/buddy")
+    @ResponseStatus(HttpStatus.OK)
+    public UserDTO addABuddy(@PathVariable String userName, @RequestBody String buddy){
+        return edgeService.addABuddy(userName, buddy);
+    }
 }

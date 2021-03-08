@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserServiceService } from 'src/app/services/user-service.service';
 
 @Component({
   selector: 'app-incoming-requests',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IncomingRequestsComponent implements OnInit {
 
-  constructor() { }
+  userRequests: {userName: string, profilePic: string}[] = [];
+
+  constructor(
+    private userService: UserServiceService
+  ) { }
 
   ngOnInit(): void {
+    this.userService.getRequests('perryThePlatypus').subscribe(data => {
+      this.userRequests = data;
+    })
   }
 
+  addBuddy(userName: string){
+    console.log('En construcción')
+  }
+
+  removeRequest(userName: string){
+    console.log('En construcción')
+  }
 }

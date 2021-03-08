@@ -1,5 +1,6 @@
 package com.ironhack.userservice.model;
 
+import com.ironhack.userservice.utils.dtos.*;
 import com.ironhack.userservice.utils.enums.*;
 import org.hibernate.annotations.*;
 
@@ -20,7 +21,7 @@ public class User {
     @ManyToMany
     @JoinTable(
             name = "user_buddies",
-            joinColumns = { @JoinColumn(name = "current_user") },
+            joinColumns = { @JoinColumn(name = "`current_user`") },
             inverseJoinColumns = { @JoinColumn(name = "buddy") }
     )
     private List<User> buddies;
@@ -42,6 +43,12 @@ public class User {
         this.password = password;
         this.profilePicture = profilePicture;
         this.visibility = visibility;
+        this.buddies = new ArrayList<>();
+        this.requests = new ArrayList<>();
+    }
+
+    public User(UserDTO userDTO){
+        this(userDTO.getUserName(), userDTO.getPassword(), userDTO.getProfilePicture(), Visibility.valueOf(userDTO.getVisibility()));
     }
 
 //    Getters and Setters

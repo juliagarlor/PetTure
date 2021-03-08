@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Picture } from 'src/app/models/picture';
+import { Profile } from 'src/app/models/profile';
 import { PictureServiceService } from 'src/app/services/picture-service.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { PictureServiceService } from 'src/app/services/picture-service.service'
 export class ProfileComponent implements OnInit {
 
   pictureList: Picture[] = [];
+  profile: Profile = new Profile('perryThePlaTypus', '', 'assets/images/perry.jpg', '', 0, 0);
 
   constructor(
     private pictureService: PictureServiceService

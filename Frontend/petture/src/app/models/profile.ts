@@ -6,7 +6,7 @@ export class Profile {
         private _profilePicture: string,
         private _visibility: string,
         private _buddies: number,
-        private _requests: number
+        private _pics: number
     ){}
 
     public get visibility(): string {
@@ -34,11 +34,11 @@ export class Profile {
         this._userName = value;
     }
 
-    public get requests(): number {
-        return this._requests;
+    public get pics(): number {
+        return this._pics;
     }
-    public set requests(value: number) {
-        this._requests = value;
+    public set pics(value: number) {
+        this._pics = value;
     }
     public get buddies(): number {
         return this._buddies;

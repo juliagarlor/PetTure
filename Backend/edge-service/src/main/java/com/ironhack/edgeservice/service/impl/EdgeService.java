@@ -18,6 +18,8 @@ public class EdgeService implements IEdgeService {
     private PictureClient pictureClient;
     @Autowired
     private PostClient postClient;
+    @Autowired
+    private UserClient userClient;
 
     private final CircuitBreakerFactory circuitBreakerFactory = new Resilience4JCircuitBreakerFactory();
     private FallBack fallBack = new FallBack();
@@ -86,5 +88,17 @@ public class EdgeService implements IEdgeService {
         Long picId = postCircuitBreaker.run(() -> postClient.removePost(postId),
                 throwable -> fallBack.picIdFallBack());
         pictureClient.removePic(picId);
+    }
+
+    public List<ProfileDTO> getBuddies(String userName) {
+        return userClient.getBuddies(userName);
+    }
+
+    public List<ProfileDTO> getRequests(String userName) {
+        return userClient.getRequests(userName);
+    }
+
+    public UserDTO addABuddy(String userName, String buddy) {
+        return userClient.addABuddy(userName, buddy);
     }
 }

@@ -1,12 +1,12 @@
 <app-nav-bar></app-nav-bar>
 <div class="container">
-    <div class="searchcard">
-        <div class="details"><app-profile-card></app-profile-card></div>
+    <div class="searchcard" *ngFor = "let request of userRequests">
+        <div class="details"><app-profile-card [userProfile] = "request"></app-profile-card></div>
         <div class="buttons">
-            <button mat-flat-button>
+            <button mat-flat-button (click) = "addBuddy(request.userName)">
                 Confirm
             </button>
-            <button mat-flat-button>
+            <button mat-flat-button (click) = "removeRequest(request.userName)">
                 Delete
             </button>
         </div>

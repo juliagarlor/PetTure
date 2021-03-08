@@ -16,4 +16,8 @@ public interface IEdgeController {
     PostDTO newPost(PostDTO postDTO);
     CommentaryDTO addCommentary(CommentaryDTO commentaryDTO);
     void removePost(Long postId);
+
+    List<ProfileDTO> getBuddies(String userName);
+    List<ProfileDTO> getRequests(String userName);
+    UserDTO addABuddy(String userName, String buddy);
 }

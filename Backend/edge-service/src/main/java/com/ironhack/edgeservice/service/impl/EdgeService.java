@@ -4,9 +4,11 @@ import com.ironhack.edgeservice.clients.*;
 import com.ironhack.edgeservice.service.interfaces.*;
 import com.ironhack.edgeservice.utils.classes.*;
 import com.ironhack.edgeservice.utils.dtos.*;
+import com.ironhack.edgeservice.utils.payload.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.cloud.circuitbreaker.resilience4j.*;
 import org.springframework.cloud.client.circuitbreaker.*;
+import org.springframework.http.*;
 import org.springframework.stereotype.*;
 
 import java.util.*;
@@ -88,6 +90,10 @@ public class EdgeService implements IEdgeService {
         Long picId = postCircuitBreaker.run(() -> postClient.removePost(postId),
                 throwable -> fallBack.picIdFallBack());
         pictureClient.removePic(picId);
+    }
+
+    public ResponseEntity<?> authenticateUser(LoginRequest loginRequest) {
+        return userClient.authenticateUser(loginRequest);
     }
 
     public List<ProfileDTO> getBuddies(String userName) {

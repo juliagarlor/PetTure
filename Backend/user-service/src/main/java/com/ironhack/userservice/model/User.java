@@ -3,6 +3,8 @@ package com.ironhack.userservice.model;
 import com.ironhack.userservice.utils.dtos.*;
 import com.ironhack.userservice.utils.enums.*;
 import org.hibernate.annotations.*;
+import org.springframework.security.crypto.bcrypt.*;
+import org.springframework.security.crypto.password.*;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -34,17 +36,28 @@ public class User {
     )
     private List<User> requests;
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_name"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
+    @Transient
+    protected PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
 //    Constructors
     public User() {
     }
 
     public User(String userName, String password, String profilePicture, Visibility visibility) {
         this.userName = userName;
-        this.password = password;
+        this.password = passwordEncoder.encode(password);
         this.profilePicture = profilePicture;
         this.visibility = visibility;
         this.buddies = new ArrayList<>();
         this.requests = new ArrayList<>();
+        roles.add(new Role("USER"));
     }
 
     public User(UserDTO userDTO){
@@ -99,5 +112,13 @@ public class User {
 
     public void setRequests(List<User> requests) {
         this.requests = requests;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

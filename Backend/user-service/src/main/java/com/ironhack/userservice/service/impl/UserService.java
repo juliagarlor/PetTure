@@ -41,20 +41,6 @@ public class UserService implements IUserService {
         return userRepository.findPublicUserNames(Visibility.PUBLIC);
     }
 
-    public UserDTO newUser(UserDTO userDTO) {
-
-        try {
-            Visibility.valueOf(userDTO.getVisibility().toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Introduce a valid visibility value.");
-        }
-
-        User newUser = new User(userDTO);
-        userRepository.save(newUser);
-
-        return userDTO;
-    }
-
     public ProfileDTO updateProfilePic(String userName, String profilePic) {
         User userToUpdate = checkUserName(userName);
         userToUpdate.setProfilePicture(profilePic);

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserServiceService } from 'src/app/services/user-service.service';
 
 @Component({
   selector: 'app-loggin',
@@ -13,7 +15,10 @@ export class LogginComponent implements OnInit {
   username: FormControl;
   password: FormControl;
 
-  constructor() { 
+  constructor(
+    private userService: UserServiceService,
+    private router: Router
+  ) { 
     this.username = new FormControl('', [Validators.required]);
     this.password = new FormControl('', [Validators.required]);
 
@@ -27,8 +32,15 @@ export class LogginComponent implements OnInit {
   }
 
   onSubmit(form: FormGroupDirective): void {
-    alert("UUUUUH LOGGED");
+    const user = {username: this.username.value, password: this.password.value};
+    console.log(user);
+    this.userService.login(user).subscribe(data => {
+      this.userService.setToken(data.accessToken, data.username);
+      this.router.navigateByUrl('/home');
+    }, error => {
+      // cambia esto cuando puedas
+      alert(error);
+    });
     form.resetForm();
-    console.log(this.form);
   }
 }

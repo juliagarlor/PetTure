@@ -3,6 +3,7 @@ package com.ironhack.edgeservice.controller.impl;
 import com.ironhack.edgeservice.controller.interfaces.*;
 import com.ironhack.edgeservice.service.interfaces.*;
 import com.ironhack.edgeservice.utils.dtos.*;
+import com.ironhack.edgeservice.utils.payload.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,7 @@ import javax.validation.*;
 import java.util.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.PATCH})
 public class EdgeController implements IEdgeController {
 
     @Autowired
@@ -76,29 +77,35 @@ public class EdgeController implements IEdgeController {
     }
 
 //    Remove a post and its pic
-    @DeleteMapping("/post/{postId}")
+    @DeleteMapping("/post/remove/{postId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removePost(@PathVariable Long postId){
         edgeService.removePost(postId);
     }
 
 //    User part:
+//    login
+    @PostMapping("/login")
+    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest){
+        return edgeService.authenticateUser(loginRequest);
+    }
+
 //    Get buddies
-    @GetMapping("/user/{userName}/buddies")
+    @GetMapping("/user/buddies/{userName}")
     @ResponseStatus(HttpStatus.OK)
     public List<ProfileDTO> getBuddies(@PathVariable String userName){
         return edgeService.getBuddies(userName);
     }
 
 //    Get requests
-    @GetMapping("/user/{userName}/requests")
+    @GetMapping("/user/requests/{userName}")
     @ResponseStatus(HttpStatus.OK)
     public List<ProfileDTO> getRequests(@PathVariable String userName){
         return edgeService.getRequests(userName);
     }
 
 //    Add new buddy
-    @PutMapping("/user/{userName}/buddy")
+    @PutMapping("/user/buddy/{userName}")
     @ResponseStatus(HttpStatus.OK)
     public UserDTO addABuddy(@PathVariable String userName, @RequestBody String buddy){
         return edgeService.addABuddy(userName, buddy);

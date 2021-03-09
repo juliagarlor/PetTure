@@ -1,6 +1,8 @@
 package com.ironhack.edgeservice.controller.interfaces;
 
 import com.ironhack.edgeservice.utils.dtos.*;
+import com.ironhack.edgeservice.utils.payload.*;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -17,6 +19,7 @@ public interface IEdgeController {
     CommentaryDTO addCommentary(CommentaryDTO commentaryDTO);
     void removePost(Long postId);
 
+    ResponseEntity<?> authenticateUser(LoginRequest loginRequest);
     List<ProfileDTO> getBuddies(String userName);
     List<ProfileDTO> getRequests(String userName);
     UserDTO addABuddy(String userName, String buddy);

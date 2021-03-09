@@ -20,6 +20,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { IncomingRequestsComponent } from './components/incoming-requests/incoming-requests.component'; 
 import { HttpClientModule } from '@angular/common/http';
+import { routing } from './app.routing';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -37,7 +39,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    routing,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -47,7 +49,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatGridListModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

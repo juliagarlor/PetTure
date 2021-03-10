@@ -50,23 +50,18 @@ public class UserService implements IUserService {
     }
 
     public UserDTO addABuddy(String userName, String buddy) {
-        System.out.println("Looking for " + userName);
         User userToUpdate = checkUserName(userName);
-        System.out.println("Looking for " + buddy);
         User newBuddy = checkUserName(buddy);
 
-        System.out.println("Both found!");
 //        Updating the buddies List of the current user
         List<User> buddies = userToUpdate.getBuddies();
         buddies.add(newBuddy);
         userToUpdate.setBuddies(buddies);
-        System.out.println("Added buddy to current user");
 
 //        And the buddy's buddy list
         buddies = newBuddy.getBuddies();
         buddies.add(userToUpdate);
         newBuddy.setBuddies(buddies);
-        System.out.println("Added buddy to buddy");
 
 //        And saving
         userRepository.saveAll(List.of(userToUpdate, newBuddy));
@@ -80,6 +75,18 @@ public class UserService implements IUserService {
 
         List<User> requests = userToUpdate.getRequests();
         requests.add(newRequest);
+        userToUpdate.setRequests(requests);
+        userRepository.save(userToUpdate);
+
+        return buildUserDTO(userToUpdate);
+    }
+
+    public UserDTO removeRequest(String userName, String request) {
+        User userToUpdate = checkUserName(userName);
+        User oldRequest = checkUserName(request);
+
+        List<User> requests = userToUpdate.getRequests();
+        requests.remove(oldRequest);
         userToUpdate.setRequests(requests);
         userRepository.save(userToUpdate);
 
@@ -116,6 +123,6 @@ public class UserService implements IUserService {
         List<ProfileDTO> requests = buildProfiles(user.getRequests());
 
         return new UserDTO(user.getUserName(), user.getPassword(), user.getProfilePicture(), user.getVisibility().toString(),
-                buddies, requests);
+                buddies, requests, user.getRoles());
     }
 }

@@ -1,7 +1,7 @@
-package com.ironhack.userservice.security;
+package com.ironhack.edgeservice.security;
 
-import com.ironhack.userservice.security.jwt.*;
-import com.ironhack.userservice.security.services.*;
+import com.ironhack.edgeservice.security.jwt.*;
+import com.ironhack.edgeservice.security.services.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.*;
@@ -50,11 +50,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/user/auth/**").permitAll()
+
+                .authorizeRequests()
+                .antMatchers("/login").permitAll()
                 .antMatchers("/users").permitAll()
                 .antMatchers("/user/buddies/**").permitAll()
                 .antMatchers("/user/search/**").permitAll()
-                .anyRequest().authenticated();
+                .antMatchers("/pics/**").permitAll()
+                .anyRequest().permitAll();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

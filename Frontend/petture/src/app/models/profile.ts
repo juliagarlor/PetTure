@@ -1,3 +1,5 @@
+import { Picture } from "./picture";
+
 export class Profile {
 
     constructor(
@@ -5,8 +7,8 @@ export class Profile {
         private _password: string,
         private _profilePicture: string,
         private _visibility: string,
-        private _buddies: number,
-        private _pics: number
+        private _buddiesAmount: number,
+        private _pics: Picture[]
     ){}
 
     public get visibility(): string {
@@ -34,16 +36,17 @@ export class Profile {
         this._userName = value;
     }
 
-    public get pics(): number {
+    public get pics(): Picture[] {
         return this._pics;
     }
-    public set pics(value: number) {
+    public set pics(value: Picture[]) {
         this._pics = value;
     }
+
     public get buddies(): number {
-        return this._buddies;
+        return this._buddiesAmount;
     }
     public set buddies(value: number) {
-        this._buddies = value;
+        this._buddiesAmount = value;
     }
 }

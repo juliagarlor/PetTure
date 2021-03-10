@@ -85,9 +85,16 @@ public class EdgeController implements IEdgeController {
 
 //    User part:
 //    login
-    @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest){
-        return edgeService.authenticateUser(loginRequest);
+//    @PostMapping("/login")
+//    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest){
+//        return edgeService.authenticateUser(loginRequest);
+//    }
+
+//    Get user by username, with all its pictures
+    @GetMapping("/user/search/{userName}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserDTO getUserByUserName(@PathVariable String userName){
+        return edgeService.getUserByUserName(userName);
     }
 
 //    Get buddies
@@ -109,5 +116,12 @@ public class EdgeController implements IEdgeController {
     @ResponseStatus(HttpStatus.OK)
     public UserDTO addABuddy(@PathVariable String userName, @RequestBody String buddy){
         return edgeService.addABuddy(userName, buddy);
+    }
+
+//    Remove requests
+    @PutMapping("/user/remove/request/{userName}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserDTO removeRequest(@PathVariable String userName, @RequestBody String request){
+        return edgeService.removeRequest(userName, request);
     }
 }

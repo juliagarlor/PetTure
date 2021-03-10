@@ -39,14 +39,19 @@ public interface UserClient {
     @PutMapping("/user/request/{userName}")
     UserDTO addRequest(@PathVariable String userName, @RequestBody String request);
 
+//    Remove request
+    @PutMapping("/user/remove/request/{userName}")
+    UserDTO removeRequest(@PathVariable String userName, @RequestBody String request);
+
 //    Remove user and return username
     @DeleteMapping("/user/{userName}")
     String removeUser(@PathVariable String userName);
 
-//    Login
-    @PostMapping("/user/auth/login")
-    ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest);
+////    Login
+//    @PostMapping("/user/auth/login")
+//    ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest);
 
+//    Register
     @PostMapping("/user/auth/register")
     ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO);
 }

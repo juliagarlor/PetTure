@@ -2,6 +2,6 @@ import { Profile } from './profile';
 
 describe('Profile', () => {
   it('should create an instance', () => {
-    expect(new Profile('', '', '', '', 0, 0)).toBeTruthy();
+    expect(new Profile('', '', '', '', 0, [])).toBeTruthy();
   });
 });

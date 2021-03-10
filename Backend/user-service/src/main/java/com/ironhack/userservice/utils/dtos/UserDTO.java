@@ -18,18 +18,20 @@ public class UserDTO {
     private String visibility;
     private List<ProfileDTO> buddies;
     private List<ProfileDTO> requests;
+    private Role roles;
 
 //    Constructors
     public UserDTO(@NotEmpty(message = "Be creative, it's your username") @Length(max = 10, message = "SHORT NAMES!")
                            String userName, @NotEmpty(message = "Password is compulsory") String password,
                    @NotEmpty(message = "Pick your favourite pic") String profilePicture, String visibility,
-                   List<ProfileDTO> buddies, List<ProfileDTO> requests) {
+                   List<ProfileDTO> buddies, List<ProfileDTO> requests, Role roles) {
         this.userName = userName;
         this.password = password;
         this.profilePicture = profilePicture;
         this.visibility = visibility;
         this.buddies = buddies;
         this.requests = requests;
+        this.roles = roles;
     }
 
 //    Getters and Setters
@@ -80,5 +82,13 @@ public class UserDTO {
 
     public void setRequests(List<ProfileDTO> requests) {
         this.requests = requests;
+    }
+
+    public Role getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Role roles) {
+        this.roles = roles;
     }
 }

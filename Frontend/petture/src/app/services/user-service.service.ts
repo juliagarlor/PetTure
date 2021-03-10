@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { Profile } from '../models/profile';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,12 @@ export class UserServiceService {
     return this.cookies.get("username");
   }
 
-  getRequests(userName: string): Observable<BasicProfile[]>{
-    return this.http.get<BasicProfile[]>('http://localhost:8080/user/'+ userName + '/requests')
+  getProfile(): Observable<Profile>{
+    return this.http.get<Profile>('http://localhost:8080/user/search/' + this.getUsername());
+  }
+
+  getRequests(): Observable<BasicProfile[]>{
+    return this.http.get<BasicProfile[]>('http://localhost:8080/user/requests/'+ this.getUsername());
   }
 }
 

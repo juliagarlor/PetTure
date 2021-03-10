@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.*;
 import org.springframework.security.crypto.password.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import java.util.*;
 
@@ -35,14 +36,9 @@ public class User {
             inverseJoinColumns = { @JoinColumn(name = "requesting_user") }
     )
     private List<User> requests;
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_name"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles = new HashSet<>();
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Role role;
     @Transient
     protected PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -57,7 +53,7 @@ public class User {
         this.visibility = visibility;
         this.buddies = new ArrayList<>();
         this.requests = new ArrayList<>();
-        roles.add(new Role("USER"));
+        this.role = new Role(userName, "USER");
     }
 
     public User(UserDTO userDTO){
@@ -114,11 +110,11 @@ public class User {
         this.requests = requests;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Role getRoles() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Role roles) {
+        this.role = roles;
     }
 }

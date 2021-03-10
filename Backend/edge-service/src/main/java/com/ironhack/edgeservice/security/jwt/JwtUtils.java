@@ -1,15 +1,15 @@
-package com.ironhack.userservice.security.jwt;
+package com.ironhack.edgeservice.security.jwt;
 
-import com.ironhack.userservice.security.services.*;
+import com.ironhack.edgeservice.security.services.*;
 import io.jsonwebtoken.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.security.core.*;
+import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.*;
 
 import java.util.*;
 
-@Component
+@Service
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
@@ -19,15 +19,9 @@ public class JwtUtils {
     @Value("${bezkoder.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-    public String generateJwtToken(Authentication authentication){
-        UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
-
-        return Jwts.builder()
-                .setSubject((userPrincipal.getUsername()))
-                .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
-                .compact();
+    public String generateJwtToken(UserDetails userDetails){
+        return Jwts.builder().setSubject(userDetails.getUsername()).setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs)).signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
     }
 
     public String getUserNameFromJwtToken(String token){

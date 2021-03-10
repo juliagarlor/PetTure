@@ -12,5 +12,6 @@ public interface IUserService {
     ProfileDTO updateProfilePic(String userName, String profilePic);
     UserDTO addABuddy(String userName, String buddy);
     UserDTO addRequest(String userName, String request);
+    UserDTO removeRequest(String userName, String request);
     String removeUser(String userName);
 }

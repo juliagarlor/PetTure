@@ -57,10 +57,17 @@ public class UserController implements IUserController {
     }
 
 //    Add new request
-    @PutMapping("/user/request/{userName}")
+    @PutMapping("/user/add/request/{userName}")
     @ResponseStatus(HttpStatus.OK)
     public UserDTO addRequest(@PathVariable String userName, @RequestBody String request){
         return userService.addRequest(userName, request);
+    }
+
+//    Remove request
+    @PutMapping("/user/remove/request/{userName}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserDTO removeRequest(@PathVariable String userName, @RequestBody String request){
+        return userService.removeRequest(userName, request);
     }
 
 //    Remove user and return username

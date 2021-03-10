@@ -1,10 +1,9 @@
-package com.ironhack.userservice.security.jwt;
+package com.ironhack.edgeservice.security.jwt;
 
+import org.slf4j.*;
 import org.springframework.security.core.*;
 import org.springframework.security.web.*;
 import org.springframework.stereotype.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

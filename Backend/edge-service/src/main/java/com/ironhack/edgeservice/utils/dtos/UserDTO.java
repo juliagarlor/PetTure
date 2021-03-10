@@ -9,9 +9,28 @@ public class UserDTO {
     private String profilePicture;
     private String visibility;
     private List<ProfileDTO> buddies;
+    private int buddiesAmount;
     private List<ProfileDTO> requests;
+    private List<PictureDTO> pics;
+    private RoleDTO role;
 
-//    Getters and Setters
+    public UserDTO() {
+    }
+
+    public UserDTO(String userName, String password) {
+        System.out.println("Holi! constructor sin roles");
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public UserDTO(String userName, String password, RoleDTO role) {
+        System.out.println("Holi! constructor con roles");
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+    }
+
+    //    Getters and Setters
 
     public String getUserName() {
         return userName;
@@ -59,5 +78,29 @@ public class UserDTO {
 
     public void setRequests(List<ProfileDTO> requests) {
         this.requests = requests;
+    }
+
+    public int getBuddiesAmount() {
+        return buddiesAmount;
+    }
+
+    public void setBuddiesAmount(int buddiesAmount) {
+        this.buddiesAmount = buddiesAmount;
+    }
+
+    public List<PictureDTO> getPics() {
+        return pics;
+    }
+
+    public void setPics(List<PictureDTO> pics) {
+        this.pics = pics;
+    }
+
+    public RoleDTO getRole() {
+        return role;
+    }
+
+    public void setRole(RoleDTO role) {
+        this.role = role;
     }
 }

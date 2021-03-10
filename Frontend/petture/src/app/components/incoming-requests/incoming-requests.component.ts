@@ -15,7 +15,7 @@ export class IncomingRequestsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.getRequests('perryThePlatypus').subscribe(data => {
+    this.userService.getRequests().subscribe(data => {
       this.userRequests = data;
     })
   }

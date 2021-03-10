@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserServiceService } from 'src/app/services/user-service.service';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-loggin',
@@ -17,7 +19,8 @@ export class LogginComponent implements OnInit {
 
   constructor(
     private userService: UserServiceService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) { 
     this.username = new FormControl('', [Validators.required]);
     this.password = new FormControl('', [Validators.required]);
@@ -42,5 +45,11 @@ export class LogginComponent implements OnInit {
       alert(error);
     });
     form.resetForm();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(RegisterComponent, {
+      width: '40%'
+    });
   }
 }

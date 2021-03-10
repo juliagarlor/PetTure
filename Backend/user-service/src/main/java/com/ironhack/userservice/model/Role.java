@@ -1,33 +1,37 @@
 package com.ironhack.userservice.model;
 
-import com.ironhack.userservice.utils.enums.*;
-
 import javax.persistence.*;
 
 @Entity
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String userName;
     private String name;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_name")
+    private User user;
 
 //    Constructors
     public Role() {
     }
 
-    public Role(String name) {
+    public Role(String userName, String name) {
+        this.userName = userName;
         this.name = name;
     }
 
-//    Getters and Setters
+    //    Getters and Setters
 
-    public Integer getId() {
-        return id;
+
+    public String getUserName() {
+        return userName;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getName() {

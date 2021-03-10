@@ -22,6 +22,8 @@ import { IncomingRequestsComponent } from './components/incoming-requests/incomi
 import { HttpClientModule } from '@angular/common/http';
 import { routing } from './app.routing';
 import { CookieService } from 'ngx-cookie-service';
+import { RegisterComponent } from './components/register/register.component';
+import {MatDialogModule} from '@angular/material/dialog'; 
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { CookieService } from 'ngx-cookie-service';
     SearchComponent,
     ProfileCardComponent,
     ProfileComponent,
-    IncomingRequestsComponent
+    IncomingRequestsComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import { CookieService } from 'ngx-cookie-service';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

@@ -92,8 +92,15 @@ public class EdgeService implements IEdgeService {
         pictureClient.removePic(picId);
     }
 
-    public ResponseEntity<?> authenticateUser(LoginRequest loginRequest) {
-        return userClient.authenticateUser(loginRequest);
+//    public ResponseEntity<?> authenticateUser(LoginRequest loginRequest) {
+//        return userClient.authenticateUser(loginRequest);
+//    }
+
+    public UserDTO getUserByUserName(String userName) {
+        UserDTO output = userClient.getUserByUserName(userName);
+        output.setPics(pictureClient.getPicsByUser(userName));
+        output.setBuddiesAmount(output.getBuddies().size());
+        return output;
     }
 
     public List<ProfileDTO> getBuddies(String userName) {
@@ -105,6 +112,13 @@ public class EdgeService implements IEdgeService {
     }
 
     public UserDTO addABuddy(String userName, String buddy) {
+//        Removing request of the new buddy
+        userClient.removeRequest(userName, buddy);
+//        And turning it into a buddy
         return userClient.addABuddy(userName, buddy);
+    }
+
+    public UserDTO removeRequest(String userName, String request) {
+        return userClient.removeRequest(userName, request);
     }
 }

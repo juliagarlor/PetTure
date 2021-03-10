@@ -2,6 +2,7 @@ package com.ironhack.edgeservice.clients;
 
 import com.ironhack.edgeservice.utils.dtos.*;
 import org.springframework.cloud.openfeign.*;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -24,6 +25,10 @@ public interface PostClient {
 //    Remove a post
     @DeleteMapping("/post/{postId}")
     Long removePost(@PathVariable Long postId);
+
+//    Remove posts by pictureID
+    @DeleteMapping("/posts/picture/{pictureId}")
+    void removePostsByPic(@PathVariable Long pictureId);
 
 //    Get all the commentaries in a post
     @GetMapping("/commentaries/{postId}")

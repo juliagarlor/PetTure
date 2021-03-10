@@ -11,6 +11,7 @@ import java.util.*;
 @FeignClient("user-service")
 public interface UserClient {
 
+//    Get user by username
     @GetMapping("/user/search/{userName}")
     @ResponseStatus(HttpStatus.OK)
     UserDTO getUserByUserName(@PathVariable String userName);
@@ -46,10 +47,6 @@ public interface UserClient {
 //    Remove user and return username
     @DeleteMapping("/user/{userName}")
     String removeUser(@PathVariable String userName);
-
-////    Login
-//    @PostMapping("/user/auth/login")
-//    ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest);
 
 //    Register
     @PostMapping("/user/auth/register")

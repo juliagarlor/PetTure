@@ -19,10 +19,14 @@ public interface IEdgeController {
     CommentaryDTO addCommentary(CommentaryDTO commentaryDTO);
     void removePost(Long postId);
 
-//    ResponseEntity<?> authenticateUser(LoginRequest loginRequest);
+    ResponseEntity<?> authenticateUser(LoginRequest loginRequest);
     UserDTO getUserByUserName(String userName);
+    ResponseEntity<?> registerUser(UserDTO userDTO);
+    ProfileDTO updateProfilePic(String userName, String profilePic);
     List<ProfileDTO> getBuddies(String userName);
     List<ProfileDTO> getRequests(String userName);
     UserDTO addABuddy(String userName, String buddy);
+    UserDTO addRequest(String userName, String request);
     UserDTO removeRequest(String userName, String request);
+    void removeUser(String userName);
 }

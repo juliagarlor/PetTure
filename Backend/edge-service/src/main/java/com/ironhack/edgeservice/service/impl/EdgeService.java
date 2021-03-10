@@ -1,6 +1,8 @@
 package com.ironhack.edgeservice.service.impl;
 
 import com.ironhack.edgeservice.clients.*;
+import com.ironhack.edgeservice.security.jwt.*;
+import com.ironhack.edgeservice.security.services.*;
 import com.ironhack.edgeservice.service.interfaces.*;
 import com.ironhack.edgeservice.utils.classes.*;
 import com.ironhack.edgeservice.utils.dtos.*;
@@ -9,6 +11,10 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.cloud.circuitbreaker.resilience4j.*;
 import org.springframework.cloud.client.circuitbreaker.*;
 import org.springframework.http.*;
+import org.springframework.security.authentication.*;
+import org.springframework.security.core.*;
+import org.springframework.security.core.context.*;
+import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.*;
 
 import java.util.*;
@@ -22,6 +28,12 @@ public class EdgeService implements IEdgeService {
     private PostClient postClient;
     @Autowired
     private UserClient userClient;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private JwtUtils jwtUtils;
+    @Autowired
+    private UserDetailsServiceImpl userDetailsServiceImpl;
 
     private final CircuitBreakerFactory circuitBreakerFactory = new Resilience4JCircuitBreakerFactory();
     private FallBack fallBack = new FallBack();
@@ -92,15 +104,30 @@ public class EdgeService implements IEdgeService {
         pictureClient.removePic(picId);
     }
 
-//    public ResponseEntity<?> authenticateUser(LoginRequest loginRequest) {
-//        return userClient.authenticateUser(loginRequest);
-//    }
+    public ResponseEntity<?> authenticateUser(LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(loginRequest.getUsername());
+        String jwt = jwtUtils.generateJwtToken(userDetails);
+
+        return ResponseEntity.ok(new JwtResponse(jwt));
+    }
 
     public UserDTO getUserByUserName(String userName) {
         UserDTO output = userClient.getUserByUserName(userName);
         output.setPics(pictureClient.getPicsByUser(userName));
         output.setBuddiesAmount(output.getBuddies().size());
         return output;
+    }
+
+    public ResponseEntity<?> registerUser(UserDTO userDTO) {
+        return userClient.registerUser(userDTO);
+    }
+
+    public ProfileDTO updateProfilePic(String userName, String profilePic) {
+        return userClient.updateProfilePic(userName, profilePic);
     }
 
     public List<ProfileDTO> getBuddies(String userName) {
@@ -118,7 +145,25 @@ public class EdgeService implements IEdgeService {
         return userClient.addABuddy(userName, buddy);
     }
 
+    public UserDTO addRequest(String userName, String request) {
+        return userClient.addRequest(userName, request);
+    }
+
     public UserDTO removeRequest(String userName, String request) {
         return userClient.removeRequest(userName, request);
+    }
+
+    public void removeUser(String userName) {
+//        Getting pictures and its ids
+        List<PictureDTO> picsToRemove = getPicsByUser(userName);
+
+        for (PictureDTO pic : picsToRemove){
+//            Removing posts and commentaries from a picture
+            postClient.removePostsByPic(pic.getPicId());
+//            Removing the picture
+            removePic(pic.getPicId());
+        }
+//        Removing the user
+        userClient.removeUser(userName);
     }
 }

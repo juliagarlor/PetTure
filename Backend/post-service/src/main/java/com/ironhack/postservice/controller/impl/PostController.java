@@ -43,4 +43,11 @@ public class PostController implements IPostController {
     public Long removePost(@PathVariable Long postId){
         return postService.removePost(postId);
     }
+
+//    Remove posts by pictureID
+    @DeleteMapping("/posts/picture/{pictureId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removePostsByPic(@PathVariable Long pictureId){
+        postService.removePostsByPic(pictureId);
+    }
 }

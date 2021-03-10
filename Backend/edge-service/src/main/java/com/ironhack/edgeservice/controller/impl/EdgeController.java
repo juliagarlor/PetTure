@@ -19,28 +19,28 @@ public class EdgeController implements IEdgeController {
     private IEdgeService edgeService;
 
 //    Picture part:
-//    Return all pictures from a user
+//    Return all pictures from a user. Permit all
     @GetMapping("/pics/{userName}")
     @ResponseStatus(HttpStatus.OK)
     public List<PictureDTO> getPicsByUser(@PathVariable String userName){
         return edgeService.getPicsByUser(userName);
     }
 
-//    Post a new picture
+//    Post a new picture. authenticated
     @PostMapping("/pic")
     @ResponseStatus(HttpStatus.OK)
     public PictureDTO newPic(@RequestBody @Valid PictureDTO pictureDTO){
         return edgeService.newPic(pictureDTO);
     }
 
-//    Update licks
+//    Update licks. authenticated
     @PutMapping("/pic/{id}")
     @ResponseStatus(HttpStatus.OK)
     public PictureDTO newLick(@PathVariable Long id){
         return edgeService.newLick(id);
     }
 
-//    Delete picture
+//    Delete picture. authenticated
     @DeleteMapping("/pic/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removePic(@PathVariable Long id){
@@ -48,35 +48,35 @@ public class EdgeController implements IEdgeController {
     }
 
 //    Posts part:
-//    Return a post with its picture
-    @GetMapping("/post/{postId}")
+//    Return a post with its picture. permit all
+    @GetMapping("/post/view/{postId}")
     @ResponseStatus(HttpStatus.OK)
     public PostDTO getPostAndPic(@PathVariable Long postId){
         return edgeService.getPostAndPic(postId);
     }
 
-//    Return commentaries from a post
+//    Return commentaries from a post. permit all
     @GetMapping("/commentaries/{postId}")
     @ResponseStatus(HttpStatus.OK)
     public List<CommentaryDTO> getCommentariesInPost(@PathVariable Long postId){
         return edgeService.getCommentariesInPost(postId);
     }
 
-//    Add new post and picture
+//    Add new post and picture. authenticated
     @PostMapping("/post")
     @ResponseStatus(HttpStatus.OK)
     public PostDTO newPost(@RequestBody PostDTO postDTO){
         return edgeService.newPost(postDTO);
     }
 
-//    Add a commentary to a post
+//    Add a commentary to a post. authenticated
     @PostMapping("/commentary")
     @ResponseStatus(HttpStatus.OK)
     public CommentaryDTO addCommentary(@RequestBody @Valid CommentaryDTO commentaryDTO) {
         return edgeService.addCommentary(commentaryDTO);
     }
 
-//    Remove a post and its pic
+//    Remove a post and its pic. authenticated
     @DeleteMapping("/post/remove/{postId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removePost(@PathVariable Long postId){
@@ -84,44 +84,68 @@ public class EdgeController implements IEdgeController {
     }
 
 //    User part:
-//    login
-//    @PostMapping("/login")
-//    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest){
-//        return edgeService.authenticateUser(loginRequest);
-//    }
+//    login. permit all
+    @PostMapping("/user/auth/login")
+    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest){
+        return edgeService.authenticateUser(loginRequest);
+    }
 
-//    Get user by username, with all its pictures
+//    Get user by username, with all its pictures. permit all
     @GetMapping("/user/search/{userName}")
     @ResponseStatus(HttpStatus.OK)
     public UserDTO getUserByUserName(@PathVariable String userName){
         return edgeService.getUserByUserName(userName);
     }
 
-//    Get buddies
+//    Register. permit all
+    @PostMapping("/user/auth/register")
+    public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO){
+        return edgeService.registerUser(userDTO);
+    }
+
+//    Get buddies. permit all
     @GetMapping("/user/buddies/{userName}")
     @ResponseStatus(HttpStatus.OK)
     public List<ProfileDTO> getBuddies(@PathVariable String userName){
         return edgeService.getBuddies(userName);
     }
 
-//    Get requests
+//    Get requests. authenticated
     @GetMapping("/user/requests/{userName}")
     @ResponseStatus(HttpStatus.OK)
     public List<ProfileDTO> getRequests(@PathVariable String userName){
         return edgeService.getRequests(userName);
     }
 
-//    Add new buddy
+//    Update profile pic. authenticated
+    @PutMapping("/user/profile-pic/{userName}")
+    public ProfileDTO updateProfilePic(@PathVariable String userName, @RequestBody String profilePic){
+        return edgeService.updateProfilePic(userName, profilePic);
+    }
+
+//    Add new buddy. authenticated
     @PutMapping("/user/buddy/{userName}")
     @ResponseStatus(HttpStatus.OK)
     public UserDTO addABuddy(@PathVariable String userName, @RequestBody String buddy){
         return edgeService.addABuddy(userName, buddy);
     }
 
-//    Remove requests
+//    Add new request. authenticated
+    @PutMapping("/user/request/{userName}")
+    public UserDTO addRequest(@PathVariable String userName, @RequestBody String request){
+        return edgeService.addRequest(userName, request);
+    }
+
+//    Remove requests. authenticated
     @PutMapping("/user/remove/request/{userName}")
     @ResponseStatus(HttpStatus.OK)
     public UserDTO removeRequest(@PathVariable String userName, @RequestBody String request){
         return edgeService.removeRequest(userName, request);
+    }
+
+//    Remove user, its pictures and posts. authenticated
+    @DeleteMapping("/user/{userName}")
+    public void removeUser(@PathVariable String userName){
+        edgeService.removeUser(userName);
     }
 }

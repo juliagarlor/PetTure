@@ -52,12 +52,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
                 .authorizeRequests()
-                .antMatchers("/login").permitAll()
+                .antMatchers("/user/auth/**").permitAll()
                 .antMatchers("/users").permitAll()
                 .antMatchers("/user/buddies/**").permitAll()
                 .antMatchers("/user/search/**").permitAll()
                 .antMatchers("/pics/**").permitAll()
-                .anyRequest().permitAll();
+                .antMatchers("/post/view/**").permitAll()
+                .antMatchers("/commentaries/**").permitAll()
+                .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

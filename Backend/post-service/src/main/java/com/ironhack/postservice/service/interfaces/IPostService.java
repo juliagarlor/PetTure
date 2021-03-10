@@ -9,4 +9,5 @@ public interface IPostService {
     List<PostDTO> getAllPosts();
     PostDTO newPost(PostDTO postDTO);
     Long removePost(Long postId);
+    void removePostsByPic(Long pictureId);
 }

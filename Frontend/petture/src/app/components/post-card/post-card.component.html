@@ -1,9 +1,22 @@
-<div>
-    <div class="body">
-        <p>{{post.picture.userName}}: {{post.body}}</p>
+<div class="card"  [@cardFlip]="flipped">
+    <div class = "front">
+        <div class="body" (click) = "cardClicked()">
+            <p><mat-icon>favorite</mat-icon> {{post.picture.licks}}</p>
+            <p>{{post.picture.userName}}: {{post.body}}</p>
+        </div>
+        <div class="pic" (dblclick) = "addALick()">
+            <img src={{post.picture.pictureName}}>
+            <h1 class="lick" @myInsertRemoveTrigger *ngIf = "isShown" aria-readonly="true">{{lick}}!</h1>
+        </div> 
     </div>
-    <div class="pic">
-        <img src={{post.picture.pictureName}}>
-    </div> 
+
+    <div class="back" (click) = "cardClicked()">
+        <div class="commentaries">
+            <p>holi que tal</p>
+            <!-- <p *ngFor = "let comment in comments">{{comment.userName}}: {{comment.body}}</p> -->
+        </div>
+    </div>
 </div>
+
+
 

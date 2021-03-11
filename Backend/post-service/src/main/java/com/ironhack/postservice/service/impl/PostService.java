@@ -26,6 +26,15 @@ public class PostService implements IPostService {
         return output;
     }
 
+    public List<PostDTO> getPostsByPicId(Long pictureId) {
+        List<Post> postList = postRepository.findByPictureId(pictureId);
+        List<PostDTO> output = new ArrayList<>();
+        for(Post post : postList){
+            output.add(new PostDTO(post));
+        }
+        return output;
+    }
+
     public List<PostDTO> getAllPosts() {
         List<Post> posts = postRepository.findAll();
         List<PostDTO> output = new ArrayList<>();

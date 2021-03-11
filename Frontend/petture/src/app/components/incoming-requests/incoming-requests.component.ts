@@ -20,11 +20,13 @@ export class IncomingRequestsComponent implements OnInit {
     })
   }
 
-  addBuddy(userName: string){
-    console.log('En construcción')
+  addBuddy(buddy: string, index: number){
+    this.userRequests.slice(index, 1);
+    this.userService.addABuddy(buddy);
   }
 
-  removeRequest(userName: string){
-    console.log('En construcción')
+  removeRequest(request: string, index: number){
+    this.userRequests.slice(index, 1);
+    this.userService.removeRequest(request);
   }
 }

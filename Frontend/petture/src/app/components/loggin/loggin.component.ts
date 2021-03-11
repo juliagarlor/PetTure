@@ -36,15 +36,14 @@ export class LogginComponent implements OnInit {
 
   onSubmit(form: FormGroupDirective): void {
     const user = {username: this.username.value, password: this.password.value};
-    console.log(user);
     this.userService.login(user).subscribe(data => {
-      this.userService.setToken(data.accessToken, data.username);
-      this.router.navigateByUrl('/home');
+      this.userService.setToken(data.accessToken, this.username.value);
+      // this.router.navigateByUrl('/home');
     }, error => {
       // cambia esto cuando puedas
       alert(error);
     });
-    form.resetForm();
+    // form.resetForm();
   }
 
   openDialog(): void {

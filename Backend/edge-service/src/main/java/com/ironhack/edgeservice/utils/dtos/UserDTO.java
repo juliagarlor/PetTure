@@ -9,7 +9,7 @@ public class UserDTO {
     private String profilePicture;
     private String visibility;
     private List<ProfileDTO> buddies;
-    private int buddiesAmount;
+    private int buddyNum;
     private List<ProfileDTO> requests;
     private List<PictureDTO> pics;
     private RoleDTO role;
@@ -80,12 +80,12 @@ public class UserDTO {
         this.requests = requests;
     }
 
-    public int getBuddiesAmount() {
-        return buddiesAmount;
+    public int getBuddyNum() {
+        return buddyNum;
     }
 
-    public void setBuddiesAmount(int buddiesAmount) {
-        this.buddiesAmount = buddiesAmount;
+    public void setBuddyNum(int buddyNum) {
+        this.buddyNum = buddyNum;
     }
 
     public List<PictureDTO> getPics() {

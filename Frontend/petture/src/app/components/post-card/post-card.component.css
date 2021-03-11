@@ -5,9 +5,9 @@ div{
     /* min-height: 20%; */
     height: 400px;
     margin: auto;
-    border: 1px solid #8cb3af;
     border-radius: 5px;
     margin-top: 10px;
+    backface-visibility: hidden;
 }
 
 .pic, .body{
@@ -18,11 +18,17 @@ div{
 .pic{
     flex: 2;
     overflow: hidden;
+    position: relative;
+}
+.pic h1{
+  padding-top: 10px;
+  margin: auto;
 }
 
 .body{
     flex: 1;
     padding: 15px;
+    flex-direction: column;
 }
 
 .body p{
@@ -34,4 +40,43 @@ img{
     height: 100%;
     width: 100%;
     object-fit: cover;
+}
+
+:host{
+  display: block;
+  perspective: 600px;
+}
+
+.card{
+  box-shadow: 10px 10px 43px -18px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.front, .back{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  margin: 0;
+  border: 1px solid #8cb3af;
+}
+
+.front{
+  transform: rotateY(180deg);
+}
+
+.commentaries{
+  margin: 0;
+  padding: 10px;
+}
+
+.lick{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: xxx-large;
+  color: white; 
 }

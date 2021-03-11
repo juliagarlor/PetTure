@@ -14,6 +14,7 @@ public interface IEdgeController {
     void removePic(Long id);
 
     PostDTO getPostAndPic(Long postId);
+    List<PostDTO> getPublicPosts();
     List<CommentaryDTO> getCommentariesInPost(Long postId);
     PostDTO newPost(PostDTO postDTO);
     CommentaryDTO addCommentary(CommentaryDTO commentaryDTO);

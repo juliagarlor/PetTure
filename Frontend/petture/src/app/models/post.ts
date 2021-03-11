@@ -5,16 +5,9 @@ export class Post {
     constructor(
         private _id: number,
         private _body: string,
-        private _picture: Picture,
-        private _commentaries: number[]
+        private _picture: Picture
     ){}
 
-    public get commentaries(): number[] {
-        return this._commentaries;
-    }
-    public set commentaries(value: number[]) {
-        this._commentaries = value;
-    }
     public get picture(): Picture {
         return this._picture;
     }

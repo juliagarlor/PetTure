@@ -8,7 +8,6 @@ public class PostDTO {
     private String postBody;
     private Long pictureId;
     private PictureDTO picture;
-    private List<CommentaryDTO> commentaries;
 
 //    Getters and Setters
 
@@ -42,13 +41,5 @@ public class PostDTO {
 
     public void setPicture(PictureDTO picture) {
         this.picture = picture;
-    }
-
-    public List<CommentaryDTO> getCommentaries() {
-        return commentaries;
-    }
-
-    public void setCommentaries(List<CommentaryDTO> commentaries) {
-        this.commentaries = commentaries;
     }
 }

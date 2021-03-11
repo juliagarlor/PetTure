@@ -55,6 +55,13 @@ public class EdgeController implements IEdgeController {
         return edgeService.getPostAndPic(postId);
     }
 
+//    Return public posts
+    @GetMapping("/post/view/public")
+    @ResponseStatus(HttpStatus.OK)
+    public List<PostDTO> getPublicPosts(){
+        return edgeService.getPublicPosts();
+    }
+
 //    Return commentaries from a post. permit all
     @GetMapping("/commentaries/{postId}")
     @ResponseStatus(HttpStatus.OK)

@@ -20,12 +20,10 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getProfile().subscribe(data => {
-      this.profile = data;
+      this.profile = new Profile(
+        data.userName, data.password, data.profilePicture, data.visibility, data.buddyNum, data.pics
+      )
     })
-
-    // this.pictureService.getPicsByUser(username).subscribe(result => {
-    //   this.pictureList = result;
-    // })
   }
 
 }

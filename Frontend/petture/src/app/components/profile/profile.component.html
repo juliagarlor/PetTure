@@ -2,17 +2,17 @@
 <div class="container">
    <div class="details">
        <div class="profileimg">
-            <img src={{profile.profilePicture}}>
+            <img src={{profile.getprofilePicture}}>
        </div>
        <div class="info">
-           <h2>{{profile.userName}}</h2>
-           <p>{{profile.pics.length}} pics  {{profile.buddies}} buddies</p>
+           <h2>{{profile.getuserName}}</h2>
+           <p>{{profile.getpics.length}} pics  {{profile.getbuddyNum}} buddies</p>
        </div>
    </div>
 
    <div class="pics">
     <mat-grid-list cols="3" rowHeight="1:1">
-        <mat-grid-tile *ngFor = "let pic of profile.pics"><img src="{{pic.pictureName}}"></mat-grid-tile>
+        <mat-grid-tile *ngFor = "let pic of profile.getpics"><img src="{{pic.pictureName}}"></mat-grid-tile>
     </mat-grid-list>      
    </div> 
 </div>

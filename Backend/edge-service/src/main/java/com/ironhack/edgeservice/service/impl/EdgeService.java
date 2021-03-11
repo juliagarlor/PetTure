@@ -67,8 +67,25 @@ public class EdgeService implements IEdgeService {
         PictureDTO pic = pictureCircuitBreaker.run(() -> pictureClient.getPicById(post.getPictureId()),
                 throwable -> fallBack.picFallBack());
         post.setPicture(pic);
-        post.setCommentaries(new ArrayList<>());
         return post;
+    }
+
+    public List<PostDTO> getPublicPosts() {
+//        Get all public profiles' usernames
+        List<String> publicUsernames = userClient.getPublicProfiles();
+        List<PostDTO> output = new ArrayList<>();
+
+        for (String username : publicUsernames){
+            List<PictureDTO> picList = pictureClient.getPicsByUser(username);
+            for (PictureDTO pic : picList){
+                List<PostDTO> postList = postClient.getPostsByPicId(pic.getPicId());
+                for (PostDTO post : postList){
+                    post.setPicture(pic);
+                    output.add(post);
+                }
+            }
+        }
+        return output;
     }
 
     public List<CommentaryDTO> getCommentariesInPost(Long postId) {
@@ -118,7 +135,7 @@ public class EdgeService implements IEdgeService {
     public UserDTO getUserByUserName(String userName) {
         UserDTO output = userClient.getUserByUserName(userName);
         output.setPics(pictureClient.getPicsByUser(userName));
-        output.setBuddiesAmount(output.getBuddies().size());
+        output.setBuddyNum(output.getBuddies().size());
         return output;
     }
 

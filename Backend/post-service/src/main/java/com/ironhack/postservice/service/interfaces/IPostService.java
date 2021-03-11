@@ -6,6 +6,7 @@ import java.util.*;
 
 public interface IPostService {
     PostDTO getPostsById(Long id);
+    List<PostDTO> getPostsByPicId(Long pictureId);
     List<PostDTO> getAllPosts();
     PostDTO newPost(PostDTO postDTO);
     Long removePost(Long postId);

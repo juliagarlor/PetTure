@@ -23,6 +23,13 @@ public class PostController implements IPostController {
         return postService.getPostsById(id);
     }
 
+//    Returns posts by pictureId
+    @GetMapping("/posts/picture/{pictureId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<PostDTO> getPostsByPicId(@PathVariable Long pictureId){
+    return postService.getPostsByPicId(pictureId);
+    }
+
 //    Returns all posts
     @GetMapping("/posts")
     @ResponseStatus(HttpStatus.OK)

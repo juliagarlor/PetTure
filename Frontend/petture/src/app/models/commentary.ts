@@ -3,7 +3,8 @@ export class Commentary {
     constructor(
         private _id: number,
         private _userName: string,
-        private _body: string
+        private _body: string,
+        private _postId: number
     ){}
 
     public get body(): string {
@@ -23,5 +24,11 @@ export class Commentary {
     }
     public set id(value: number) {
         this._id = value;
+    }
+    public get postId(): number {
+        return this._postId;
+    }
+    public set postId(value: number) {
+        this._postId = value;
     }
 }

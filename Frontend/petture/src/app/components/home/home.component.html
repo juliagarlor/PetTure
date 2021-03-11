@@ -1,9 +1,12 @@
 <app-nav-bar></app-nav-bar>
 <div class="newpic">
-    <button mat-icon-button>
+    <button mat-icon-button (click) = "openDialog()">
         <mat-icon>add_a_photo</mat-icon>
     </button>
 </div>
 <div class="posts">
-    <app-post-card *ngFor = "let post of postList" [post] = "post"></app-post-card>
+    <!-- <app-post-card *ngFor = "let post of postList" [post] = "post"></app-post-card> -->
+    <app-post-card></app-post-card>
+    <app-post-card></app-post-card>
+    <app-post-card></app-post-card>
 </div>

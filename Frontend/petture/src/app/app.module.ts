@@ -23,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { routing } from './app.routing';
 import { CookieService } from 'ngx-cookie-service';
 import { RegisterComponent } from './components/register/register.component';
-import {MatDialogModule} from '@angular/material/dialog'; 
+import {MatDialogModule} from '@angular/material/dialog';
+import { NewPostComponent } from './components/new-post/new-post.component'; 
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     ProfileCardComponent,
     ProfileComponent,
     IncomingRequestsComponent,
-    RegisterComponent
+    RegisterComponent,
+    NewPostComponent
   ],
   imports: [
     BrowserModule,

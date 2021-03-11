@@ -1,0 +1,39 @@
+h1, mat-icon{
+    color: #442f51;
+}
+
+h1{
+    text-align: center;
+    font-size: 525%;
+    font-family: Brush Script MT, Brush Script Std, cursive;
+    padding: 20px;
+}
+
+mat-icon{
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+    padding: 5px;
+}
+
+math-dialog-content{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    min-width: 200px;
+    font-size: 16px;
+}
+
+.input{
+    display: block;
+}
+
+button{
+    margin: 10px;
+    background-color: #b4281e;
+    color: white;
+}
+
+p{
+    color: #fb8c65;
+}

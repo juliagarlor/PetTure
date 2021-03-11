@@ -15,4 +15,8 @@ export class PictureServiceService {
   getPicsByUser(userName: string): Observable<Picture[]>{
     return this.http.get<Picture[]>('http://localhost:8080/pics/' + userName);
   }
+
+  addALick(picId: number):Observable<any>{
+    return this.http.put<any>("http://localhost:8080/pic/" + picId, '');
+  }
 }

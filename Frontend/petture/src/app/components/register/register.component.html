@@ -3,7 +3,7 @@
   <p>Register to share pics with your buddies</p>
   <form class="example-form" (ngSubmit)="onSubmit(formDirective)" [formGroup]="form" #formDirective = "ngForm">
 
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="input">
         <mat-label>Username</mat-label>
         <input type="text" matInput formControlName="username" placeholder="fluffy16">
         <mat-error *ngIf="username.hasError('required')">
@@ -11,7 +11,7 @@
         </mat-error>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="input">
         <mat-label>Password</mat-label>
         <input type="password" matInput formControlName="password">
         <mat-error *ngIf="password.hasError('required')">
@@ -20,8 +20,7 @@
     </mat-form-field>
 
     
-    <button mat-flat-button type="submit" [disabled]="form.invalid" cdkFocusInitial>
-        <!-- <button mat-flat-button type="submit" [disabled]="form.invalid"> -->
+    <button mat-flat-button type="submit" [disabled]="form.invalid">
         Register
     </button>
     <button mat-button (click)="onNoClick()">Go back</button>

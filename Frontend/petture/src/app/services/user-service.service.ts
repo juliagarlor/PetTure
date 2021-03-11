@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { Picture } from '../models/picture';
 import { Profile } from '../models/profile';
 
 @Injectable({
@@ -15,12 +16,14 @@ export class UserServiceService {
   ) { }
 
   login(user: any): Observable<any>{
-    return this.http.post('http://localhost:8080/login', user);
+    return this.http.post('http://localhost:8080/user/auth/login', user);
   }
 
   setToken(token: string, username: string){
     this.cookies.set("token", token);
     this.cookies.set("username", username);
+    console.log(username);
+    console.log(this.cookies.get("username"));
   }
 
   getToken(){
@@ -31,12 +34,20 @@ export class UserServiceService {
     return this.cookies.get("username");
   }
 
-  getProfile(): Observable<Profile>{
-    return this.http.get<Profile>('http://localhost:8080/user/search/' + this.getUsername());
+  getProfile(): Observable<IncomingProfile>{
+    return this.http.get<IncomingProfile>('http://localhost:8080/user/search/' + this.getUsername());
   }
 
   getRequests(): Observable<BasicProfile[]>{
     return this.http.get<BasicProfile[]>('http://localhost:8080/user/requests/'+ this.getUsername());
+  }
+
+  removeRequest(requestId: string): Observable<any>{
+    return this.http.put<any>('http://localhost:8080/user/remove/request/' + this.getUsername, requestId);
+  }
+
+  addABuddy(buddyId: string): Observable<any>{
+    return this.http.put<any>('http://localhost:8080/user/buddy/' + this.getUsername, buddyId);
   }
 }
 
@@ -45,11 +56,14 @@ interface BasicProfile{
   profilePic: string
 }
 
-// {
-//   "username": "perryThePlatypus",
-//   "roles": [
-//       "USER"
-//   ],
-//   "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwZXJyeVRoZVBsYXR5cHVzIiwiaWF0IjoxNjE1MzA4NTAyLCJleHAiOjE2MTUzOTQ5MDJ9.5u3iowBIP0j8klTd4Pc8jJYVv_aR-a6LtJPBEXERR1XdSQhaAVLb8CENHEFxA1zLQ0tz8nhx51yeHhZUW6-FHg",
-//   "tokenType": "Bearer"
-// }
+interface IncomingProfile{
+  userName: string,
+  password: string,
+  profilePicture: string,
+  visibility: string,
+  pics: Picture[],
+  buddyNum: number
+}
+
+
+

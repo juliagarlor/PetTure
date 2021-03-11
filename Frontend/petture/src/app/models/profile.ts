@@ -7,46 +7,46 @@ export class Profile {
         private _password: string,
         private _profilePicture: string,
         private _visibility: string,
-        private _buddiesAmount: number,
+        private _buddyNum: number,
         private _pics: Picture[]
     ){}
 
-    public get visibility(): string {
+    public get getvisibility(): string {
         return this._visibility;
     }
-    public set visibility(value: string) {
+    public set setvisibility(value: string) {
         this._visibility = value;
     }
-    public get profilePicture(): string {
+    public get getprofilePicture(): string {
         return this._profilePicture;
     }
-    public set profilePicture(value: string) {
+    public set setprofilePicture(value: string) {
         this._profilePicture = value;
     }
-    public get password(): string {
+    public get getpassword(): string {
         return this._password;
     }
-    public set password(value: string) {
+    public set setpassword(value: string) {
         this._password = value;
     }
-    public get userName(): string {
+    public get getuserName(): string {
         return this._userName;
     }
-    public set userName(value: string) {
+    public set setuserName(value: string) {
         this._userName = value;
     }
 
-    public get pics(): Picture[] {
+    public get getpics(): Picture[] {
         return this._pics;
     }
-    public set pics(value: Picture[]) {
+    public set setpics(value: Picture[]) {
         this._pics = value;
     }
 
-    public get buddies(): number {
-        return this._buddiesAmount;
+    public get getbuddyNum(): number {
+        return this._buddyNum;
     }
-    public set buddies(value: number) {
-        this._buddiesAmount = value;
+    public set setbuddyNum(value: number) {
+        this._buddyNum = value;
     }
 }

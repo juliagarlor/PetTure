@@ -1,16 +1,17 @@
-div{
+.card{
     display: flex;
-    /* min-width: 50%; */
-    width: 600px;
-    /* min-height: 20%; */
-    height: 400px;
-    margin: auto;
     border-radius: 5px;
-    margin-top: 10px;
-    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
 }
-input{
-    border: 2px solid black;
+
+.searcher{
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
 
 .pic, .body{
@@ -28,6 +29,7 @@ input{
     flex: 1;
     padding: 15px;
     flex-direction: column;
+    display: flex;
 }
 
 .body p{
@@ -41,3 +43,8 @@ img{
     object-fit: cover;
 }
 
+button{
+    margin: 10px;
+    background-color: #b4281e;
+    color: white;
+}

@@ -10,10 +10,16 @@
         </div> 
     </div>
 
-    <div class="back" (click) = "cardClicked()">
-        <div class="commentaries">
-            <p>holi que tal</p>
-            <!-- <p *ngFor = "let comment in comments">{{comment.userName}}: {{comment.body}}</p> -->
+    <div class="back">
+        <div class="commentaries" (click) = "cardClicked()">
+            <p *ngFor="let comment of comments"><b>{{comment.userName}}:</b> {{comment.body}}</p>
+        </div>
+        <div class="newComment">
+            <mat-form-field>
+                <span matPrefix><b>{{logedUser}}: &nbsp;</b></span>
+                <input type="text" matInput placeholder="Add a comment" [readOnly] = "logedUser.length == 0" [(ngModel)] = "newComment">
+                <mat-icon matSuffix (click) = "addAComment()">mode_edit</mat-icon>
+            </mat-form-field>
         </div>
     </div>
 </div>

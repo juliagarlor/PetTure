@@ -2,15 +2,13 @@
     <div class="body">
         <mat-form-field class="example-full-width">
             <mat-label>Caption:</mat-label>
-            <textarea matInput [ngModel] = "caption"></textarea>
+            <textarea matInput placeholder="I want chocolate" [(ngModel)] = "caption"></textarea>
           </mat-form-field>
-        <input type="file" (change)="onFileChanged($event)" accept=".jpg, .jpeg, .png">
-        <button mat-flat-button [disabled]="uploaded">
-            Register
-        </button>
+        <input id="file" class="searcher" type="file" (change)="onFileChanged($event)" accept=".jpg, .jpeg, .png">
+        <button mat-button><label for="file">Choose a file</label></button>
+        <button mat-button (click)="postNew()" [disabled] = "uploaded">New post</button>
     </div>
     <div class="pic">
         <img src={{uploadedPic}}>
-
     </div> 
 </div>

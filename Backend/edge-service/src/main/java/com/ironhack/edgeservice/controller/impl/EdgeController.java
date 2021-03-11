@@ -79,7 +79,7 @@ public class EdgeController implements IEdgeController {
 //    Add a commentary to a post. authenticated
     @PostMapping("/commentary")
     @ResponseStatus(HttpStatus.OK)
-    public CommentaryDTO addCommentary(@RequestBody @Valid CommentaryDTO commentaryDTO) {
+    public CommentaryDTO addCommentary(@RequestBody CommentaryDTO commentaryDTO) {
         return edgeService.addCommentary(commentaryDTO);
     }
 

@@ -102,7 +102,6 @@ public class EdgeService implements IEdgeService {
         postDTO.setPictureId(pic.getPicId());
         PostDTO newPost = postCircuitBreaker.run(() -> postClient.newPost(postDTO), throwable -> fallBack.postFallBack());
         postDTO.setPostId(newPost.getPostId());
-        postDTO.setCommentaries(new ArrayList<>());
         return postDTO;
     }
 

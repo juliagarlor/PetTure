@@ -75,7 +75,9 @@ export class PostCardComponent implements OnInit {
   addAComment(): void{
     let commentToAdd = new Commentary(0, this.logedUser, this.newComment, this.post.id);
     this.comments.push(commentToAdd);
-    // Call the service to add that comment to the database
+    
+    let commentToSend = {userName: this.logedUser, commentBody: this.newComment, postId: this.post.id};
+    this.postService.addAComment(commentToSend);
 
     this.newComment = '';
   }

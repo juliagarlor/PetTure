@@ -45,7 +45,14 @@ export class HomeComponent implements OnInit {
       console.log('The dialog was closed');
       if(result != undefined){
         this.postList.push(result);
-        // llama al service para que incluya el nuevo post
+        this.postList[0].picture.userName
+        // lo siento, se lo mando como json porque no me fio del stringify
+        let postToSend = {postBody: result.body, 
+          picture: {
+            pictureName: result.picture.pictureName,
+            userName: result.picture.userName
+          }};
+        this.postService.addNewPost(postToSend);
       }
     });
   }

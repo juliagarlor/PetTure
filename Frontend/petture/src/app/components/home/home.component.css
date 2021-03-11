@@ -11,6 +11,8 @@ div{
 .posts{
     margin-top: 10px;
     margin-bottom: 200px;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
 }
 
 button{

@@ -76,6 +76,7 @@ img{
   display: flex;
   flex-direction: column-reverse;
   vertical-align: top;
+  justify-content: flex-end;
   overflow-y: auto;
   overflow-wrap: break-word;
   padding: 0;

@@ -9,22 +9,32 @@
 
 .details{
     display: grid;
-    height: 200px;
     grid-template-columns: auto auto;
     column-gap: 10p;
+
 }
 .profileimg{
     overflow: hidden;
-    max-width: 200px;
-    height: 200px;
-    border-radius: 200px;
+    width: 20vw;
+    height: 20vw;
+    border-radius: 200vw;
     margin: auto;
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 150px;
+    max-height: 150px;
 }
 
 .info{
     display: grid;
+    height: 20vw;
+    padding-left: 10px;
     grid-template-rows: auto auto;
     align-content: space-around;
+    height: 20vw;
+    min-height: 100px;
+    max-width: 150px;
+    max-height: 150px;
 }
 
 img{
@@ -39,4 +49,13 @@ h2, p{
 
 .pics{
     margin-top: 40px;
+}
+
+.searcher{
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }

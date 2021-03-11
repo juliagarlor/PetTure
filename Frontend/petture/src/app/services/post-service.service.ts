@@ -9,22 +9,26 @@ import { Post } from '../models/post';
 })
 export class PostServiceService {
 
-  url: string = "http//localhost:8080/";
+  url: string = 'http//localhost:8080/';
 
   constructor(
     private http: HttpClient
   ) { }
 
   getPublicPosts():Observable<IncomingPost[]>{
-    return this.http.get<IncomingPost[]>(this.url + "post/view/public");
+    return this.http.get<IncomingPost[]>(this.url + 'post/view/public');
   }
 
-  addNewPost(newPost: any){
-    this.http.post(this.url + "/post", newPost);
+  addNewPost(newPost: any): Observable<any>{
+    return this.http.post<any>(this.url + '/post', newPost);
   }
 
-  addAComment(newComment: any){
-    this.http.post(this.url + "commentary", newComment);
+  addAComment(newComment: any): Observable<any>{
+    return this.http.post<any>(this.url + 'commentary', newComment);
+  }
+
+  getPostAndPic(postId: number): Observable<IncomingPost>{
+    return this.http.get<IncomingPost>(this.url + 'post/view/' + postId)
   }
 }
 

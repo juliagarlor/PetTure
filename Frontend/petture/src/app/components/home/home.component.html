@@ -1,5 +1,5 @@
 <app-nav-bar></app-nav-bar>
-<div class="newpic">
+<div class="newpic" *ngIf = "username.length > 0">
     <button mat-icon-button (click) = "openDialog()">
         <mat-icon>add_a_photo</mat-icon>
     </button>

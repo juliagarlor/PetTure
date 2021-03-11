@@ -9,8 +9,8 @@
 
     <div class="searchcard">
         <div class="details"><app-profile-card></app-profile-card></div>
-        <div class="buttons">
-            <button mat-flat-button>
+        <div class="buttons" >
+            <button mat-flat-button *ngIf = "loggedUser.length > 0">
                 Send request
             </button>
         </div>

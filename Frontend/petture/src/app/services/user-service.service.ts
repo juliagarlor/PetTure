@@ -10,20 +10,20 @@ import { Profile } from '../models/profile';
 })
 export class UserServiceService {
 
+  url: string = 'http://localhost:8080/';
+
   constructor(
     private http: HttpClient,
     private cookies: CookieService
   ) { }
 
   login(user: any): Observable<any>{
-    return this.http.post('http://localhost:8080/user/auth/login', user);
+    return this.http.post(this.url + 'user/auth/login', user);
   }
 
   setToken(token: string, username: string){
     this.cookies.set("token", token);
     this.cookies.set("username", username);
-    console.log(username);
-    console.log(this.cookies.get("username"));
   }
 
   getToken(){
@@ -34,20 +34,29 @@ export class UserServiceService {
     return this.cookies.get("username");
   }
 
+  signOut(){
+    this.cookies.delete("token");
+    this.cookies.deleteAll("username");
+  }
+
   getProfile(): Observable<IncomingProfile>{
-    return this.http.get<IncomingProfile>('http://localhost:8080/user/search/' + this.getUsername());
+    return this.http.get<IncomingProfile>( this.url + 'user/search/' + this.getUsername());
   }
 
   getRequests(): Observable<BasicProfile[]>{
-    return this.http.get<BasicProfile[]>('http://localhost:8080/user/requests/'+ this.getUsername());
+    return this.http.get<BasicProfile[]>(this.url + 'user/requests/'+ this.getUsername());
   }
 
   removeRequest(requestId: string): Observable<any>{
-    return this.http.put<any>('http://localhost:8080/user/remove/request/' + this.getUsername, requestId);
+    return this.http.put<any>(this.url + 'user/remove/request/' + this.getUsername(), requestId);
   }
 
   addABuddy(buddyId: string): Observable<any>{
-    return this.http.put<any>('http://localhost:8080/user/buddy/' + this.getUsername, buddyId);
+    return this.http.put<any>(this.url + 'user/buddy/' + this.getUsername(), buddyId);
+  }
+
+  updateProfilePic(newProfilePic: string): Observable<any>{
+    return this.http.put<any>(this.url + 'user/profile-pic/' + this.getUsername(), newProfilePic);
   }
 }
 

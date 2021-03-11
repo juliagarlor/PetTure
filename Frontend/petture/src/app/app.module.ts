@@ -25,6 +25,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { RegisterComponent } from './components/register/register.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { NewPostComponent } from './components/new-post/new-post.component'; 
+import {MatMenuModule} from '@angular/material/menu'; 
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { NewPostComponent } from './components/new-post/new-post.component';
     MatButtonModule,
     MatIconModule,
     MatGridListModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

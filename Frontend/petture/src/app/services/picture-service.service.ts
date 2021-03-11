@@ -8,15 +8,17 @@ import { Picture } from '../models/picture';
 })
 export class PictureServiceService {
 
+  url: string = 'http://localhost:8080/';
+
   constructor(
     private http: HttpClient
   ) { }
 
   getPicsByUser(userName: string): Observable<Picture[]>{
-    return this.http.get<Picture[]>('http://localhost:8080/pics/' + userName);
+    return this.http.get<Picture[]>(this.url + 'pics/' + userName);
   }
 
   addALick(picId: number):Observable<any>{
-    return this.http.put<any>("http://localhost:8080/pic/" + picId, '');
+    return this.http.put<any>(this.url + 'pic/' + picId, '');
   }
 }

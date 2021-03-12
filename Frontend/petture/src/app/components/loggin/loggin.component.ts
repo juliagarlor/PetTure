@@ -38,12 +38,11 @@ export class LogginComponent implements OnInit {
     const user = {username: this.username.value, password: this.password.value};
     this.userService.login(user).subscribe(data => {
       this.userService.setToken(data.accessToken, this.username.value);
-      // this.router.navigateByUrl('/home');
+      form.resetForm();
+      this.router.navigateByUrl('/home');
     }, error => {
-      // cambia esto cuando puedas
-      alert(error);
+      alert("Something went wrong");
     });
-    // form.resetForm();
   }
 
   openDialog(): void {

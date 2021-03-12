@@ -76,13 +76,20 @@ public class EdgeService implements IEdgeService {
         List<PostDTO> output = new ArrayList<>();
 
         for (String username : publicUsernames){
-            List<PictureDTO> picList = pictureClient.getPicsByUser(username);
-            for (PictureDTO pic : picList){
-                List<PostDTO> postList = postClient.getPostsByPicId(pic.getPicId());
-                for (PostDTO post : postList){
-                    post.setPicture(pic);
-                    output.add(post);
-                }
+            output.addAll(getPostsByUser(username));
+        }
+        return output;
+    }
+
+    public List<PostDTO> getPostsByUser(String username) {
+        List<PictureDTO> picList = pictureClient.getPicsByUser(username);
+        List<PostDTO> output = new ArrayList<>();
+
+        for (PictureDTO pic : picList){
+            List<PostDTO> postList = postClient.getPostsByPicId(pic.getPicId());
+            for (PostDTO post : postList){
+                post.setPicture(pic);
+                output.add(post);
             }
         }
         return output;

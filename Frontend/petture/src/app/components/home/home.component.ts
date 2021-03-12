@@ -29,7 +29,8 @@ export class HomeComponent implements OnInit {
     this.username = this.userService.getUsername();
     this.postService.getPublicPosts().subscribe(data => {
       data.forEach(post => {
-        this.postList.push(new Post(post.postId, post.postBody, post.picture));
+        this.postList.push(new Post(post.postId, post.postBody, 
+          new Picture(post.picture.picId, post.picture.pictureName, post.picture.userName, post.picture.licks)));
       });
     })
   }

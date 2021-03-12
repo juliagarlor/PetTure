@@ -59,3 +59,14 @@ h2, p{
     position: absolute;
     z-index: -1;
 }
+
+.dialog .mat-dialog-container {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.dialog .mat-dialog-container .card{
+    margin: 0;
+    padding: 0;
+}

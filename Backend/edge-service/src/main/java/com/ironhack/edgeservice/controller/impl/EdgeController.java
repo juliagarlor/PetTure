@@ -62,6 +62,13 @@ public class EdgeController implements IEdgeController {
         return edgeService.getPublicPosts();
     }
 
+//    Return every post from an user
+    @GetMapping("/post/view/by-user/{username}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<PostDTO> getPostsByUser(@PathVariable String username){
+        return edgeService.getPostsByUser(username);
+    }
+
 //    Return commentaries from a post. permit all
     @GetMapping("/commentaries/{postId}")
     @ResponseStatus(HttpStatus.OK)

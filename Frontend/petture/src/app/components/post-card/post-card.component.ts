@@ -44,11 +44,11 @@ export class PostCardComponent implements OnInit {
   lick: string = 'Meow';
   lickList: string[] = ['Meow', 'Meow', 'Woof', 'Woof', 'What the fox say', 'Quack', 'Quack'];
   isShown: boolean = false;
-  logedUser: string = 'bestFriendForever';
-  // @Input() post!: Post;
+  @Input() logedUser!: string;
+  @Input() post!: Post;
 
-  post: Post = new Post(0, 'holi', new Picture(0, 'assets/images/garfield.jpg', 'garfield', 0));
-  comments: Commentary[] = [new Commentary(0, 'bestFriendForever', 'hola que haseh', this.post.id)];
+  // post: Post = new Post(0, 'holi', new Picture(0, 'assets/images/garfield.jpg', 'garfield', 0));
+  comments: Commentary[] = [];
   newComment: string = '';
 
   constructor(
@@ -58,7 +58,11 @@ export class PostCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.logedUser = this.userService.getUsername();
+    this.postService.getCommentsInPost(this.post.id).subscribe(data => {
+      data.forEach(comment => {
+        this.comments.push(new Commentary(comment.commentaryId, comment.userName, comment.commentBody, comment.postId));
+      });
+    })
   }
 
   addALick():void{

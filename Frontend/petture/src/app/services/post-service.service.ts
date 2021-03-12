@@ -9,7 +9,7 @@ import { Post } from '../models/post';
 })
 export class PostServiceService {
 
-  url: string = 'http//localhost:8080/';
+  url: string = 'http://localhost:8080/';
 
   constructor(
     private http: HttpClient
@@ -30,10 +30,30 @@ export class PostServiceService {
   getPostAndPic(postId: number): Observable<IncomingPost>{
     return this.http.get<IncomingPost>(this.url + 'post/view/' + postId)
   }
+
+  getCommentsInPost(postId: number): Observable<IncomingComment[]>{
+    return this.http.get<IncomingComment[]>(this.url + 'commentaries/' + postId)
+  }
+
+  getPostsByUser(username: string): Observable<IncomingPost[]>{
+    return this.http.get<IncomingPost[]>(this.url + 'post/view/by-user/' + username);
+  }
 }
 
 interface IncomingPost{
   postId: number,
   postBody: string,
-  picture: Picture
+  picture: {
+    picId: number,
+    pictureName: string,
+    userName: string,
+    licks: number
+  }
+}
+
+interface IncomingComment{
+  commentaryId: number,
+  userName: string,
+  commentBody: string,
+  postId: number
 }

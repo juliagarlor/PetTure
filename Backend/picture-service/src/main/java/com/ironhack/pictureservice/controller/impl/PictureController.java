@@ -29,7 +29,7 @@ public class PictureController implements IPictureController {
         return pictureService.getPicById(id);
     }
 
-    //    Post a new picture
+//    Post a new picture
     @PostMapping("/pic")
     @ResponseStatus(HttpStatus.OK)
     public PictureDTO newPic(@RequestBody @Valid PictureDTO pictureDTO){

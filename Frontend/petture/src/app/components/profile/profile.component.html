@@ -13,7 +13,7 @@
 
    <div class="pics">
     <mat-grid-list cols="3" rowHeight="1:1">
-        <mat-grid-tile *ngFor = "let post of postList"><img src="{{post.picture.pictureName}}" (click) = "openPic(post.id)"></mat-grid-tile>
+        <mat-grid-tile *ngFor = "let post of postList"><img src="{{post.picture.pictureName}}" (click) = "openPic(post)"></mat-grid-tile>
     </mat-grid-list>      
    </div> 
 </div>

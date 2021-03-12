@@ -16,7 +16,7 @@ public interface PostClient {
 
 //    Returns posts by pictureId
     @GetMapping("/posts/picture/{pictureId}")
-    List<PostDTO> getPostsByPicId(Long pictureId);
+    List<PostDTO> getPostsByPicId(@PathVariable Long pictureId);
 
 //    Returns all posts
     @GetMapping("/posts")

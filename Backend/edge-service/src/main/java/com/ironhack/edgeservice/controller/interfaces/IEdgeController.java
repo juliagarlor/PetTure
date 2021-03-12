@@ -15,6 +15,7 @@ public interface IEdgeController {
 
     PostDTO getPostAndPic(Long postId);
     List<PostDTO> getPublicPosts();
+    List<PostDTO> getPostsByUser(String username);
     List<CommentaryDTO> getCommentariesInPost(Long postId);
     PostDTO newPost(PostDTO postDTO);
     CommentaryDTO addCommentary(CommentaryDTO commentaryDTO);

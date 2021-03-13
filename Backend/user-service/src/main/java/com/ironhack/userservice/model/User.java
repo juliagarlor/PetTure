@@ -36,9 +36,9 @@ public class User {
             inverseJoinColumns = { @JoinColumn(name = "requesting_user") }
     )
     private List<User> requests;
-    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Role role;
+//    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @PrimaryKeyJoinColumn
+    private String role;
     @Transient
     protected PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -53,7 +53,7 @@ public class User {
         this.visibility = visibility;
         this.buddies = new ArrayList<>();
         this.requests = new ArrayList<>();
-        this.role = new Role(userName, "USER");
+        this.role = "USER";
     }
 
     public User(UserDTO userDTO){
@@ -110,11 +110,11 @@ public class User {
         this.requests = requests;
     }
 
-    public Role getRoles() {
+    public String getRoles() {
         return role;
     }
 
-    public void setRoles(Role roles) {
+    public void setRoles(String roles) {
         this.role = roles;
     }
 }

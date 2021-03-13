@@ -41,6 +41,10 @@ export class UserServiceService {
     this.cookies.deleteAll("username");
   }
 
+  register(user: any): Observable<any>{
+    return this.http.post<any>(this.url + 'user/auth/register', user);
+  }
+
   getProfile(): Observable<IncomingProfile>{
     return this.http.get<IncomingProfile>( this.url + 'user/search/' + this.getUsername());
   }

@@ -9,6 +9,7 @@ user_name VARCHAR(255) NOT NULL,
 `password` VARCHAR(255),
 profile_picture VARCHAR(255),
 visibility VARCHAR(255),
+`role` VARCHAR(255),
 PRIMARY KEY(user_name)
 );
 
@@ -26,22 +27,11 @@ FOREIGN KEY(requested_user) REFERENCES `user`(user_name),
 FOREIGN KEY(requesting_user) REFERENCES `user`(user_name)
 );
 
-CREATE TABLE `role`(
-user_name VARCHAR(255) NOT NULL,
-`name` VARCHAR(255),
-PRIMARY KEY(user_name),
-FOREIGN KEY(user_name) REFERENCES `user`(user_name)
-);
-
-INSERT INTO `user` (user_name, `password`, profile_picture, visibility) VALUES 
+INSERT INTO `user` (user_name, `password`, profile_picture, visibility, `role`) VALUES 
 -- Contraseña perry: malditaSeaPerryElOrnitorrinco
-('perryThePlatypus', '$2a$10$D4RylHFq71wpbaufSeL.2uULHmpz.Gtf6yO5kFnC7h8h6kv6zw5U6', 'assets/images/perry.jpg', 'PUBLIC'),
+('perryThePlatypus', '$2a$10$D4RylHFq71wpbaufSeL.2uULHmpz.Gtf6yO5kFnC7h8h6kv6zw5U6', 'assets/images/perry.jpg', 'PUBLIC', 'USER'),
 -- contraseña garfield: lasaña
-('garfieldLovesMondays', '$2a$10$cFlNgE2vRoTuDAc3/rjEI.uizoiKOY/3r2Xq6MoRinOZ5WWoYD5NS', 'assets/images/garfield.jpg', 'PUBLIC');
-
-INSERT INTO `role`(user_name, `name`) VALUES 
-('perryThePlatypus', 'USER'),
-('garfieldLovesMondays', 'USER');
+('garfieldLovesMondays', '$2a$10$cFlNgE2vRoTuDAc3/rjEI.uizoiKOY/3r2Xq6MoRinOZ5WWoYD5NS', 'assets/images/garfield.jpg', 'PUBLIC', 'USER');
 
 INSERT INTO request_to_user(requested_user, requesting_user) VALUES
 ('perryThePlatypus', 'garfieldLovesMondays');

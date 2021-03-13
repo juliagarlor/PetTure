@@ -32,10 +32,11 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(form: FormGroupDirective): void {
-    const user = {username: this.username.value, password: this.password.value};
-    // Register user
-    form.resetForm();
+    const user = {userName: this.username.value, password: this.password.value, profilePicture: 'default.jpg', visibility: 'PUBLIC'};
+    this.userService.register(user).subscribe(data => {
+          form.resetForm();
     this.onNoClick();
+    })
   }
 
   onNoClick(): void{

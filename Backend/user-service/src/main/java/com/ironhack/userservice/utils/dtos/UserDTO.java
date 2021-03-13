@@ -18,13 +18,13 @@ public class UserDTO {
     private String visibility;
     private List<ProfileDTO> buddies;
     private List<ProfileDTO> requests;
-    private Role roles;
+    private String roles;
 
 //    Constructors
     public UserDTO(@NotEmpty(message = "Be creative, it's your username") @Length(max = 10, message = "SHORT NAMES!")
                            String userName, @NotEmpty(message = "Password is compulsory") String password,
                    @NotEmpty(message = "Pick your favourite pic") String profilePicture, String visibility,
-                   List<ProfileDTO> buddies, List<ProfileDTO> requests, Role roles) {
+                   List<ProfileDTO> buddies, List<ProfileDTO> requests, String roles) {
         this.userName = userName;
         this.password = password;
         this.profilePicture = profilePicture;
@@ -84,11 +84,11 @@ public class UserDTO {
         this.requests = requests;
     }
 
-    public Role getRoles() {
+    public String getRoles() {
         return roles;
     }
 
-    public void setRoles(Role roles) {
+    public void setRoles(String roles) {
         this.roles = roles;
     }
 }

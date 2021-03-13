@@ -21,7 +21,7 @@ public class CustomUserDetails implements UserDetails {
 
         Collection<GrantedAuthority> authorities = new HashSet<>();
 
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRoles().getName()));
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRoles()));
 
         return authorities;
     }

@@ -16,17 +16,22 @@ export class IncomingRequestsComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getRequests().subscribe(data => {
-      this.userRequests = data;
+      data.forEach(profile => {
+        this.userRequests.push({userName: profile.userName, profilePic: profile.profilePic})
+      });
     })
   }
 
   addBuddy(buddy: string, index: number){
-    this.userRequests.slice(index, 1);
-    this.userService.addABuddy(buddy);
+    this.userService.addABuddy(buddy).subscribe(data => {
+          this.userRequests.slice(index, 1);
+    });
   }
 
   removeRequest(request: string, index: number){
-    this.userRequests.slice(index, 1);
-    this.userService.removeRequest(request);
+    this.userService.removeRequest(request).subscribe(data => {
+      // ESTO NO ESTÁ FUNCIONANDOOOOOO 
+          this.userRequests.slice(index, index + 1);
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
@@ -11,11 +11,13 @@ import { Profile } from '../models/profile';
 export class UserServiceService {
 
   url: string = 'http://localhost:8080/';
+  headers = new HttpHeaders();
 
   constructor(
     private http: HttpClient,
     private cookies: CookieService
-  ) { }
+  ) {
+   }
 
   login(user: any): Observable<any>{
     return this.http.post(this.url + 'user/auth/login', user);
@@ -44,19 +46,23 @@ export class UserServiceService {
   }
 
   getRequests(): Observable<BasicProfile[]>{
-    return this.http.get<BasicProfile[]>(this.url + 'user/requests/'+ this.getUsername());
+    this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.getToken());
+    return this.http.get<BasicProfile[]>(this.url + 'user/requests/'+ this.getUsername(), {headers: this.headers});
   }
 
   removeRequest(requestId: string): Observable<any>{
-    return this.http.put<any>(this.url + 'user/remove/request/' + this.getUsername(), requestId);
+    this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.getToken());
+    return this.http.put<any>(this.url + 'user/remove/request/' + this.getUsername(), requestId, {headers: this.headers});
   }
 
   addABuddy(buddyId: string): Observable<any>{
-    return this.http.put<any>(this.url + 'user/buddy/' + this.getUsername(), buddyId);
+    this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.getToken());
+    return this.http.put<any>(this.url + 'user/buddy/' + this.getUsername(), buddyId, {headers: this.headers});
   }
 
   updateProfilePic(newProfilePic: string): Observable<any>{
-    return this.http.put<any>(this.url + 'user/profile-pic/' + this.getUsername(), newProfilePic);
+    this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.getToken());
+    return this.http.put<any>(this.url + 'user/profile-pic/' + this.getUsername(), newProfilePic, {headers: this.headers});
   }
 }
 

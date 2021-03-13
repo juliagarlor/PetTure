@@ -17,7 +17,7 @@ div{
 
 .searchcard{
     flex-direction: row;
-    width: 50%;
+    width: auto;
     margin: auto;
     border: 1px solid #8cb3af;
     border-radius: 5px;

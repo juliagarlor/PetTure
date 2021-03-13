@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Picture } from '../models/picture';
 import { Post } from '../models/post';
+import { UserServiceService } from './user-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,21 +11,27 @@ import { Post } from '../models/post';
 export class PostServiceService {
 
   url: string = 'http://localhost:8080/';
+  headers = new HttpHeaders();
 
   constructor(
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+    private userService: UserServiceService
+  ) {
+  }
 
   getPublicPosts():Observable<IncomingPost[]>{
     return this.http.get<IncomingPost[]>(this.url + 'post/view/public');
   }
 
   addNewPost(newPost: any): Observable<any>{
-    return this.http.post<any>(this.url + '/post', newPost);
+    this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.userService.getToken());
+    console.log('headers in post: ' + this.headers);
+    return this.http.post<any>(this.url + '/post', newPost, {headers: this.headers});
   }
 
   addAComment(newComment: any): Observable<any>{
-    return this.http.post<any>(this.url + 'commentary', newComment);
+    this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.userService.getToken());
+    return this.http.post<any>(this.url + 'commentary', newComment, {headers: this.headers});
   }
 
   getPostAndPic(postId: number): Observable<IncomingPost>{

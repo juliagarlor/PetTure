@@ -16,12 +16,18 @@ div{
 }
 
 .searchcard{
+    display: flex;
     flex-direction: row;
-    width: auto;
+    justify-content: space-around;
+    width: 60vw;
     margin: auto;
     border: 1px solid #8cb3af;
     border-radius: 5px;
     padding: 10px;
+    height: 5vw;
+    min-width: 500px;
+    min-height: 100px;
+    margin-top: 10px;
 }
 
 .details, .buttons{

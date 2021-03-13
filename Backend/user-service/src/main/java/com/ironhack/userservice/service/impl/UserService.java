@@ -23,6 +23,11 @@ public class UserService implements IUserService {
         return buildUserDTO(user);
     }
 
+    public ProfileDTO getProfileByUserName(String username) {
+        User user = checkUserName(username);
+        return new ProfileDTO(user);
+    }
+
     public List<ProfileDTO> getBuddies(String userName) {
         User user = checkUserName(userName);
         List<User> buddies = user.getBuddies();

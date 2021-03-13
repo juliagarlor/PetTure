@@ -15,10 +15,18 @@ public class UserController implements IUserController {
     @Autowired
     private IUserService userService;
 
+//    Get user by username
     @GetMapping("/user/search/{userName}")
     @ResponseStatus(HttpStatus.OK)
     public UserDTO getUserByUserName(@PathVariable String userName) {
         return userService.getUserByUserName(userName);
+    }
+
+//    Get basic profile by username
+    @GetMapping("/user/basic-profile/{username}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProfileDTO getProfileByUserName(@PathVariable String username){
+        return userService.getProfileByUserName(username);
     }
 
 //    Get buddies

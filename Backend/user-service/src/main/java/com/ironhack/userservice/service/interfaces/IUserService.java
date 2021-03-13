@@ -6,6 +6,7 @@ import java.util.*;
 
 public interface IUserService {
     UserDTO getUserByUserName(String userName);
+    ProfileDTO getProfileByUserName(String username);
     List<ProfileDTO> getBuddies(String userName);
     List<ProfileDTO> getRequests(String userName);
     List<String> getPublicProfiles();

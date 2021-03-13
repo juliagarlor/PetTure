@@ -14,7 +14,7 @@ export class NewPostComponent implements OnInit {
   caption: string = '';
   uploaded: boolean = false;
   uploadedPic: string = 'assets/images/perry.jpg';
-  newPost: Post = new Post(0, '', new Picture(0, '', '', 0));
+  newPost: {} = {};
   @Input() username!: string;
   @Output() newPostEvent = new EventEmitter();
 
@@ -42,10 +42,8 @@ export class NewPostComponent implements OnInit {
   }
 
   postNew(): void{
-    console.log(this.caption);
-    console.log(this.username);
-    let newPic = new Picture(0, this.uploadedPic, this.username, 0);
-    this.newPost = new Post(0, this.caption, newPic);
+    let newPic = {pictureName: this.uploadedPic, userName: this.username};
+    this.newPost = {postBody: this.caption, picture: newPic};
     this.dialogRef.close(this.newPost);
   }
 }

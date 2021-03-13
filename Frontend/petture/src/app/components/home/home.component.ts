@@ -45,15 +45,10 @@ export class HomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       if(result != undefined){
-        this.postList.push(result);
-        this.postList[0].picture.userName
-        // lo siento, se lo mando como json porque no me fio del stringify
-        let postToSend = {postBody: result.body, 
-          picture: {
-            pictureName: result.picture.pictureName,
-            userName: result.picture.userName
-          }};
-        this.postService.addNewPost(postToSend);
+        this.postService.addNewPost(result).subscribe(data => {
+          this.postList.push(new Post(data.postId, data.postBody, 
+            new Picture(data.picture.picId, data.picture.pictureName, data.picture.userName, 0)));
+        });
       }
     });
   }

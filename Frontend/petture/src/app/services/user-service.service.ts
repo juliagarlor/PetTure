@@ -62,7 +62,16 @@ export class UserServiceService {
 
   updateProfilePic(newProfilePic: string): Observable<any>{
     this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.getToken());
+    console.log(newProfilePic);
     return this.http.put<any>(this.url + 'user/profile-pic/' + this.getUsername(), newProfilePic, {headers: this.headers});
+  }
+
+  getPublicProfiles(): Observable<BasicProfile[]>{
+    return this.http.get<BasicProfile[]>(this.url + 'user/search/public-profiles');
+  }
+
+  newRequest(requestedUser: string): Observable<any>{
+    return this.http.put<any>(this.url + 'user/request/' + this.getUsername(), requestedUser)
   }
 }
 

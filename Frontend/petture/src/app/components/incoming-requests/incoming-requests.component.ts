@@ -24,14 +24,13 @@ export class IncomingRequestsComponent implements OnInit {
 
   addBuddy(buddy: string, index: number){
     this.userService.addABuddy(buddy).subscribe(data => {
-          this.userRequests.slice(index, 1);
+          this.userRequests.splice(index, 1);
     });
   }
 
   removeRequest(request: string, index: number){
     this.userService.removeRequest(request).subscribe(data => {
-      // ESTO NO ESTÁ FUNCIONANDOOOOOO 
-          this.userRequests.slice(index, index + 1);
+          this.userRequests.splice(index, 1);
     });
   }
 }

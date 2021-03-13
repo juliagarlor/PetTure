@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.*;
 import org.springframework.cloud.openfeign.*;
+import org.springframework.context.annotation.*;
+import org.springframework.web.servlet.config.annotation.*;
 
 @SpringBootApplication
 @EnableEurekaClient

@@ -30,4 +30,5 @@ public interface IEdgeService {
     UserDTO addRequest(String userName, String request);
     UserDTO removeRequest(String userName, String request);
     void removeUser(String userName);
+    List<ProfileDTO> getPublicProfiles();
 }

@@ -16,6 +16,11 @@ public interface UserClient {
     @ResponseStatus(HttpStatus.OK)
     UserDTO getUserByUserName(@PathVariable String userName);
 
+//    Get basic profile by username
+    @GetMapping("/user/basic-profile/{username}")
+    @ResponseStatus(HttpStatus.OK)
+    ProfileDTO getProfileByUserName(@PathVariable String username);
+
 //    Get buddies
     @GetMapping("/user/buddies/{userName}")
     List<ProfileDTO> getBuddies(@PathVariable String userName);

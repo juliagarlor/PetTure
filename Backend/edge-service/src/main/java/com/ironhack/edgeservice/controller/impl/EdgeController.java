@@ -134,6 +134,8 @@ public class EdgeController implements IEdgeController {
 //    Update profile pic. authenticated
     @PutMapping("/user/profile-pic/{userName}")
     public ProfileDTO updateProfilePic(@PathVariable String userName, @RequestBody String profilePic){
+        System.out.println("llegamos aquí con esta pic: ");
+        System.out.println(profilePic);
         return edgeService.updateProfilePic(userName, profilePic);
     }
 
@@ -161,5 +163,12 @@ public class EdgeController implements IEdgeController {
     @DeleteMapping("/user/{userName}")
     public void removeUser(@PathVariable String userName){
         edgeService.removeUser(userName);
+    }
+
+//    Get public profiles. permit all
+    @GetMapping("/user/search/public-profiles")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProfileDTO> getPublicProfiles(){
+        return edgeService.getPublicProfiles();
     }
 }

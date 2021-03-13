@@ -189,4 +189,18 @@ public class EdgeService implements IEdgeService {
 //        Removing the user
         userClient.removeUser(userName);
     }
+
+    public List<ProfileDTO> getPublicProfiles() {
+        List<String> publicUsernames = userClient.getPublicProfiles();
+        if (publicUsernames.size() > 5){
+            publicUsernames.removeIf(username -> (publicUsernames.indexOf(username) > 4));
+        }
+        System.out.println(publicUsernames.size());
+
+        List<ProfileDTO> output = new ArrayList<>();
+        for (String name : publicUsernames){
+            output.add(userClient.getProfileByUserName(name));
+        }
+        return output;
+    }
 }

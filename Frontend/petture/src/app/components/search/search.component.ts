@@ -12,7 +12,7 @@ export class SearchComponent implements OnInit {
   value = '';
   loggedUser: string = ''; 
   // haz que traiga los 5 primeros profiles publicos y guardalos aqui:
-  suggestedUsers: {username: string, profilePicture: string}[] = [];
+  suggestedUsers: {userName: string, profilePic: string}[] = [];
 
   constructor(
     private userService: UserServiceService
@@ -20,6 +20,18 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedUser = this.userService.getUsername();
+    this.userService.getPublicProfiles().subscribe(data => {
+      data.forEach(profile => {
+        this.suggestedUsers.push({userName: profile.userName, profilePic: profile.profilePic});
+      });
+    })
   }
 
+  sendRequest(requestTo: string, i: number){
+    // Por ahora no uso el indice para nada
+    this.userService.newRequest(requestTo).subscribe(data => {
+      // nada
+      console.log('sent');
+    })
+  }
 }

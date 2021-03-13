@@ -23,10 +23,11 @@ export class PostServiceService {
     return this.http.get<IncomingPost[]>(this.url + 'post/view/public');
   }
 
-  addNewPost(newPost: any): Observable<any>{
+  addNewPost(newPost: any): Observable<IncomingPost>{
     this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.userService.getToken());
-    console.log('headers in post: ' + this.headers);
-    return this.http.post<any>(this.url + '/post', newPost, {headers: this.headers});
+    console.log('headers in post: ');
+    console.log(this.headers);
+    return this.http.post<IncomingPost>(this.url + 'post', newPost, {headers: this.headers});
   }
 
   addAComment(newComment: any): Observable<any>{

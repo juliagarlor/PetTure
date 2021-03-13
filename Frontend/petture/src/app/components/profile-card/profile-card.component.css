@@ -1,9 +1,6 @@
 div{
     display: flex;
-    /* min-width: 50%; */
-    /* width: 50%; */
-    /* min-height: 20%; */
-    height: 100px;
+    height: 100%;
     margin: auto;
 }
 
@@ -11,10 +8,14 @@ div{
     margin: 0;
 }
 .profileimg{
-    flex: 1;
     overflow: hidden;
+    border-radius: 10vw;
+    width: 11vw;
+    height: 11vw;
+    min-width: 80px;
+    min-height: 80px;
     max-width: 100px;
-    border-radius: 100px;
+    max-height: 100px;
 }
 
 .username{
@@ -26,6 +27,7 @@ p{
     display: table-cell;
     vertical-align: middle;
     font-weight: 500;
+    font-size: 2vw;
 }
 
 img{

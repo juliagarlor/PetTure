@@ -3,7 +3,7 @@ package com.ironhack.edgeservice.utils.dtos;
 public class ProfileDTO {
 
     private String userName;
-    private String profilePic;
+    private Long profilePic;
 
 //    Getters and Setters
 
@@ -15,11 +15,11 @@ public class ProfileDTO {
         this.userName = userName;
     }
 
-    public String getProfilePic() {
+    public Long getProfilePic() {
         return profilePic;
     }
 
-    public void setProfilePic(String profilePic) {
+    public void setProfilePic(Long profilePic) {
         this.profilePic = profilePic;
     }
 }

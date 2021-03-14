@@ -16,6 +16,8 @@ import org.springframework.security.core.*;
 import org.springframework.security.core.context.*;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.*;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import java.util.*;
 
@@ -39,19 +41,12 @@ public class EdgeService implements IEdgeService {
     private FallBack fallBack = new FallBack();
 
 //    Picture part
-    public List<PictureDTO> getPicsByUser(String userName) {
-        CircuitBreaker pictureCircuitBreaker = circuitBreakerFactory.create("picture-service");
-        return pictureCircuitBreaker.run(() -> pictureClient.getPicsByUser(userName), throwable -> fallBack.listPicFallBack());
-    }
 
-    public PictureDTO newPic(PictureDTO pictureDTO) {
-        CircuitBreaker pictureCircuitBreaker = circuitBreakerFactory.create("picture-service");
-        return pictureCircuitBreaker.run(() -> pictureClient.newPic(pictureDTO), throwable -> fallBack.picFallBack());
-    }
-
-    public PictureDTO newLick(Long id) {
-        CircuitBreaker pictureCircuitBreaker = circuitBreakerFactory.create("picture-service");
-        return pictureCircuitBreaker.run(() -> pictureClient.newLick(id), throwable -> fallBack.picFallBack());
+    public PictureDTO newPic(MultipartFile file) {
+        System.out.println(file);
+//        CircuitBreaker pictureCircuitBreaker = circuitBreakerFactory.create("picture-service");
+//        return pictureCircuitBreaker.run(() -> pictureClient.newPic(file), throwable -> fallBack.picFallBack());
+        return pictureClient.newPic(file);
     }
 
     public void removePic(Long id) {
@@ -66,7 +61,6 @@ public class EdgeService implements IEdgeService {
         PostDTO post = postCircuitBreaker.run(() -> postClient.getPostsById(postId), throwable -> fallBack.postFallBack());
         PictureDTO pic = pictureCircuitBreaker.run(() -> pictureClient.getPicById(post.getPictureId()),
                 throwable -> fallBack.picFallBack());
-        post.setPicture(pic);
         return post;
     }
 
@@ -81,17 +75,12 @@ public class EdgeService implements IEdgeService {
         return output;
     }
 
-    public List<PostDTO> getPostsByUser(String username) {
-        List<PictureDTO> picList = pictureClient.getPicsByUser(username);
-        List<PostDTO> output = new ArrayList<>();
+    public PostDTO updateLicks(Long postId) {
+        return postClient.updateLicks(postId);
+    }
 
-        for (PictureDTO pic : picList){
-            List<PostDTO> postList = postClient.getPostsByPicId(pic.getPicId());
-            for (PostDTO post : postList){
-                post.setPicture(pic);
-                output.add(post);
-            }
-        }
+    public List<PostDTO> getPostsByUser(String username) {
+        List<PostDTO> output = postClient.getPostsByUsername(username);
         return output;
     }
 
@@ -104,9 +93,6 @@ public class EdgeService implements IEdgeService {
     public PostDTO newPost(PostDTO postDTO) {
         CircuitBreaker postCircuitBreaker = circuitBreakerFactory.create("post-service");
 
-        PictureDTO pic = newPic(postDTO.getPicture());
-        postDTO.setPicture(pic);
-        postDTO.setPictureId(pic.getPicId());
         PostDTO newPost = postCircuitBreaker.run(() -> postClient.newPost(postDTO), throwable -> fallBack.postFallBack());
         postDTO.setPostId(newPost.getPostId());
         return postDTO;
@@ -140,7 +126,7 @@ public class EdgeService implements IEdgeService {
 
     public UserDTO getUserByUserName(String userName) {
         UserDTO output = userClient.getUserByUserName(userName);
-        output.setPics(pictureClient.getPicsByUser(userName));
+        output.setPosts(postClient.getPostsByUsername(userName));
         output.setBuddyNum(output.getBuddies().size());
         return output;
     }
@@ -149,7 +135,7 @@ public class EdgeService implements IEdgeService {
         return userClient.registerUser(userDTO);
     }
 
-    public ProfileDTO updateProfilePic(String userName, String profilePic) {
+    public ProfileDTO updateProfilePic(String userName, Long profilePic) {
         return userClient.updateProfilePic(userName, profilePic);
     }
 
@@ -178,13 +164,11 @@ public class EdgeService implements IEdgeService {
 
     public void removeUser(String userName) {
 //        Getting pictures and its ids
-        List<PictureDTO> picsToRemove = getPicsByUser(userName);
+        List<PostDTO> postsToRemove = getPostsByUser(userName);
 
-        for (PictureDTO pic : picsToRemove){
+        for (PostDTO post : postsToRemove){
 //            Removing posts and commentaries from a picture
-            postClient.removePostsByPic(pic.getPicId());
-//            Removing the picture
-            removePic(pic.getPicId());
+            postClient.removePost(post.getPostId());
         }
 //        Removing the user
         userClient.removeUser(userName);

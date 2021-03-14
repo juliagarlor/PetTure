@@ -9,23 +9,18 @@ public class PictureDTO {
     private Long picId;
     @NotEmpty(message = "A picture must have a name")
     private String pictureName;
-    @NotEmpty(message = "A picture must belong to an user")
-    private String userName;
-    @Min(value = 0, message = "You are beautiful!")
-    private int licks;
+    private String type;
+    private byte[] pic;
 
 //    Constructors
-
-    public PictureDTO(@NotEmpty(message = "A picture must have a name") String pictureName,
-                      @NotEmpty(message = "A picture must belong to an user") String userName,
-                      @Min(value = 0, message = "You are beautiful!") int licks) {
+    public PictureDTO(@NotEmpty(message = "A picture must have a name") String pictureName, String type, byte[] pic) {
         this.pictureName = pictureName;
-        this.userName = userName;
-        this.licks = licks;
+        this.type = type;
+        this.pic = pic;
     }
 
     public PictureDTO(Picture picture) {
-        this(picture.getPictureName(), picture.getUserName(), picture.getLicks());
+        this(picture.getPictureName(), picture.getType(), picture.getPic());
         this.picId = picture.getId();
     }
 
@@ -46,19 +41,19 @@ public class PictureDTO {
         this.pictureName = pictureName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getType() {
+        return type;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public int getLicks() {
-        return licks;
+    public byte[] getPic() {
+        return pic;
     }
 
-    public void setLicks(int licks) {
-        this.licks = licks;
+    public void setPic(byte[] pic) {
+        this.pic = pic;
     }
 }

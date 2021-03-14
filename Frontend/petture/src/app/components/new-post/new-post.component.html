@@ -9,6 +9,6 @@
         <button mat-button (click)="postNew()" [disabled] = "uploaded">New post</button>
     </div>
     <div class="pic">
-        <img src={{uploadedPic}}>
+        <img src={{imgURL}} *ngIf = "imgURL">
     </div> 
 </div>

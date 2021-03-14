@@ -7,6 +7,7 @@ import com.ironhack.edgeservice.utils.payload.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.*;
 
 import javax.validation.*;
 import java.util.*;
@@ -19,25 +20,13 @@ public class EdgeController implements IEdgeController {
     private IEdgeService edgeService;
 
 //    Picture part:
-//    Return all pictures from a user. Permit all
-    @GetMapping("/pics/{userName}")
-    @ResponseStatus(HttpStatus.OK)
-    public List<PictureDTO> getPicsByUser(@PathVariable String userName){
-        return edgeService.getPicsByUser(userName);
-    }
 
 //    Post a new picture. authenticated
     @PostMapping("/pic")
     @ResponseStatus(HttpStatus.OK)
-    public PictureDTO newPic(@RequestBody @Valid PictureDTO pictureDTO){
-        return edgeService.newPic(pictureDTO);
-    }
-
-//    Update licks. authenticated
-    @PutMapping("/pic/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public PictureDTO newLick(@PathVariable Long id){
-        return edgeService.newLick(id);
+    public PictureDTO newPic(@RequestParam("myFile") MultipartFile file){
+        System.out.println("Holi");
+        return edgeService.newPic(file);
     }
 
 //    Delete picture. authenticated
@@ -53,6 +42,13 @@ public class EdgeController implements IEdgeController {
     @ResponseStatus(HttpStatus.OK)
     public PostDTO getPostAndPic(@PathVariable Long postId){
         return edgeService.getPostAndPic(postId);
+    }
+
+//    Update licks. authenticated
+    @PutMapping("/licks/{postId}")
+    @ResponseStatus(HttpStatus.OK)
+    public PostDTO updateLicks(@PathVariable Long postId){
+        return edgeService.updateLicks(postId);
     }
 
 //    Return public posts
@@ -133,7 +129,7 @@ public class EdgeController implements IEdgeController {
 
 //    Update profile pic. authenticated
     @PutMapping("/user/profile-pic/{userName}")
-    public ProfileDTO updateProfilePic(@PathVariable String userName, @RequestBody String profilePic){
+    public ProfileDTO updateProfilePic(@PathVariable String userName, @RequestBody Long profilePic){
         System.out.println("llegamos aquí con esta pic: ");
         System.out.println(profilePic);
         return edgeService.updateProfilePic(userName, profilePic);

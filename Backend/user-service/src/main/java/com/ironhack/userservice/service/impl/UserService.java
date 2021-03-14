@@ -46,7 +46,7 @@ public class UserService implements IUserService {
         return userRepository.findPublicUserNames(Visibility.PUBLIC);
     }
 
-    public ProfileDTO updateProfilePic(String userName, String profilePic) {
+    public ProfileDTO updateProfilePic(String userName, Long profilePic) {
         User userToUpdate = checkUserName(userName);
         userToUpdate.setProfilePicture(profilePic);
         userRepository.save(userToUpdate);

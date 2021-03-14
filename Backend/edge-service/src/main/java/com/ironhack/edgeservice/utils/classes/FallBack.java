@@ -13,15 +13,16 @@ public class FallBack {
     public PictureDTO picFallBack(){
         PictureDTO output = new PictureDTO();
         output.setPictureName("notFound.jpg");
-        output.setUserName("banksy");
+        output.setType("jpg");
         return output;
     }
 
     public PostDTO postFallBack(){
         PostDTO output = new PostDTO();
         output.setPostBody("Post service counting sheeps...");
-        output.setPicture(picFallBack());
         output.setPictureId(0L);
+        output.setLicks(0);
+        output.setUserName("MissingNo");
         return output;
     }
 

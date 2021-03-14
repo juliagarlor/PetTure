@@ -3,17 +3,17 @@ package com.ironhack.edgeservice.service.interfaces;
 import com.ironhack.edgeservice.utils.dtos.*;
 import com.ironhack.edgeservice.utils.payload.*;
 import org.springframework.http.*;
+import org.springframework.web.multipart.*;
 
 import java.util.*;
 
 public interface IEdgeService {
-    List<PictureDTO> getPicsByUser(String userName);
-    PictureDTO newPic(PictureDTO pictureDTO);
-    PictureDTO newLick(Long id);
+    PictureDTO newPic(MultipartFile file);
     void removePic(Long id);
 
     PostDTO getPostAndPic(Long postId);
     List<PostDTO> getPublicPosts();
+    PostDTO updateLicks(Long postId);
     List<PostDTO> getPostsByUser(String username);
     List<CommentaryDTO> getCommentariesInPost(Long postId);
     PostDTO newPost(PostDTO postDTO);
@@ -23,7 +23,7 @@ public interface IEdgeService {
     ResponseEntity<?> authenticateUser(LoginRequest loginRequest);
     UserDTO getUserByUserName(String userName);
     ResponseEntity<?> registerUser(UserDTO userDTO);
-    ProfileDTO updateProfilePic(String userName, String profilePic);
+    ProfileDTO updateProfilePic(String userName, Long profilePic);
     List<ProfileDTO> getBuddies(String userName);
     List<ProfileDTO> getRequests(String userName);
     UserDTO addABuddy(String userName, String buddy);

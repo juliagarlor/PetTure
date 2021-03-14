@@ -1,14 +1,15 @@
 package com.ironhack.edgeservice.utils.dtos;
 
+import javax.validation.constraints.*;
+
 public class PictureDTO {
 
     private Long picId;
     private String pictureName;
-    private String userName;
-    private int licks;
+    private String type;
+    private byte[] pic;
 
 //    Getters and Setters
-
     public Long getPicId() {
         return picId;
     }
@@ -25,19 +26,19 @@ public class PictureDTO {
         this.pictureName = pictureName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getType() {
+        return type;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public int getLicks() {
-        return licks;
+    public byte[] getPic() {
+        return pic;
     }
 
-    public void setLicks(int licks) {
-        this.licks = licks;
+    public void setPic(byte[] pic) {
+        this.pic = pic;
     }
 }

@@ -7,8 +7,10 @@ import com.ironhack.pictureservice.utils.dtos.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.stereotype.*;
+import org.springframework.web.multipart.*;
 import org.springframework.web.server.*;
 
+import java.io.*;
 import java.util.*;
 
 @Service
@@ -17,37 +19,18 @@ public class PictureService implements IPictureService {
     @Autowired
     private PictureRepository pictureRepository;
 
-    public List<PictureDTO> getPicsByUser(String userName) {
-        List<Picture> pictures = pictureRepository.findByUserName(userName);
-        List<PictureDTO> output = new ArrayList<>();
-
-        for(Picture pic : pictures){
-            output.add(new PictureDTO(pic));
-        }
-
-        return output;
-    }
-
     public PictureDTO getPicById(Long id) {
         Picture pic = checkId(id);
         return new PictureDTO(pic);
     }
 
-    public PictureDTO newPic(PictureDTO pictureDTO) {
-        Picture newPic = new Picture(pictureDTO);
-        pictureRepository.save(newPic);
+    public PictureDTO newPic(MultipartFile file) throws IOException {
+//        System.out.println("holi");
+//        System.out.println(file.getOriginalFilename());
+        Picture newPic = new Picture(file.getOriginalFilename(), file.getContentType(), file.getBytes());
+        PictureDTO output = new PictureDTO(pictureRepository.save(newPic));
 
-        return new PictureDTO(newPic);
-    }
-
-    public PictureDTO newLick(Long id) {
-        Picture picToUpdate = checkId(id);
-
-        int licks = picToUpdate.getLicks();
-        picToUpdate.setLicks(licks + 1);
-        pictureRepository.save(picToUpdate);
-
-        return new PictureDTO(picToUpdate);
+        return output;
     }
 
     public void removePic(Long id) {

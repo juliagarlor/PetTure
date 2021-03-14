@@ -13,19 +13,22 @@ public class Post {
     private Long id;
     private String body;
     private Long pictureId;
+    private String userName;
+    private int licks;
 
 //    Constructors
 
     public Post() {
     }
 
-    public Post(String body, Long pictureId) {
+    public Post(String body, Long pictureId, String userName) {
         this.body = body;
         this.pictureId = pictureId;
+        this.licks = 0;
     }
 
     public Post(PostDTO postDTO){
-        this(postDTO.getPostBody(), postDTO.getPictureId());
+        this(postDTO.getPostBody(), postDTO.getPictureId(), postDTO.getUserName());
     }
 
 //    Getters and Setters
@@ -54,4 +57,19 @@ public class Post {
         this.pictureId = pictureId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public int getLicks() {
+        return licks;
+    }
+
+    public void setLicks(int licks) {
+        this.licks = licks;
+    }
 }

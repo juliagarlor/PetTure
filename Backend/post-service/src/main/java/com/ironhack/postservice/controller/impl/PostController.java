@@ -30,6 +30,12 @@ public class PostController implements IPostController {
     return postService.getPostsByPicId(pictureId);
     }
 
+//    Returns posts by username
+    @GetMapping("/posts/user/{userName}")
+    public List<PostDTO> getPostsByUsername(@PathVariable String userName){
+        return postService.getPostsByUsername(userName);
+    }
+
 //    Returns all posts
     @GetMapping("/posts")
     @ResponseStatus(HttpStatus.OK)
@@ -42,6 +48,13 @@ public class PostController implements IPostController {
     @ResponseStatus(HttpStatus.OK)
     public PostDTO newPost(@RequestBody @Valid PostDTO postDTO){
         return postService.newPost(postDTO);
+    }
+
+//    Update licks
+    @PutMapping("/licks/{postId}")
+    @ResponseStatus(HttpStatus.OK)
+    public PostDTO updateLicks(@PathVariable Long postId){
+        return postService.updateLicks(postId);
     }
 
 //    Remove a post and return pictureId

@@ -3,15 +3,12 @@ package com.ironhack.edgeservice.clients;
 import com.ironhack.edgeservice.utils.dtos.*;
 import org.springframework.cloud.openfeign.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.*;
 
 import java.util.*;
 
 @FeignClient("picture-service")
 public interface PictureClient {
-
-//    Return all pictures from a user
-    @GetMapping("/pics/{userName}")
-    List<PictureDTO> getPicsByUser(@PathVariable String userName);
 
 //    Return a picture by id
     @GetMapping("/pic/{id}")
@@ -19,11 +16,7 @@ public interface PictureClient {
 
 //    Post a new picture
     @PostMapping("/pic")
-    PictureDTO newPic(@RequestBody PictureDTO pictureDTO);
-
-//    Update licks
-    @PutMapping("/pic/{id}")
-    PictureDTO newLick(@PathVariable Long id);
+    PictureDTO newPic(@RequestParam("myFile") MultipartFile file);
 
 //    Delete picture
     @DeleteMapping("/pic/{id}")

@@ -11,23 +11,23 @@ public class Picture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String pictureName;
-    private String userName;
-    private int licks;
+    private String type;
+    @Column(name = "pic", length = 1000)
+    private byte[] pic;
 
 //    Constructors
 
     public Picture() {
     }
 
-//    When posting a new picture, it does not have licks yet
-    public Picture(String pictureName, String userName) {
+    public Picture(String pictureName, String type, byte[] pic) {
         this.pictureName = pictureName;
-        this.userName = userName;
-        this.licks = 0;
+        this.type = type;
+        this.pic = pic;
     }
 
     public Picture(PictureDTO pictureDTO) {
-        this(pictureDTO.getPictureName(), pictureDTO.getUserName());
+        this(pictureDTO.getPictureName(), pictureDTO.getType(), pictureDTO.getPic());
     }
 
 //    Getters and Setters
@@ -48,19 +48,19 @@ public class Picture {
         this.pictureName = pictureName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getType() {
+        return type;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public int getLicks() {
-        return licks;
+    public byte[] getPic() {
+        return pic;
     }
 
-    public void setLicks(int licks) {
-        this.licks = licks;
+    public void setPic(byte[] pic) {
+        this.pic = pic;
     }
 }

@@ -46,6 +46,7 @@ export class PostCardComponent implements OnInit {
   isShown: boolean = false;
   @Input() logedUser!: string;
   @Input() post!: Post;
+  @Input() image!: any;
 
   // post: Post = new Post(0, 'holi', new Picture(0, 'assets/images/garfield.jpg', 'garfield', 0));
   comments: Commentary[] = [];
@@ -70,8 +71,8 @@ export class PostCardComponent implements OnInit {
       const random = Math.floor(Math.random() * this.lickList.length);
       this.lick = this.lickList[random];
 
-      this.post.picture.licks++;
-      this.pictureService.addALick(this.post.picture.id);
+      // this.post.pictureIdlicks++;
+      this.pictureService.addALick(this.post.pictureId);
       this.isShown = true;
     }
   }

@@ -8,7 +8,7 @@ import { UserServiceService } from 'src/app/services/user-service.service';
 })
 export class IncomingRequestsComponent implements OnInit {
 
-  userRequests: {userName: string, profilePic: string}[] = [];
+  userRequests: {userName: string, profilePic: number}[] = [];
 
   constructor(
     private userService: UserServiceService

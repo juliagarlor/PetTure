@@ -64,9 +64,9 @@ export class UserServiceService {
     return this.http.put<any>(this.url + 'user/buddy/' + this.getUsername(), buddyId, {headers: this.headers});
   }
 
-  updateProfilePic(newProfilePic: string): Observable<any>{
+  updateProfilePic(newProfilePic: any): Observable<any>{
     this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.getToken());
-    console.log(newProfilePic);
+    // console.log(newProfilePic);
     return this.http.put<any>(this.url + 'user/profile-pic/' + this.getUsername(), newProfilePic, {headers: this.headers});
   }
 
@@ -81,15 +81,14 @@ export class UserServiceService {
 
 interface BasicProfile{
   userName: string,
-  profilePic: string
+  profilePic: number
 }
 
 interface IncomingProfile{
   userName: string,
   password: string,
-  profilePicture: string,
+  profilePicture: number,
   visibility: string,
-  pics: Picture[],
   buddyNum: number
 }
 

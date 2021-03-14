@@ -25,8 +25,6 @@ export class PostServiceService {
 
   addNewPost(newPost: any): Observable<IncomingPost>{
     this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.userService.getToken());
-    console.log('headers in post: ');
-    console.log(this.headers);
     return this.http.post<IncomingPost>(this.url + 'post', newPost, {headers: this.headers});
   }
 
@@ -51,12 +49,9 @@ export class PostServiceService {
 interface IncomingPost{
   postId: number,
   postBody: string,
-  picture: {
-    picId: number,
-    pictureName: string,
-    userName: string,
-    licks: number
-  }
+  pictureId: number,
+  userName: string,
+  licks: number
 }
 
 interface IncomingComment{

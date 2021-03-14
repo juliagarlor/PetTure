@@ -35,6 +35,15 @@ public class PostService implements IPostService {
         return output;
     }
 
+    public List<PostDTO> getPostsByUsername(String userName) {
+        List<Post> postList = postRepository.findByUserName(userName);
+        List<PostDTO> output = new ArrayList<>();
+        for (Post post : postList){
+            output.add(new PostDTO(post));
+        }
+        return output;
+    }
+
     public List<PostDTO> getAllPosts() {
         List<Post> posts = postRepository.findAll();
         List<PostDTO> output = new ArrayList<>();
@@ -51,6 +60,15 @@ public class PostService implements IPostService {
         postRepository.save(newPost);
 
         return new PostDTO(newPost);
+    }
+
+    public PostDTO updateLicks(Long postId) {
+        Post post = checkPostId(postId);
+        int currentLicks = post.getLicks() + 1;
+        post.setLicks(currentLicks);
+        PostDTO output = new PostDTO(postRepository.save(post));
+        output.setLicks(currentLicks);
+        return output;
     }
 
     public Long removePost(Long postId) {

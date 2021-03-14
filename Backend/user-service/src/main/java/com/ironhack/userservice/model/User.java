@@ -17,7 +17,7 @@ public class User {
     @Id
     private String userName;
     private String password;
-    private String profilePicture;
+    private Long profilePicture;
     @Enumerated(EnumType.STRING)
     private Visibility visibility;
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -36,8 +36,6 @@ public class User {
             inverseJoinColumns = { @JoinColumn(name = "requesting_user") }
     )
     private List<User> requests;
-//    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @PrimaryKeyJoinColumn
     private String role;
     @Transient
     protected PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -46,7 +44,7 @@ public class User {
     public User() {
     }
 
-    public User(String userName, String password, String profilePicture, Visibility visibility) {
+    public User(String userName, String password, Long profilePicture, Visibility visibility) {
         this.userName = userName;
         this.password = passwordEncoder.encode(password);
         this.profilePicture = profilePicture;
@@ -78,12 +76,20 @@ public class User {
         this.password = password;
     }
 
-    public String getProfilePicture() {
+    public Long getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(String profilePicture) {
+    public void setProfilePicture(Long profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Visibility getVisibility() {

@@ -1,13 +1,13 @@
 package com.ironhack.pictureservice.service.interfaces;
 
 import com.ironhack.pictureservice.utils.dtos.*;
+import org.springframework.web.multipart.*;
 
+import java.io.*;
 import java.util.*;
 
 public interface IPictureService {
-    List<PictureDTO> getPicsByUser(String userName);
     PictureDTO getPicById(Long id);
-    PictureDTO newPic(PictureDTO pictureDTO);
-    PictureDTO newLick(Long id);
+    PictureDTO newPic(MultipartFile file) throws IOException;
     void removePic(Long id);
 }

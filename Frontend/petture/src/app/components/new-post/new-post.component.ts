@@ -2,6 +2,7 @@ import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Picture } from 'src/app/models/picture';
 import { Post } from 'src/app/models/post';
+import { PictureServiceService } from 'src/app/services/picture-service.service';
 import { DialogData } from '../home/home.component';
 
 @Component({
@@ -13,12 +14,19 @@ export class NewPostComponent implements OnInit {
 
   caption: string = '';
   uploaded: boolean = false;
-  uploadedPic: string = 'assets/images/perry.jpg';
+
+  selectedFile: any;
+  imgURL: any;
+  receivedImageData: any;
+  base64Data: any;
+  convertedImage: any;
+
   newPost: {} = {};
   @Input() username!: string;
   @Output() newPostEvent = new EventEmitter();
 
   constructor(
+    private pictureService: PictureServiceService,
     public dialogRef: MatDialogRef<NewPostComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
@@ -26,24 +34,38 @@ export class NewPostComponent implements OnInit {
   }
 
   onFileChanged(event: any): void {
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
+    console.log('event:')
+    console.log(event);
 
-      reader.readAsDataURL(event.target.files[0]);
-
-      reader.onload = (event) => {
-        let result = event.target?.result?.toString();
-        if(result != undefined){
-          this.uploadedPic = result;
-          console.log(this.uploadedPic)
-        }
-      }
-    }
+    this.selectedFile = event.target.files[0];
+    console.log('selectedFile')
+    console.log(this.selectedFile)
+    let reader = new FileReader();
+    reader.readAsDataURL(this.selectedFile);
+    reader.onload = (event2) => {
+      this.imgURL = reader.result;
+      console.log('url')
+      console.log(this.imgURL)
+    };
   }
 
   postNew(): void{
-    let newPic = {pictureName: this.uploadedPic, userName: this.username};
-    this.newPost = {postBody: this.caption, picture: newPic};
-    this.dialogRef.close(this.newPost);
+    const uploadData = new FormData();
+    uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
+    
+    console.log('uploadData:')
+    console.log(uploadData.get('myFile'));
+    this.pictureService.upload(uploadData).subscribe(res => {
+      console.log('result');
+      console.log(res)
+      this.receivedImageData = res;
+      this.base64Data = this.receivedImageData.pic;
+      this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data;
+
+      this.newPost = {postBody: this.caption, pictureId: this.receivedImageData.picId, userName: this.username};
+      console.log('new post:')
+      console.log(this.newPost)
+      // this.dialogRef.close(this.newPost);
+    }, err => console.log('Error occured during saving: ' + err));
   }
 }

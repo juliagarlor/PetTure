@@ -1,11 +1,11 @@
 <div class="card"  [@cardFlip]="flipped">
     <div class = "front">
         <div class="body" (click) = "cardClicked()">
-            <p><mat-icon>favorite</mat-icon> {{post.picture.licks}}</p>
-            <p>{{post.picture.userName}}: {{post.body}}</p>
+            <p><mat-icon>favorite</mat-icon> {{post.licks}}</p>
+            <p>{{post.userName}}: {{post.body}}</p>
         </div>
         <div class="pic" (dblclick) = "addALick()">
-            <img src={{post.picture.pictureName}}>
+            <img src={{image}}>
             <h1 class="lick" @myInsertRemoveTrigger *ngIf = "isShown" aria-readonly="true">{{lick}}!</h1>
         </div> 
     </div>

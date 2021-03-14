@@ -13,12 +13,10 @@ public interface UserClient {
 
 //    Get user by username
     @GetMapping("/user/search/{userName}")
-    @ResponseStatus(HttpStatus.OK)
     UserDTO getUserByUserName(@PathVariable String userName);
 
 //    Get basic profile by username
     @GetMapping("/user/basic-profile/{username}")
-    @ResponseStatus(HttpStatus.OK)
     ProfileDTO getProfileByUserName(@PathVariable String username);
 
 //    Get buddies
@@ -35,7 +33,7 @@ public interface UserClient {
 
 //    Update profile pic
     @PutMapping("/user/profile-pic/{userName}")
-    ProfileDTO updateProfilePic(@PathVariable String userName, @RequestBody String profilePic);
+    ProfileDTO updateProfilePic(@PathVariable String userName, @RequestBody Long profilePic);
 
 //    Add new buddy
     @PutMapping("/user/buddy/{userName}")

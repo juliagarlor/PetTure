@@ -9,4 +9,5 @@ import java.util.*;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findByPictureId(Long pictureId);
+    List<Post> findByUserName(String userName);
 }

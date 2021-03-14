@@ -18,6 +18,10 @@ public interface PostClient {
     @GetMapping("/posts/picture/{pictureId}")
     List<PostDTO> getPostsByPicId(@PathVariable Long pictureId);
 
+//    Returns post by username
+    @GetMapping("/posts/user/{userName}")
+    List<PostDTO> getPostsByUsername(@PathVariable String userName);
+
 //    Returns all posts
     @GetMapping("/posts")
     List<PostDTO> getAllPosts();
@@ -25,6 +29,9 @@ public interface PostClient {
 //    Post a new post
     @PostMapping("/post")
     PostDTO newPost(@RequestBody PostDTO postDTO);
+
+    @PutMapping("/licks/{postId}")
+    PostDTO updateLicks(@PathVariable Long postId);
 
 //    Remove a post
     @DeleteMapping("/post/{postId}")

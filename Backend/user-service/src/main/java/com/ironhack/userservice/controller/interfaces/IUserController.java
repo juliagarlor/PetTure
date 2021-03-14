@@ -11,7 +11,7 @@ public interface IUserController {
     List<ProfileDTO> getBuddies(String userName);
     List<ProfileDTO> getRequests(String userName);
     List<String> getPublicProfiles();
-    ProfileDTO updateProfilePic(String userName, String profilePic);
+    ProfileDTO updateProfilePic(String userName, Long profilePic);
     UserDTO addABuddy(String userName, String buddy);
     UserDTO addRequest(String userName, String request);
     UserDTO removeRequest(String userName, String request);

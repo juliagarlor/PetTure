@@ -13,8 +13,7 @@ public class UserDTO {
     private String userName;
     @NotEmpty(message = "Password is compulsory")
     private String password;
-    @NotEmpty(message = "Pick your favourite pic")
-    private String profilePicture;
+    private Long profilePicture;
     private String visibility;
     private List<ProfileDTO> buddies;
     private List<ProfileDTO> requests;
@@ -23,7 +22,7 @@ public class UserDTO {
 //    Constructors
     public UserDTO(@NotEmpty(message = "Be creative, it's your username") @Length(max = 10, message = "SHORT NAMES!")
                            String userName, @NotEmpty(message = "Password is compulsory") String password,
-                   @NotEmpty(message = "Pick your favourite pic") String profilePicture, String visibility,
+                   Long profilePicture, String visibility,
                    List<ProfileDTO> buddies, List<ProfileDTO> requests, String roles) {
         this.userName = userName;
         this.password = password;
@@ -52,11 +51,11 @@ public class UserDTO {
         this.password = password;
     }
 
-    public String getProfilePicture() {
+    public Long getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(String profilePicture) {
+    public void setProfilePicture(Long profilePicture) {
         this.profilePicture = profilePicture;
     }
 

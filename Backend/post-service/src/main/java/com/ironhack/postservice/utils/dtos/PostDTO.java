@@ -12,16 +12,19 @@ public class PostDTO {
     private String postBody;
     @NotNull(message = "A post must be associated to an image, this is not twitter")
     private Long pictureId;
+    private String userName;
+    private int licks;
 
 //    Constructors
     public PostDTO(@Length(max = 100, message = "Please, leave space for the rest") String body,
-                   @NotNull(message = "A post must be associated to an image, this is not twitter") Long pictureId) {
+                   @NotNull(message = "A post must be associated to an image, this is not twitter") Long pictureId, String userName) {
         this.postBody = body;
         this.pictureId = pictureId;
+        this.userName = userName;
     }
 
     public PostDTO(Post post) {
-        this(post.getBody(), post.getPictureId());
+        this(post.getBody(), post.getPictureId(), post.getUserName());
         this.postId = post.getId();
     }
 
@@ -48,5 +51,21 @@ public class PostDTO {
 
     public void setPictureId(Long pictureId) {
         this.pictureId = pictureId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public int getLicks() {
+        return licks;
+    }
+
+    public void setLicks(int licks) {
+        this.licks = licks;
     }
 }

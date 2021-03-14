@@ -7,7 +7,8 @@ public class PostDTO {
     private Long postId;
     private String postBody;
     private Long pictureId;
-    private PictureDTO picture;
+    private String userName;
+    private int licks;
 
 //    Getters and Setters
 
@@ -35,11 +36,19 @@ public class PostDTO {
         this.pictureId = pictureId;
     }
 
-    public PictureDTO getPicture() {
-        return picture;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setPicture(PictureDTO picture) {
-        this.picture = picture;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public int getLicks() {
+        return licks;
+    }
+
+    public void setLicks(int licks) {
+        this.licks = licks;
     }
 }

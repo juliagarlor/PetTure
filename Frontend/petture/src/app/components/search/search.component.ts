@@ -12,7 +12,7 @@ export class SearchComponent implements OnInit {
   value = '';
   loggedUser: string = ''; 
   // haz que traiga los 5 primeros profiles publicos y guardalos aqui:
-  suggestedUsers: {userName: string, profilePic: string}[] = [];
+  suggestedUsers: {userName: string, profilePic: number}[] = [];
 
   constructor(
     private userService: UserServiceService

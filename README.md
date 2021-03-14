@@ -73,17 +73,17 @@ Password: lasaña
 
 Once this has been decided, you will be carried to the home page:
 
-![Home](prints/home.png)
+![Home](prints/home.PNG)
 
 and, if you are logged, you can add new posts and commentaries to other profiles' pictures:
 
-![Home2](prints/profile.png)
-![Home3](prints/search.png)
+![Home2](prints/profile.PNG)
+![Home3](prints/search.PNG)
 
 Do not forget to check your profile and search for friends to keep your page neat and cool, and not missing any event.
 
-![Profile](prints/2.png)
-![Search](prints/3.png)
+![Profile](prints/2.PNG)
+![Search](prints/3.PNG)
 
 ---
 developed with ❤️ by Julia García

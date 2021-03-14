@@ -64,9 +64,8 @@ export class UserServiceService {
     return this.http.put<any>(this.url + 'user/buddy/' + this.getUsername(), buddyId, {headers: this.headers});
   }
 
-  updateProfilePic(newProfilePic: any): Observable<any>{
+  updateProfilePic(newProfilePic: number): Observable<any>{
     this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.getToken());
-    // console.log(newProfilePic);
     return this.http.put<any>(this.url + 'user/profile-pic/' + this.getUsername(), newProfilePic, {headers: this.headers});
   }
 

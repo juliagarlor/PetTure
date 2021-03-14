@@ -3,7 +3,7 @@
    <div class="details">
        <div class="profileimg">
             <input id="file" class="searcher" type="file" (change)="onFileChanged($event)" accept=".jpg, .jpeg, .png">
-            <label for="file"><img src="blob:http://localhost:4200/7e72155f-5c65-48f4-b0f3-ef78ea6f1d92"></label>
+            <label for="file"><img src={{profilePic}}></label>
        </div>
        <div class="info">
            <h2>{{profile.getuserName}}</h2>

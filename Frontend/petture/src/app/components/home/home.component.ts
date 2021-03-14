@@ -50,13 +50,16 @@ export class HomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       if(result != undefined){
+        console.log('post after closed')
+        console.log(result)
         this.postService.addNewPost(result).subscribe(data => {
           this.postList.push(new Post(data.postId, data.postBody, data.pictureId, data.userName, data.licks));
             
             this.pictureService.getImage(data.pictureId).subscribe(res => {
               this.retrievedResponse = res;
-              this.base64Data = this.retrievedResponse.picByte;
+              this.base64Data = this.retrievedResponse.pic;
               this.image = 'data:image/jpeg;base64,' + this.base64Data;
+              console.log(this.image)
             })
         });
       }

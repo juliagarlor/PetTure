@@ -17,10 +17,6 @@ import { UserServiceService } from 'src/app/services/user-service.service';
         style({ opacity: 0 }),
         animate('300ms', style({ opacity: 1 })),
       ])
-      // ,
-      // transition(':leave', [
-      //   animate('300ms 500ms', style({ opacity: 0 }))
-      // ])
     ]),
 
     trigger('cardFlip', [
@@ -71,8 +67,8 @@ export class PostCardComponent implements OnInit {
       const random = Math.floor(Math.random() * this.lickList.length);
       this.lick = this.lickList[random];
 
-      // this.post.pictureIdlicks++;
-      this.pictureService.addALick(this.post.pictureId);
+      this.post.licks++;
+      this.postService.addALick(this.post.id);
       this.isShown = true;
     }
   }

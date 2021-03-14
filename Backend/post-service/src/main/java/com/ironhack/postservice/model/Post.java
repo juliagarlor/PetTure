@@ -24,6 +24,7 @@ public class Post {
     public Post(String body, Long pictureId, String userName) {
         this.body = body;
         this.pictureId = pictureId;
+        this.userName = userName;
         this.licks = 0;
     }
 

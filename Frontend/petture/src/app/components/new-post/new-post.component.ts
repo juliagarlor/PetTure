@@ -53,19 +53,14 @@ export class NewPostComponent implements OnInit {
     const uploadData = new FormData();
     uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
     
-    console.log('uploadData:')
-    console.log(uploadData.get('myFile'));
     this.pictureService.upload(uploadData).subscribe(res => {
-      console.log('result');
-      console.log(res)
       this.receivedImageData = res;
       this.base64Data = this.receivedImageData.pic;
       this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data;
 
+      console.log(this.username);
       this.newPost = {postBody: this.caption, pictureId: this.receivedImageData.picId, userName: this.username};
-      console.log('new post:')
-      console.log(this.newPost)
-      // this.dialogRef.close(this.newPost);
+      this.dialogRef.close(this.newPost);
     }, err => console.log('Error occured during saving: ' + err));
   }
 }

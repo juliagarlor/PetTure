@@ -9,22 +9,13 @@ import { UserServiceService } from './user-service.service';
 })
 export class PictureServiceService {
 
-  url: string = 'http://localhost:8080/';
+  url: string = 'http://localhost:8082/';
   headers = new HttpHeaders();
 
   constructor(
     private http: HttpClient,
     private userService: UserServiceService
   ) { }
-
-  getPicsByUser(userName: string): Observable<Picture[]>{
-    return this.http.get<Picture[]>(this.url + 'pics/' + userName);
-  }
-
-  addALick(picId: number):Observable<any>{
-    this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.userService.getToken());
-    return this.http.put<any>(this.url + 'pic/' + picId, '', {headers: this.headers});
-  }
 
   upload(file: FormData): Observable<any>{
     console.log('uploadData in upload:')

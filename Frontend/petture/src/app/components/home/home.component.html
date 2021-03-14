@@ -1,13 +1,9 @@
 <app-nav-bar></app-nav-bar>
-<!-- <div class="newpic" *ngIf = "username.length > 0"> -->
-    <div class="newpic">
-    <button mat-icon-button (click) = "openDialog()">
+<div class="newpic" >
+    <button mat-icon-button (click) = "openDialog()" *ngIf = "username.length > 0">
         <mat-icon>add_a_photo</mat-icon>
     </button>
 </div>
 <div class="posts">
-    <app-post-card *ngFor = "let post of postList" [post] = "post" [logedUser] = "username" [image] = "image"></app-post-card>
-    <!-- <app-post-card></app-post-card> -->
-    <!-- <app-post-card></app-post-card>
-    <app-post-card></app-post-card> -->
+    <app-post-card *ngFor = "let post of postList; let i = index" [post] = "post" [logedUser] = "username" [image] = "pictures[i]"></app-post-card>
 </div>

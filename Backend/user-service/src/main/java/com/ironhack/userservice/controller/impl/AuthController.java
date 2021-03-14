@@ -20,14 +20,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public UserDTO registerUser(@Valid @RequestBody UserDTO userDTO) {
-        System.out.println("usename:");
-        System.out.println(userDTO.getUserName());
-        System.out.println("password");
-        System.out.println(userDTO.getPassword());
-        System.out.println("profilepic");
-        System.out.println(userDTO.getProfilePicture());
-        System.out.println("visibility");
-        System.out.println(userDTO.getVisibility());
         if (userRepository.findById(userDTO.getUserName()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already taken");
         }

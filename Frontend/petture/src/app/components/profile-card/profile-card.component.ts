@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PictureServiceService } from 'src/app/services/picture-service.service';
 
 @Component({
   selector: 'app-profile-card',
@@ -8,10 +9,20 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ProfileCardComponent implements OnInit {
 
   @Input() userProfile!: {userName:string, profilePic:number};
+  profilePic: any;
+  retrievedResponse: any;
+  base64Data: any;
 
-  constructor() { }
+  constructor(
+    private pictureService: PictureServiceService
+  ) { }
 
   ngOnInit(): void {
+    this.pictureService.getImage(this.userProfile.profilePic).subscribe(data => {
+      this.retrievedResponse = data;
+      this.base64Data = this.retrievedResponse.pic;
+      this.profilePic = 'data:image/jpeg;base64,' + this.base64Data;
+    })
   }
 
 }

@@ -12,7 +12,7 @@ public class Picture {
     private Long id;
     private String pictureName;
     private String type;
-    @Column(name = "pic", length = 1000)
+    @Column(name = "pic", length = 10000)
     private byte[] pic;
 
 //    Constructors

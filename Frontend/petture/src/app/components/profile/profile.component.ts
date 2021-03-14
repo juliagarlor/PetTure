@@ -46,16 +46,19 @@ export class ProfileComponent implements OnInit {
           this.retrievedResponse = res;
           this.base64Data = this.retrievedResponse.pic;
           this.profilePic = 'data:image/jpeg;base64,' + this.base64Data;
-          console.log(this.profilePic)
 
           this.postService.getPostsByUser(data.userName).subscribe(result => {
             result.forEach(post => {
               this.postList.push(new Post(post.postId, post.postBody, post.pictureId, post.userName, post.licks));
-              this.pictures.push(this.getImage(post.pictureId));
-            });
+
+              this.pictureService.getImage(post.pictureId).subscribe(res => {
+                this.retrievedResponse = res;
+                this.base64Data = this.retrievedResponse.pic;
+                this.pictures.push( 'data:image/jpeg;base64,' + this.base64Data);
+              });
           })
         })
-      
+        })
     })
   }
 
@@ -81,12 +84,13 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  openPic(post: Post): void{
+  openPic(post: Post, pic: any): void{
     const dialogRef = this.dialog.open(PostCardComponent, {
       width: '599px',
       panelClass: 'dialog'
     });
     dialogRef.componentInstance.post = post;
+    dialogRef.componentInstance.image = pic;
     dialogRef.componentInstance.logedUser = this.profile.getuserName;
   }
 

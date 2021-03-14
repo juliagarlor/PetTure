@@ -74,7 +74,7 @@ export class UserServiceService {
   }
 
   newRequest(requestedUser: string): Observable<any>{
-    return this.http.put<any>(this.url + 'user/request/' + this.getUsername(), requestedUser)
+    return this.http.put<any>(this.url + 'user/request/' + requestedUser, this.getUsername())
   }
 }
 

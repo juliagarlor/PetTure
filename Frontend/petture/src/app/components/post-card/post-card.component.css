@@ -1,8 +1,6 @@
 div{
     display: flex;
-    /* min-width: 50%; */
     width: 600px;
-    /* min-height: 20%; */
     height: 400px;
     margin: auto;
     border-radius: 5px;
@@ -29,11 +27,6 @@ div{
     flex: 1;
     padding: 15px;
     flex-direction: column;
-}
-
-.body p{
-    font-family: Brush Script MT, Brush Script Std, cursive;
-    font-size: x-large;
 }
 
 img{

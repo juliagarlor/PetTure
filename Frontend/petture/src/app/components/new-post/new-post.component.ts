@@ -31,21 +31,16 @@ export class NewPostComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   ngOnInit(): void {
+    this.imgURL = 'assets/images/default.jpg'
   }
 
   onFileChanged(event: any): void {
-    console.log('event:')
-    console.log(event);
 
     this.selectedFile = event.target.files[0];
-    console.log('selectedFile')
-    console.log(this.selectedFile)
     let reader = new FileReader();
     reader.readAsDataURL(this.selectedFile);
     reader.onload = (event2) => {
       this.imgURL = reader.result;
-      console.log('url')
-      console.log(this.imgURL)
     };
   }
 
@@ -58,7 +53,6 @@ export class NewPostComponent implements OnInit {
       this.base64Data = this.receivedImageData.pic;
       this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data;
 
-      console.log(this.username);
       this.newPost = {postBody: this.caption, pictureId: this.receivedImageData.picId, userName: this.username};
       this.dialogRef.close(this.newPost);
     }, err => console.log('Error occured during saving: ' + err));

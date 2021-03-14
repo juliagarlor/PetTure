@@ -40,7 +40,7 @@ public interface UserClient {
     UserDTO addABuddy(@PathVariable String userName, @RequestBody String buddy);
 
 //    Add new request
-    @PutMapping("/user/request/{userName}")
+    @PutMapping("/user/add/request/{userName}")
     UserDTO addRequest(@PathVariable String userName, @RequestBody String request);
 
 //    Remove request

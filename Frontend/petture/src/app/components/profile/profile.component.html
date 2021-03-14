@@ -7,13 +7,13 @@
        </div>
        <div class="info">
            <h2>{{profile.getuserName}}</h2>
-           <p>pics  {{profile.getbuddyNum}} buddies</p>
+           <p>{{postList.length}} pics  {{profile.getbuddyNum}} buddies</p>
        </div>
    </div>
 
    <div class="pics">
     <mat-grid-list cols="3" rowHeight="1:1">
-        <mat-grid-tile *ngFor = "let pic of pictures; let i = index"><img src="{{pic}}" (click) = "openPic(postList[i])"></mat-grid-tile>
+        <mat-grid-tile *ngFor = "let pic of pictures; let i = index"><img src="{{pic}}" (click) = "openPic(postList[i], pic)"></mat-grid-tile>
     </mat-grid-list>      
    </div> 
 </div>

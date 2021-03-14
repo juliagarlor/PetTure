@@ -2,7 +2,7 @@
     <div class = "front">
         <div class="body" (click) = "cardClicked()">
             <p><mat-icon>favorite</mat-icon> {{post.licks}}</p>
-            <p>{{post.userName}}: {{post.body}}</p>
+            <p><b>{{post.userName}}:</b>  {{post.body}}</p>
         </div>
         <div class="pic" (dblclick) = "addALick()">
             <img src={{image}}>

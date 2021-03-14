@@ -77,13 +77,13 @@ Once this has been decided, you will be carried to the home page:
 
 and, if you are logged, you can add new posts and commentaries to other profiles' pictures:
 
-![Home2](prints/profile.PNG)
-![Home3](prints/search.PNG)
+![Home2](prints/home1.PNG)
+![Home2](prints/comment.PNG)
 
 Do not forget to check your profile and search for friends to keep your page neat and cool, and not missing any event.
 
-![Profile](prints/2.PNG)
-![Search](prints/3.PNG)
+![Profile](prints/profile.PNG)
+![Search](prints/search.PNG)
 
 ---
 developed with ❤️ by Julia García

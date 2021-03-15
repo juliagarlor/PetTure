@@ -49,6 +49,7 @@ export class UserServiceService {
     return this.http.get<IncomingProfile>( this.url + 'user/search/' + this.getUsername());
   }
 
+
   getRequests(): Observable<BasicProfile[]>{
     this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.getToken());
     return this.http.get<BasicProfile[]>(this.url + 'user/requests/'+ this.getUsername(), {headers: this.headers});
@@ -71,6 +72,10 @@ export class UserServiceService {
 
   getPublicProfiles(): Observable<BasicProfile[]>{
     return this.http.get<BasicProfile[]>(this.url + 'user/search/public-profiles');
+  }
+
+  getBasicProfile(username: string): Observable<BasicProfile>{
+    return this.http.get<BasicProfile>('http://localhost:8081/user/basic-profile/' + username);
   }
 
   newRequest(requestedUser: string): Observable<any>{

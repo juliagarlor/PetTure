@@ -35,7 +35,7 @@ export class PostServiceService {
 
   addALick(postId: number): Observable<any>{
     this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.userService.getToken());
-    return this.http.put<any>(this.url + '/licks/' + postId, '', {headers: this.headers});
+    return this.http.put<any>(this.url + 'licks/' + postId, '', {headers: this.headers});
   }
 
   getPostAndPic(postId: number): Observable<IncomingPost>{

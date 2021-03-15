@@ -21,17 +21,13 @@ public class PictureService implements IPictureService {
     private PictureRepository pictureRepository;
 
     public PictureDTO getPicById(Long id) {
-        System.out.println("id: " + id);
         Picture pic = checkId(id);
         PictureDTO output = new PictureDTO(pic.getPictureName(), pic.getType(), decompressBytes(pic.getPic()));
         output.setPicId(pic.getId());
-        System.out.println(output.getPic().length);
         return output;
     }
 
     public PictureDTO newPic(MultipartFile file) throws IOException {
-//        System.out.println("holi");
-//        System.out.println(file.getOriginalFilename());
         Picture newPic = new Picture(file.getOriginalFilename(), file.getContentType(), compressBytes(file.getBytes()));
         PictureDTO output = new PictureDTO(pictureRepository.save(newPic));
 

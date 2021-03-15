@@ -34,4 +34,13 @@ export class SearchComponent implements OnInit {
       console.log('sent');
     })
   }
+
+  search(event: KeyboardEvent):void{
+    if(event.key == 'Enter'){
+      this.userService.getBasicProfile(this.value).subscribe(data => {
+        this.suggestedUsers = [];
+        this.suggestedUsers.push({userName: data.userName, profilePic: data.profilePic})
+      })
+    }
+  }
 }

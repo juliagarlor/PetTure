@@ -64,3 +64,10 @@ post_id BIGINT,
 PRIMARY KEY(id),
 FOREIGN KEY(post_id) REFERENCES post(id)
 );
+
+DROP SCHEMA IF EXISTS user_test;
+CREATE SCHEMA user_test;
+DROP SCHEMA IF EXISTS picture_test;
+CREATE SCHEMA picture_test;
+DROP SCHEMA IF EXISTS post_test;
+CREATE SCHEMA post_test;

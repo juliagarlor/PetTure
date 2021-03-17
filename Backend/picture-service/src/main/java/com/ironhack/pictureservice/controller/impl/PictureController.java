@@ -19,6 +19,7 @@ public class PictureController implements IPictureController {
 
 //    Return a picture by id
     @GetMapping("/pic/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public PictureDTO getPicById(@PathVariable Long id) {
         return pictureService.getPicById(id);
     }

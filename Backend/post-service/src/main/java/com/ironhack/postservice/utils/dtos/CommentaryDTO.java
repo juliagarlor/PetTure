@@ -3,6 +3,7 @@ package com.ironhack.postservice.utils.dtos;
 import com.ironhack.postservice.model.*;
 import org.hibernate.validator.constraints.*;
 
+import javax.validation.constraints.*;
 import javax.validation.constraints.NotEmpty;
 
 public class CommentaryDTO {
@@ -13,13 +14,15 @@ public class CommentaryDTO {
     @NotEmpty(message = "Say something to your friend")
     @Length(max = 100, message = "Please, leave space for the rest")
     private String commentBody;
+    @NotNull(message = "A comment shouldn't be alone")
     private Long postId;
 
 //    Constructors
     public CommentaryDTO(@NotEmpty(message = "Be brave") String userName, @NotEmpty(message = "Say something to your friend")
-    @Length(max = 100, message = "Please, leave space for the rest") String body, Long postId) {
+    @Length(max = 100, message = "Please, leave space for the rest") String commentBody,
+                         @NotNull(message = "A comment shouldn't be alone") Long postId) {
         this.userName = userName;
-        this.commentBody = body;
+        this.commentBody = commentBody;
         this.postId = postId;
     }
 

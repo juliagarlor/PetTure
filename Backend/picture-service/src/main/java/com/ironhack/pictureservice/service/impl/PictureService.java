@@ -29,6 +29,11 @@ public class PictureService implements IPictureService {
 
     public PictureDTO newPic(MultipartFile file) throws IOException {
         Picture newPic = new Picture(file.getOriginalFilename(), file.getContentType(), compressBytes(file.getBytes()));
+        if (newPic.getPictureName().length() == 0){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A picture must have a name");
+        } else if(newPic.getType().length() == 0){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A picture must have a type");
+        }
         PictureDTO output = new PictureDTO(pictureRepository.save(newPic));
 
         return output;
@@ -36,7 +41,6 @@ public class PictureService implements IPictureService {
 
     public void removePic(Long id) {
         Picture picToRemove = checkId(id);
-
         pictureRepository.delete(picToRemove);
     }
 
@@ -67,6 +71,9 @@ public class PictureService implements IPictureService {
     }
 
     public static byte[] decompressBytes(byte[] data) {
+        if (data.length == 0){
+            return data;
+        }
         Inflater inflater = new Inflater();
         inflater.setInput(data);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);

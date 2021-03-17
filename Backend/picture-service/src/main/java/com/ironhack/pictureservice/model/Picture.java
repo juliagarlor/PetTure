@@ -1,5 +1,6 @@
 package com.ironhack.pictureservice.model;
 
+import com.fasterxml.jackson.databind.annotation.*;
 import com.ironhack.pictureservice.utils.dtos.*;
 
 import javax.persistence.*;

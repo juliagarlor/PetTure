@@ -4,21 +4,27 @@ import com.ironhack.postservice.model.*;
 import org.hibernate.validator.constraints.*;
 
 import javax.validation.constraints.*;
+import javax.validation.constraints.NotEmpty;
 
 public class PostDTO {
 
     private Long postId;
+    @NotEmpty(message = "Tell me your username")
     @Length(max = 100, message = "Please, leave space for the rest")
     private String postBody;
     @NotNull(message = "A post must be associated to an image, this is not twitter")
     private Long pictureId;
+    @NotEmpty(message = "A post must be associated to an user")
     private String userName;
     private int licks;
 
 //    Constructors
-    public PostDTO(@Length(max = 100, message = "Please, leave space for the rest") String body,
-                   @NotNull(message = "A post must be associated to an image, this is not twitter") Long pictureId, String userName) {
-        this.postBody = body;
+
+
+    public PostDTO(@NotEmpty(message = "Tell me your username") @Length(max = 100, message = "Please, leave space for the rest") String postBody,
+                   @NotNull(message = "A post must be associated to an image, this is not twitter") Long pictureId,
+                   @NotEmpty(message = "A post must be associated to an user") String userName) {
+        this.postBody = postBody;
         this.pictureId = pictureId;
         this.userName = userName;
     }

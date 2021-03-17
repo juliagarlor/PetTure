@@ -9,11 +9,13 @@ public class PictureDTO {
     private Long picId;
     @NotEmpty(message = "A picture must have a name")
     private String pictureName;
+    @NotEmpty(message = "A picture must have a type")
     private String type;
     private byte[] pic;
 
 //    Constructors
-    public PictureDTO(@NotEmpty(message = "A picture must have a name") String pictureName, String type, byte[] pic) {
+    public PictureDTO(@NotEmpty(message = "A picture must have a name") String pictureName,
+                      @NotEmpty(message = "A picture must have a type") String type, byte[] pic) {
         this.pictureName = pictureName;
         this.type = type;
         this.pic = pic;

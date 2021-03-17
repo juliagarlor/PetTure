@@ -67,9 +67,7 @@ export class PostCardComponent implements OnInit {
       this.lick = this.lickList[random];
 
       this.post.licks++;
-      console.log('holi')
       this.postService.addALick(this.post.id).subscribe(data => {
-        console.log('holi despues de mandar al microservicio')
               this.isShown = true;
       });
     }

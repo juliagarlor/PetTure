@@ -56,11 +56,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users").permitAll()
                 .antMatchers("/user/buddies/**").permitAll()
                 .antMatchers("/user/search/**").permitAll()
+                .antMatchers("/user/basic-profile/**").permitAll()
                 .antMatchers("/pics/**").permitAll()
                 .antMatchers("/post/view/**").permitAll()
                 .antMatchers("/commentaries/**").permitAll()
-                .anyRequest().permitAll();
-//                .anyRequest().authenticated();
+                .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

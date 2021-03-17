@@ -44,9 +44,8 @@ public class EdgeService implements IEdgeService {
 
     public PictureDTO newPic(MultipartFile file) {
         System.out.println(file);
-//        CircuitBreaker pictureCircuitBreaker = circuitBreakerFactory.create("picture-service");
-//        return pictureCircuitBreaker.run(() -> pictureClient.newPic(file), throwable -> fallBack.picFallBack());
-        return pictureClient.newPic(file);
+        CircuitBreaker pictureCircuitBreaker = circuitBreakerFactory.create("picture-service");
+        return pictureCircuitBreaker.run(() -> pictureClient.newPic(file), throwable -> fallBack.picFallBack());
     }
 
     public void removePic(Long id) {
@@ -65,8 +64,10 @@ public class EdgeService implements IEdgeService {
     }
 
     public List<PostDTO> getPublicPosts() {
+        CircuitBreaker userCircuitBreaker = circuitBreakerFactory.create("user-service");
 //        Get all public profiles' usernames
-        List<String> publicUsernames = userClient.getPublicProfiles();
+        List<String> publicUsernames = userCircuitBreaker.run(() -> userClient.getPublicProfiles(),
+                throwable -> fallBack.userNameFallBack());
         List<PostDTO> output = new ArrayList<>();
 
         for (String username : publicUsernames){
@@ -76,12 +77,15 @@ public class EdgeService implements IEdgeService {
     }
 
     public PostDTO updateLicks(Long postId) {
-        return postClient.updateLicks(postId);
+        CircuitBreaker postCircuitBreaker = circuitBreakerFactory.create("post-service");
+        return postCircuitBreaker.run(() -> postClient.updateLicks(postId),
+                throwable -> fallBack.postFallBack());
     }
 
     public List<PostDTO> getPostsByUser(String username) {
-        List<PostDTO> output = postClient.getPostsByUsername(username);
-        return output;
+        CircuitBreaker postCircuitBreaker = circuitBreakerFactory.create("post-service");
+        return postCircuitBreaker.run(() -> postClient.getPostsByUsername(username),
+                throwable -> fallBack.postListFallBack());
     }
 
     public List<CommentaryDTO> getCommentariesInPost(Long postId) {
@@ -114,6 +118,7 @@ public class EdgeService implements IEdgeService {
     }
 
     public ResponseEntity<?> authenticateUser(LoginRequest loginRequest) {
+//        We need circuit Breakers here, but you'll have to look where
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -125,9 +130,22 @@ public class EdgeService implements IEdgeService {
     }
 
     public UserDTO getUserByUserName(String userName) {
-        UserDTO output = userClient.getUserByUserName(userName);
-        output.setPosts(postClient.getPostsByUsername(userName));
+        CircuitBreaker userCircuitBreaker = circuitBreakerFactory.create("user-service");
+        CircuitBreaker postCircuitBreaker = circuitBreakerFactory.create("post-service");
+
+        UserDTO output = userCircuitBreaker.run(() -> userClient.getUserByUserName(userName),
+                throwable -> fallBack.userFallBack());
+        List<PostDTO> posts = postCircuitBreaker.run(() ->postClient.getPostsByUsername(userName),
+                throwable -> fallBack.postListFallBack());
+        output.setPosts(posts);
         output.setBuddyNum(output.getBuddies().size());
+        return output;
+    }
+
+    public ProfileDTO getProfileByUserName(String username) {
+        CircuitBreaker userCircuitBreaker = circuitBreakerFactory.create("user-service");
+        ProfileDTO output = userCircuitBreaker.run(() -> userClient.getProfileByUserName(username),
+                throwable -> fallBack.profileFallBack());
         return output;
     }
 
@@ -136,30 +154,48 @@ public class EdgeService implements IEdgeService {
     }
 
     public ProfileDTO updateProfilePic(String userName, Long profilePic) {
-        return userClient.updateProfilePic(userName, profilePic);
+        CircuitBreaker userCircuitBreaker = circuitBreakerFactory.create("user-service");
+        ProfileDTO output = userCircuitBreaker.run(() -> userClient.updateProfilePic(userName, profilePic),
+                throwable -> fallBack.profileFallBack());
+        return output;
     }
 
     public List<ProfileDTO> getBuddies(String userName) {
-        return userClient.getBuddies(userName);
+        CircuitBreaker userCircuitBreaker = circuitBreakerFactory.create("user-service");
+        List<ProfileDTO> output = userCircuitBreaker.run(() -> userClient.getBuddies(userName),
+                throwable -> fallBack.profileListFallBack());
+        return output;
     }
 
     public List<ProfileDTO> getRequests(String userName) {
-        return userClient.getRequests(userName);
+        CircuitBreaker userCircuitBreaker = circuitBreakerFactory.create("user-service");
+        List<ProfileDTO> output = userCircuitBreaker.run(() -> userClient.getRequests(userName),
+                throwable -> fallBack.profileListFallBack());
+        return output;
     }
 
     public UserDTO addABuddy(String userName, String buddy) {
+        CircuitBreaker userCircuitBreaker = circuitBreakerFactory.create("user-service");
 //        Removing request of the new buddy
         userClient.removeRequest(userName, buddy);
 //        And turning it into a buddy
-        return userClient.addABuddy(userName, buddy);
+        UserDTO output = userCircuitBreaker.run(() -> userClient.addABuddy(userName, buddy),
+                throwable -> fallBack.userFallBack());
+        return output;
     }
 
     public UserDTO addRequest(String userName, String request) {
-        return userClient.addRequest(userName, request);
+        CircuitBreaker userCircuitBreaker = circuitBreakerFactory.create("user-service");
+        UserDTO output = userCircuitBreaker.run(() -> userClient.addRequest(userName, request),
+                throwable -> fallBack.userFallBack());
+        return output;
     }
 
     public UserDTO removeRequest(String userName, String request) {
-        return userClient.removeRequest(userName, request);
+        CircuitBreaker userCircuitBreaker = circuitBreakerFactory.create("user-service");
+        UserDTO output = userCircuitBreaker.run(() -> userClient.removeRequest(userName, request),
+                throwable -> fallBack.userFallBack());
+        return output;
     }
 
     public void removeUser(String userName) {
@@ -175,15 +211,16 @@ public class EdgeService implements IEdgeService {
     }
 
     public List<ProfileDTO> getPublicProfiles() {
-        List<String> publicUsernames = userClient.getPublicProfiles();
+        CircuitBreaker userCircuitBreaker = circuitBreakerFactory.create("user-service");
+        List<String> publicUsernames = userCircuitBreaker.run(() -> userClient.getPublicProfiles(),
+                throwable -> fallBack.userNameFallBack());
         if (publicUsernames.size() > 5){
             publicUsernames.removeIf(username -> (publicUsernames.indexOf(username) > 4));
         }
-        System.out.println(publicUsernames.size());
 
         List<ProfileDTO> output = new ArrayList<>();
         for (String name : publicUsernames){
-            output.add(userClient.getProfileByUserName(name));
+            output.add(getProfileByUserName(name));
         }
         return output;
     }

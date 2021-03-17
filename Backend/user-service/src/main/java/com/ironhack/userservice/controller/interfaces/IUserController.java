@@ -3,6 +3,7 @@ package com.ironhack.userservice.controller.interfaces;
 import com.ironhack.userservice.utils.dtos.*;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.*;
 import java.util.*;
 
 public interface IUserController {
@@ -11,6 +12,7 @@ public interface IUserController {
     List<ProfileDTO> getBuddies(String userName);
     List<ProfileDTO> getRequests(String userName);
     List<String> getPublicProfiles();
+    UserDTO registerUser(UserDTO userDTO);
     ProfileDTO updateProfilePic(String userName, Long profilePic);
     UserDTO addABuddy(String userName, String buddy);
     UserDTO addRequest(String userName, String request);

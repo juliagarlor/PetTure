@@ -46,6 +46,25 @@ public class UserService implements IUserService {
         return userRepository.findPublicUserNames(Visibility.PUBLIC);
     }
 
+    public UserDTO registerUser(UserDTO userDTO) {
+        if (userRepository.findById(userDTO.getUserName()).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already taken");
+        }
+
+        try {
+            Visibility.valueOf(userDTO.getVisibility().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Introduce a valid visibility value.");
+        }
+
+        // Create new user's account
+        User user = new User(userDTO);
+
+        userRepository.save(user);
+
+        return userDTO;
+    }
+
     public ProfileDTO updateProfilePic(String userName, Long profilePic) {
         User userToUpdate = checkUserName(userName);
         userToUpdate.setProfilePicture(profilePic);

@@ -14,7 +14,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException{
         UserDTO userDTO = userClient.getUserByUserName(userName);
-        userDTO.setRole(new RoleDTO());
+        userDTO.setRole("USER");
         return new UserDetailsImpl(userDTO);
     }
 }

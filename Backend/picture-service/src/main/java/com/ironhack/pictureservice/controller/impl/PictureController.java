@@ -8,9 +8,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.*;
 
-import javax.validation.*;
 import java.io.*;
-import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.PATCH})
@@ -29,7 +27,6 @@ public class PictureController implements IPictureController {
     @PostMapping("/pic")
     @ResponseStatus(HttpStatus.OK)
     public PictureDTO newPic(@RequestParam("myFile") MultipartFile file) throws IOException {
-        System.out.println("holi1");
         return pictureService.newPic(file);
     }
 

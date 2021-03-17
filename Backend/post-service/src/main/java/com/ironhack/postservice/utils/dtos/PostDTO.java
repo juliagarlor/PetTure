@@ -26,6 +26,7 @@ public class PostDTO {
     public PostDTO(Post post) {
         this(post.getBody(), post.getPictureId(), post.getUserName());
         this.postId = post.getId();
+        this.licks = post.getLicks();
     }
 
 //    Getters and Setters

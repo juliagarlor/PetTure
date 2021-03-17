@@ -23,6 +23,7 @@ public interface IEdgeController {
 
     ResponseEntity<?> authenticateUser(LoginRequest loginRequest);
     UserDTO getUserByUserName(String userName);
+    ProfileDTO getProfileByUserName(String username);
     ResponseEntity<?> registerUser(UserDTO userDTO);
     ProfileDTO updateProfilePic(String userName, Long profilePic);
     List<ProfileDTO> getBuddies(String userName);

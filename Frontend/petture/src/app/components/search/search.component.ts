@@ -11,7 +11,6 @@ export class SearchComponent implements OnInit {
 
   value = '';
   loggedUser: string = ''; 
-  // haz que traiga los 5 primeros profiles publicos y guardalos aqui:
   suggestedUsers: {userName: string, profilePic: number}[] = [];
 
   constructor(
@@ -30,8 +29,6 @@ export class SearchComponent implements OnInit {
   sendRequest(requestTo: string, i: number){
     // Por ahora no uso el indice para nada
     this.userService.newRequest(requestTo).subscribe(data => {
-      // nada
-      console.log('sent');
     })
   }
 

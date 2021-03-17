@@ -56,9 +56,7 @@ public class PostService implements IPostService {
     }
 
     public PostDTO newPost(PostDTO postDTO) {
-        System.out.println(postDTO.getUserName());
         Post newPost = new Post(postDTO);
-        System.out.println(newPost.getUserName());
         postRepository.save(newPost);
 
         return new PostDTO(newPost);

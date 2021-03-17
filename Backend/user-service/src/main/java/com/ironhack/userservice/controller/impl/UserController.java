@@ -1,12 +1,16 @@
 package com.ironhack.userservice.controller.impl;
 
 import com.ironhack.userservice.controller.interfaces.*;
+import com.ironhack.userservice.model.*;
 import com.ironhack.userservice.service.interfaces.*;
 import com.ironhack.userservice.utils.dtos.*;
+import com.ironhack.userservice.utils.enums.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.*;
 
+import javax.validation.*;
 import java.util.*;
 
 @RestController
@@ -49,6 +53,12 @@ public class UserController implements IUserController {
     @ResponseStatus(HttpStatus.OK)
     public List<String> getPublicProfiles(){
         return userService.getPublicProfiles();
+    }
+
+//    Registering a new user
+    @PostMapping("/user/auth/register")
+    public UserDTO registerUser(@Valid @RequestBody UserDTO userDTO) {
+        return userService.registerUser(userDTO);
     }
 
 //    Update profile pic

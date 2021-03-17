@@ -97,8 +97,6 @@ export class ProfileComponent implements OnInit {
   getImage(picId: number): any{
     let image: any;
     let retrievedResponse: any;
-    console.log('profilepicid:')
-    console.log(picId);
     this.pictureService.getImage(picId).subscribe(res => {
       this.retrievedResponse = res;
       this.base64Data = this.retrievedResponse.pic;

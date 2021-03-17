@@ -12,7 +12,7 @@ public class UserDTO {
     private int buddyNum;
     private List<ProfileDTO> requests;
     private List<PostDTO> posts;
-    private RoleDTO role;
+    private String role;
 
     //    Getters and Setters
 
@@ -80,11 +80,11 @@ public class UserDTO {
         this.posts = posts;
     }
 
-    public RoleDTO getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(RoleDTO role) {
+    public void setRole(String role) {
         this.role = role;
     }
 }

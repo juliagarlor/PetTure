@@ -107,6 +107,13 @@ public class EdgeController implements IEdgeController {
         return edgeService.getUserByUserName(userName);
     }
 
+//    Get basic profile by username. permit all
+    @GetMapping("/user/basic-profile/{username}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProfileDTO getProfileByUserName(@PathVariable String username){
+        return edgeService.getProfileByUserName(username);
+    }
+
 //    Register. permit all
     @PostMapping("/user/auth/register")
     public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO){

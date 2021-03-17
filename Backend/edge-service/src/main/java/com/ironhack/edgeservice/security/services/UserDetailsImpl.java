@@ -20,7 +20,7 @@ public class UserDetailsImpl implements UserDetails {
         Collection<GrantedAuthority> authorities = new HashSet<>();
 
         if(user.getRole() == null){
-            user.setRole(new RoleDTO());
+            user.setRole("USER");
         }
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         return authorities;

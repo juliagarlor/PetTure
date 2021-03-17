@@ -10,6 +10,7 @@ public interface IUserService {
     List<ProfileDTO> getBuddies(String userName);
     List<ProfileDTO> getRequests(String userName);
     List<String> getPublicProfiles();
+    UserDTO registerUser(UserDTO userDTO);
     ProfileDTO updateProfilePic(String userName, Long profilePic);
     UserDTO addABuddy(String userName, String buddy);
     UserDTO addRequest(String userName, String request);

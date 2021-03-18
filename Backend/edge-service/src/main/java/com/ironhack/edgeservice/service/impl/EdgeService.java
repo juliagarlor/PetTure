@@ -43,7 +43,6 @@ public class EdgeService implements IEdgeService {
 //    Picture part
 
     public PictureDTO newPic(MultipartFile file) {
-        System.out.println(file);
         CircuitBreaker pictureCircuitBreaker = circuitBreakerFactory.create("picture-service");
         return pictureCircuitBreaker.run(() -> pictureClient.newPic(file), throwable -> fallBack.picFallBack());
     }
@@ -176,8 +175,6 @@ public class EdgeService implements IEdgeService {
 
     public UserDTO addABuddy(String userName, String buddy) {
         CircuitBreaker userCircuitBreaker = circuitBreakerFactory.create("user-service");
-//        Removing request of the new buddy
-        userClient.removeRequest(userName, buddy);
 //        And turning it into a buddy
         UserDTO output = userCircuitBreaker.run(() -> userClient.addABuddy(userName, buddy),
                 throwable -> fallBack.userFallBack());

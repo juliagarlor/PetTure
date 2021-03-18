@@ -64,7 +64,7 @@ public class UserController implements IUserController {
 //    Update profile pic
     @PutMapping("/user/profile-pic/{userName}")
     @ResponseStatus(HttpStatus.OK)
-    public ProfileDTO updateProfilePic(@PathVariable String userName, @RequestBody Long profilePic){
+    public ProfileDTO updateProfilePic(@PathVariable String userName, @RequestBody String profilePic){
         return userService.updateProfilePic(userName, profilePic);
     }
 

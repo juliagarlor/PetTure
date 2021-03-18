@@ -61,7 +61,6 @@ class CommentaryControllerTest {
 
         MvcResult result = mockMvc.perform(get("/commentaries/" + (test.getId() + 1)))
                 .andExpect(status().isOk()).andReturn();
-        System.out.println(result.getResponse().getContentAsString());
         assertFalse(result.getResponse().getContentAsString().contains("Snowball"));
     }
 

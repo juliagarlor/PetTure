@@ -7,6 +7,7 @@ import com.ironhack.userservice.utils.dtos.*;
 import com.ironhack.userservice.utils.enums.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
+import org.springframework.http.converter.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.server.*;
 
@@ -65,9 +66,15 @@ public class UserService implements IUserService {
         return userDTO;
     }
 
-    public ProfileDTO updateProfilePic(String userName, Long profilePic) {
+    public ProfileDTO updateProfilePic(String userName, String profilePic) {
+        Long profilePicId = 0L;
+        try {
+            profilePicId = Long.parseLong(profilePic);
+        }catch (NumberFormatException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The profile picture id must be a number");
+        }
         User userToUpdate = checkUserName(userName);
-        userToUpdate.setProfilePicture(profilePic);
+        userToUpdate.setProfilePicture(profilePicId);
         userRepository.save(userToUpdate);
 
         return new ProfileDTO(userToUpdate);
@@ -77,6 +84,13 @@ public class UserService implements IUserService {
         User userToUpdate = checkUserName(userName);
         User newBuddy = checkUserName(buddy);
 
+//        Updating the requests list
+        for (User request : userToUpdate.getRequests()){
+            if (request.equals(newBuddy)){
+                removeRequest(userName, buddy);
+                break;
+            }
+        }
 //        Updating the buddies List of the current user
         List<User> buddies = userToUpdate.getBuddies();
         buddies.add(newBuddy);

@@ -13,7 +13,7 @@ public interface IUserController {
     List<ProfileDTO> getRequests(String userName);
     List<String> getPublicProfiles();
     UserDTO registerUser(UserDTO userDTO);
-    ProfileDTO updateProfilePic(String userName, Long profilePic);
+    ProfileDTO updateProfilePic(String userName, String profilePic);
     UserDTO addABuddy(String userName, String buddy);
     UserDTO addRequest(String userName, String request);
     UserDTO removeRequest(String userName, String request);

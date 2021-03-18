@@ -3,6 +3,7 @@ package com.ironhack.userservice.utils.dtos;
 import com.ironhack.userservice.model.*;
 import org.hibernate.validator.constraints.*;
 
+import javax.validation.constraints.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.*;
 
@@ -13,16 +14,20 @@ public class UserDTO {
     private String userName;
     @NotEmpty(message = "Password is compulsory")
     private String password;
+    @NotNull(message = "Pick your favourite pic")
     private Long profilePicture;
+    @NotEmpty(message = "Please, enter a visibility value: public or private")
     private String visibility;
     private List<ProfileDTO> buddies;
     private List<ProfileDTO> requests;
     private String roles;
 
 //    Constructors
-    public UserDTO(@NotEmpty(message = "Be creative, it's your username") @Length(max = 10, message = "SHORT NAMES!")
+
+    public UserDTO(@NotEmpty(message = "Be creative, it's your username") @Length(max = 20, message = "SHORT NAMES!")
                            String userName, @NotEmpty(message = "Password is compulsory") String password,
-                   Long profilePicture, String visibility,
+                   @NotNull(message = "Pick your favourite pic") Long profilePicture,
+                   @NotEmpty(message = "Please, enter a visibility value: public or private") String visibility,
                    List<ProfileDTO> buddies, List<ProfileDTO> requests, String roles) {
         this.userName = userName;
         this.password = password;
@@ -32,6 +37,7 @@ public class UserDTO {
         this.requests = requests;
         this.roles = roles;
     }
+
 
 //    Getters and Setters
 

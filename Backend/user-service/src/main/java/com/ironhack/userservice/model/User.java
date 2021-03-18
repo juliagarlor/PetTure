@@ -123,4 +123,14 @@ public class User {
     public void setRoles(String roles) {
         this.role = roles;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return userName.equals(user.userName) && password.equals(user.password) && profilePicture.equals(user.profilePicture)
+                && visibility == user.visibility && buddies.equals(user.buddies) && requests.equals(user.requests)
+                && role.equals(user.role);
+    }
 }

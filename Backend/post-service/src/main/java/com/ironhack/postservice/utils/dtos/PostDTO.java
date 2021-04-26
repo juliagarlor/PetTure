@@ -20,7 +20,6 @@ public class PostDTO {
 
 //    Constructors
 
-
     public PostDTO(@NotEmpty(message = "Tell me your username") @Length(max = 100, message = "Please, leave space for the rest") String postBody,
                    @NotNull(message = "A post must be associated to an image, this is not twitter") Long pictureId,
                    @NotEmpty(message = "A post must be associated to an user") String userName) {

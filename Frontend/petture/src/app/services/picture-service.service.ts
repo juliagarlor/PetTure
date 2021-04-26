@@ -9,7 +9,7 @@ import { UserServiceService } from './user-service.service';
 })
 export class PictureServiceService {
 
-  url: string = 'http://localhost:8082/';
+  url: string = 'http://localhost:8080/';
   headers = new HttpHeaders();
 
   constructor(
@@ -18,13 +18,14 @@ export class PictureServiceService {
   ) { }
 
   upload(file: FormData): Observable<any>{
-    console.log('uploadData in upload:')
-    console.log(file.get('myFile'));
-    this.headers = new HttpHeaders().set('Content-Type', 'multipart/form-data').set('Authorization', 'Bearer ' + this.userService.getToken());
-    return this.http.post<any>('http://localhost:8082/pic', file)
+    // this.headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.userService.getToken());
+    return this.http.post<any>('http://localhost:8082/pic', file
+    // , {headers: this.headers}
+    )
   }
 
   getImage(id: number): Observable<FormData> {
-    return this.http.get<FormData>(this.url + 'pic/' + id);
+    // this.headers = new HttpHeaders().set('Content-Type', 'multipart/form-data').set('Authorization', 'Bearer ' + this.userService.getToken());
+    return this.http.get<FormData>('http://localhost:8082/pic/' + id);
   }
 }

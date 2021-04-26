@@ -9,7 +9,6 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.*;
 
-import javax.validation.*;
 import java.util.*;
 
 @RestController
@@ -25,15 +24,7 @@ public class EdgeController implements IEdgeController {
     @PostMapping("/pic")
     @ResponseStatus(HttpStatus.OK)
     public PictureDTO newPic(@RequestParam("myFile") MultipartFile file){
-        System.out.println("Holi");
         return edgeService.newPic(file);
-    }
-
-//    Delete picture. authenticated
-    @DeleteMapping("/pic/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removePic(@PathVariable Long id){
-        edgeService.removePic(id);
     }
 
 //    Posts part:
@@ -51,7 +42,7 @@ public class EdgeController implements IEdgeController {
         return edgeService.updateLicks(postId);
     }
 
-//    Return public posts
+//    Return public posts.U
     @GetMapping("/post/view/public")
     @ResponseStatus(HttpStatus.OK)
     public List<PostDTO> getPublicPosts(){
@@ -86,13 +77,6 @@ public class EdgeController implements IEdgeController {
         return edgeService.addCommentary(commentaryDTO);
     }
 
-//    Remove a post and its pic. authenticated
-    @DeleteMapping("/post/remove/{postId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removePost(@PathVariable Long postId){
-        edgeService.removePost(postId);
-    }
-
 //    User part:
 //    login. permit all
     @PostMapping("/user/auth/login")
@@ -118,13 +102,6 @@ public class EdgeController implements IEdgeController {
     @PostMapping("/user/auth/register")
     public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO){
         return edgeService.registerUser(userDTO);
-    }
-
-//    Get buddies. permit all
-    @GetMapping("/user/buddies/{userName}")
-    @ResponseStatus(HttpStatus.OK)
-    public List<ProfileDTO> getBuddies(@PathVariable String userName){
-        return edgeService.getBuddies(userName);
     }
 
 //    Get requests. authenticated
@@ -160,12 +137,6 @@ public class EdgeController implements IEdgeController {
     @ResponseStatus(HttpStatus.OK)
     public UserDTO removeRequest(@PathVariable String userName, @RequestBody String request){
         return edgeService.removeRequest(userName, request);
-    }
-
-//    Remove user, its pictures and posts. authenticated
-    @DeleteMapping("/user/{userName}")
-    public void removeUser(@PathVariable String userName){
-        edgeService.removeUser(userName);
     }
 
 //    Get public profiles. permit all

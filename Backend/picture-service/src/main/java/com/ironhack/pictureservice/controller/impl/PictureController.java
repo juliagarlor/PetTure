@@ -25,9 +25,9 @@ public class PictureController implements IPictureController {
     }
 
 //    Post a new picture
-    @PostMapping("/pic")
+    @PostMapping(value = "/pic", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public PictureDTO newPic(@RequestParam("myFile") MultipartFile file) throws IOException {
+    public PictureDTO newPic(@RequestPart("myFile") MultipartFile file) throws IOException {
         return pictureService.newPic(file);
     }
 

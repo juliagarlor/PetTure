@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Picture } from 'src/app/models/picture';
 import { Post } from 'src/app/models/post';
 import { PictureServiceService } from 'src/app/services/picture-service.service';
 import { PostServiceService } from 'src/app/services/post-service.service';
@@ -50,19 +49,16 @@ export class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(NewPostComponent, {
       width: '600px'
     });
-    dialogRef.componentInstance.username = this.username;
 
     dialogRef.afterClosed().subscribe(result => {
       if(result != undefined){
-        this.postService.addNewPost(result).subscribe(data => {
+      this.pictureService.upload(result.picture).subscribe(picData => {
+        let postToSave = {postBody: result.postBody, pictureId: picData.picId, userName: this.username}
+        this.postService.addNewPost(postToSave).subscribe(data => {
           this.postList.push(new Post(data.postId, data.postBody, data.pictureId, data.userName, data.licks));
-            
-            this.pictureService.getImage(data.pictureId).subscribe(res => {
-              this.retrievedResponse = res;
-              this.base64Data = this.retrievedResponse.pic;
-              this.pictures.push('data:image/jpeg;base64,' + this.base64Data);
-            })
+          this.pictures.push(result.picUrl);
         });
+      })
       }
     });
   }

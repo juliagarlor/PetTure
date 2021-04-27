@@ -2,6 +2,7 @@ package com.ironhack.edgeservice.clients;
 
 import com.ironhack.edgeservice.utils.dtos.*;
 import org.springframework.cloud.openfeign.*;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.*;
 
@@ -15,8 +16,8 @@ public interface PictureClient {
     PictureDTO getPicById(@PathVariable Long id);
 
 //    Post a new picture
-    @PostMapping("/pic")
-    PictureDTO newPic(@RequestParam("myFile") MultipartFile file);
+    @PostMapping(value = "/pic", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    PictureDTO newPic(@RequestPart("myFile") MultipartFile file);
 
 //    Delete picture
     @DeleteMapping("/pic/{id}")

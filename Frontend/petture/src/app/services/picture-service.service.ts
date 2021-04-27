@@ -18,10 +18,8 @@ export class PictureServiceService {
   ) { }
 
   upload(file: FormData): Observable<any>{
-    // this.headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.userService.getToken());
-    return this.http.post<any>('http://localhost:8082/pic', file
-    // , {headers: this.headers}
-    )
+    this.headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.userService.getToken());
+    return this.http.post<any>(this.url + 'pic', file, {headers: this.headers})
   }
 
   getImage(id: number): Observable<FormData> {

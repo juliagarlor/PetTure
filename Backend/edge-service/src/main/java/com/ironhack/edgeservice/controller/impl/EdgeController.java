@@ -21,9 +21,9 @@ public class EdgeController implements IEdgeController {
 //    Picture part:
 
 //    Post a new picture. authenticated
-    @PostMapping("/pic")
+    @PostMapping(value = "/pic", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public PictureDTO newPic(@RequestParam("myFile") MultipartFile file){
+    public PictureDTO newPic(@RequestPart("myFile") MultipartFile file){
         return edgeService.newPic(file);
     }
 

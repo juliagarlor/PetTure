@@ -22,11 +22,8 @@ export class NewPostComponent implements OnInit {
   convertedImage: any;
 
   newPost: {} = {};
-  @Input() username!: string;
-  @Output() newPostEvent = new EventEmitter();
 
   constructor(
-    private pictureService: PictureServiceService,
     public dialogRef: MatDialogRef<NewPostComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
@@ -47,14 +44,7 @@ export class NewPostComponent implements OnInit {
   postNew(): void{
     const uploadData = new FormData();
     uploadData.append('myFile', this.selectedFile, this.selectedFile.name);
-    
-    this.pictureService.upload(uploadData).subscribe(res => {
-      this.receivedImageData = res;
-      this.base64Data = this.receivedImageData.pic;
-      this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data;
-
-      this.newPost = {postBody: this.caption, pictureId: this.receivedImageData.picId, userName: this.username};
-      this.dialogRef.close(this.newPost);
-    }, err => console.log('Error occured during saving: ' + err));
+    this.newPost = {postBody: this.caption, picture: uploadData, picUrl: this.imgURL};
+    this.dialogRef.close(this.newPost);
   }
 }

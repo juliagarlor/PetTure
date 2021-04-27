@@ -46,7 +46,12 @@ public class EdgeService implements IEdgeService {
         return pictureCircuitBreaker.run(() -> pictureClient.newPic(file), throwable -> fallBack.picFallBack());
     }
 
-//    Posts part
+    public PictureDTO getPicById(Long id) {
+        CircuitBreaker pictureCircuitBreaker = circuitBreakerFactory.create("picture-service");
+        return pictureCircuitBreaker.run(() -> pictureClient.getPicById(id), throwable -> fallBack.picFallBack());
+    }
+
+    //    Posts part
     public PostDTO getPostAndPic(Long postId) {
         CircuitBreaker pictureCircuitBreaker = circuitBreakerFactory.create("picture-service");
         CircuitBreaker postCircuitBreaker = circuitBreakerFactory.create("post-service");
@@ -54,7 +59,6 @@ public class EdgeService implements IEdgeService {
         PostDTO post = postCircuitBreaker.run(() -> postClient.getPostsById(postId), throwable -> fallBack.postFallBack());
         PictureDTO pic = pictureCircuitBreaker.run(() -> pictureClient.getPicById(post.getPictureId()),
                 throwable -> fallBack.picFallBack());
-        post.setPic(pic);
         return post;
     }
 

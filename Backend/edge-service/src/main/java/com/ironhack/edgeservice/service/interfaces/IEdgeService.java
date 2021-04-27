@@ -9,6 +9,7 @@ import java.util.*;
 
 public interface IEdgeService {
     PictureDTO newPic(MultipartFile file);
+    PictureDTO getPicById(Long id);
 
     PostDTO getPostAndPic(Long postId);
     List<PostDTO> getPublicPosts();

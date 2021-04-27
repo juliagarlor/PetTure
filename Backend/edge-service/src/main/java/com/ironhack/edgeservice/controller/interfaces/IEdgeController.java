@@ -10,6 +10,7 @@ import java.util.*;
 
 public interface IEdgeController {
     PictureDTO newPic(MultipartFile file);
+    PictureDTO getPicById(Long id);
 
     PostDTO getPostAndPic(Long postId);
     List<PostDTO> getPublicPosts();

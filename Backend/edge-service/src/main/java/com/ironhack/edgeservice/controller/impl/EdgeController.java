@@ -27,6 +27,12 @@ public class EdgeController implements IEdgeController {
         return edgeService.newPic(file);
     }
 
+    @GetMapping("/pic/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public PictureDTO getPicById(@PathVariable Long id){
+        return edgeService.getPicById(id);
+    }
+
 //    Posts part:
 //    Return a post with its picture. permit all
     @GetMapping("/post/view/{postId}")

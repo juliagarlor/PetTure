@@ -7,7 +7,6 @@ import com.ironhack.userservice.utils.dtos.*;
 import com.ironhack.userservice.utils.enums.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
-import org.springframework.http.converter.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.server.*;
 
@@ -159,8 +158,9 @@ public class UserService implements IUserService {
     public UserDTO buildUserDTO(User user){
         List<ProfileDTO> buddies = buildProfiles(user.getBuddies());
         List<ProfileDTO> requests = buildProfiles(user.getRequests());
+        List<ProfileDTO> requested = buildProfiles(user.getRequested());
 
         return new UserDTO(user.getUserName(), user.getPassword(), user.getProfilePicture(), user.getVisibility().toString(),
-                buddies, requests, user.getRoles());
+                buddies, requests, requested, user.getRoles());
     }
 }

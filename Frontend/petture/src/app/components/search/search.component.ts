@@ -11,7 +11,8 @@ export class SearchComponent implements OnInit {
 
   value = '';
   loggedUser: string = ''; 
-  suggestedUsers: {userName: string, profilePic: number}[] = [];
+  suggestedUsers: {userName: string, profilePic: number, requestable: boolean}[] = [];
+  unrequestable: string[] = [];
 
   constructor(
     private userService: UserServiceService
@@ -19,9 +20,10 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedUser = this.userService.getUsername();
+    this.unrequestable.push(this.loggedUser);
     this.userService.getPublicProfiles().subscribe(data => {
       data.forEach(profile => {
-        this.suggestedUsers.push({userName: profile.userName, profilePic: profile.profilePic});
+        this.suggestedUsers.push({userName: profile.userName, profilePic: profile.profilePic, requestable: !this.unrequestable.includes(profile.userName)});
       });
     })
   }
@@ -36,7 +38,7 @@ export class SearchComponent implements OnInit {
     if(event.key == 'Enter'){
       this.userService.getBasicProfile(this.value).subscribe(data => {
         this.suggestedUsers = [];
-        this.suggestedUsers.push({userName: data.userName, profilePic: data.profilePic})
+        this.suggestedUsers.push({userName: data.userName, profilePic: data.profilePic, requestable: !this.unrequestable.includes(data.userName)})
       })
     }
   }

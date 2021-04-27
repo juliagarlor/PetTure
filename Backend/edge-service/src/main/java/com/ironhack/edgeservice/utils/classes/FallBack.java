@@ -56,6 +56,7 @@ public class FallBack {
         output.setBuddyNum(0);
         output.setBuddies(new ArrayList<>());
         output.setRequests(new ArrayList<>());
+        output.setRequested(new ArrayList<>());
         output.setRole("USER");
         output.setVisibility("PUBLIC");
         return output;

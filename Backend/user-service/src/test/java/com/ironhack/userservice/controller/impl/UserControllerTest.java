@@ -126,7 +126,7 @@ class UserControllerTest {
     @Test
     void registerUser_validUserDTO_UserDTO() throws Exception {
         UserDTO test = new UserDTO("SnowBall", "1234", 4L, "PRIVATE",
-                new ArrayList<>(), new ArrayList<>(), "USER");
+                new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), "USER");
         String body = objectMapper.writeValueAsString(test);
         MvcResult result = mockMvc.perform(post("/user/auth/register").content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andReturn();
@@ -138,7 +138,7 @@ class UserControllerTest {
     void registerUser_invalidUserDTO_Exception() throws Exception {
 //        Without username
         UserDTO test = new UserDTO("", "1234", 4L, "PRIVATE",
-                new ArrayList<>(), new ArrayList<>(), "USER");
+                new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), "USER");
         String body = objectMapper.writeValueAsString(test);
         MvcResult result = mockMvc.perform(post("/user/auth/register").content(body).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest()).andReturn();
@@ -146,7 +146,7 @@ class UserControllerTest {
 
 //        Without password
         UserDTO test2 = new UserDTO("SnowBall", "", 4L, "PRIVATE",
-                new ArrayList<>(), new ArrayList<>(), "USER");
+                new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),  "USER");
         String body2 = objectMapper.writeValueAsString(test2);
         MvcResult result2 = mockMvc.perform(post("/user/auth/register").content(body2).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest()).andReturn();
@@ -154,7 +154,7 @@ class UserControllerTest {
 
 //        Without picture
         UserDTO test3 = new UserDTO("SnowBall", "1234", null, "PRIVATE",
-                new ArrayList<>(), new ArrayList<>(), "USER");
+                new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), "USER");
         String body3 = objectMapper.writeValueAsString(test3);
         MvcResult result3 = mockMvc.perform(post("/user/auth/register").content(body3).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest()).andReturn();
@@ -162,7 +162,7 @@ class UserControllerTest {
 
 //        Without visibility
         UserDTO test4 = new UserDTO("SnowBall", "1234", 4L, "",
-                new ArrayList<>(), new ArrayList<>(), "USER");
+                new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), "USER");
         String body4 = objectMapper.writeValueAsString(test4);
         MvcResult result4 = mockMvc.perform(post("/user/auth/register").content(body4).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest()).andReturn();

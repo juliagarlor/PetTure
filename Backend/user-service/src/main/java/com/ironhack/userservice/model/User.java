@@ -36,6 +36,14 @@ public class User {
             inverseJoinColumns = { @JoinColumn(name = "requesting_user") }
     )
     private List<User> requests;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany
+    @JoinTable(
+            name = "request_from_user",
+            joinColumns = { @JoinColumn(name = "requested_user") },
+            inverseJoinColumns = { @JoinColumn(name = "requesting_user") }
+    )
+    private List<User> requested;
     private String role;
     @Transient
     protected PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -51,6 +59,7 @@ public class User {
         this.visibility = visibility;
         this.buddies = new ArrayList<>();
         this.requests = new ArrayList<>();
+        this.requested = new ArrayList<>();
         this.role = "USER";
     }
 
@@ -114,6 +123,14 @@ public class User {
 
     public void setRequests(List<User> requests) {
         this.requests = requests;
+    }
+
+    public List<User> getRequested() {
+        return requested;
+    }
+
+    public void setRequested(List<User> requested) {
+        this.requested = requested;
     }
 
     public String getRoles() {

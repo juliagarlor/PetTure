@@ -11,7 +11,7 @@
         <div class="details" >
             <app-profile-card [userProfile] = "profile"></app-profile-card></div>
         <div class="buttons" >
-            <button mat-flat-button *ngIf = "loggedUser.length > 0 && loggedUser != profile.userName" (click) = "sendRequest(profile.userName, i)">
+            <button mat-flat-button *ngIf = "loggedUser.length > 0 && profile.requestable" (click) = "sendRequest(profile.userName, i)">
                 Send request
             </button>
         </div>

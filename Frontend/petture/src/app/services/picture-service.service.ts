@@ -26,6 +26,6 @@ export class PictureServiceService {
 
   getImage(id: number): Observable<FormData> {
     // this.headers = new HttpHeaders().set('Content-Type', 'multipart/form-data').set('Authorization', 'Bearer ' + this.userService.getToken());
-    return this.http.get<FormData>('http://localhost:8082/pic/' + id);
+    return this.http.get<FormData>(this.url + 'pic/' + id);
   }
 }

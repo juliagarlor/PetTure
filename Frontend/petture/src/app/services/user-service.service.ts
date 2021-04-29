@@ -86,7 +86,13 @@ export class UserServiceService {
   }
 
   newRequest(requestedUser: string): Observable<any>{
-    return this.http.put<any>(this.url + 'user/request/' + requestedUser, this.getUsername())
+    this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.getToken());
+    return this.http.put<any>(this.url + 'user/request/' + requestedUser, this.getUsername(), {headers: this.headers})
+  }
+
+  removeUser(): Observable<any>{
+    this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.getToken());
+    return this.http.delete<any>(this.url + 'user/' + this.getUsername(), {headers: this.headers})
   }
 }
 

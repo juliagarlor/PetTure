@@ -32,4 +32,5 @@ public interface IEdgeController {
     UserDTO addRequest(String userName, String request);
     UserDTO removeRequest(String userName, String request);
     List<ProfileDTO> getPublicProfiles();
+    void removeUser(String username);
 }

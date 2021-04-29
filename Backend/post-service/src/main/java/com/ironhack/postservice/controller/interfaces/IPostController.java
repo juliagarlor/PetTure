@@ -14,4 +14,5 @@ public interface IPostController {
     PostDTO updateLicks(Long postId);
     Long removePost(Long postId);
     void removePostsByPic(Long pictureId);
+    List<Long> removePostsByUsername(String username);
 }

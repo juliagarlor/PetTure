@@ -22,4 +22,8 @@ public interface PictureClient {
 //    Delete picture
     @DeleteMapping("/pic/{id}")
     void removePic(@PathVariable Long id);
+
+//    Delete all pictures from a user
+    @DeleteMapping("/pics")
+    void removePicsByUser(@RequestBody List<Long> picsId);
 }

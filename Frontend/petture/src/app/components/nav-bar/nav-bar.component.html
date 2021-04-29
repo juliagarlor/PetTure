@@ -31,6 +31,10 @@
                   <mat-icon>exit_to_app</mat-icon>
                   <span>Sign out</span>
                 </button>
+                <button mat-menu-item (click) = "deleteAccount()" *ngIf = "logged">
+                  <mat-icon>delete_outline</mat-icon>
+                  <span>Delete account</span>
+                </button>
               </mat-menu>
         </div>
     </div>

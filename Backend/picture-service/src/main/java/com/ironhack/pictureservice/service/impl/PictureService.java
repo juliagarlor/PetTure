@@ -44,6 +44,12 @@ public class PictureService implements IPictureService {
         pictureRepository.delete(picToRemove);
     }
 
+    public void removePicsByUser(List<Long> picsId) {
+        for (Long id : picsId){
+            removePic(id);
+        }
+    }
+
     public Picture checkId(Long id){
         Optional<Picture> output = pictureRepository.findById(id);
 

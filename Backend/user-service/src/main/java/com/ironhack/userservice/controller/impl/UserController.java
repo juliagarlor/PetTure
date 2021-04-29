@@ -99,7 +99,7 @@ public class UserController implements IUserController {
 //    Remove user and return username
     @DeleteMapping("/user/{userName}")
     @ResponseStatus(HttpStatus.OK)
-    public String removeUser(@PathVariable String userName){
+    public Long removeUser(@PathVariable String userName){
         return userService.removeUser(userName);
     }
 }

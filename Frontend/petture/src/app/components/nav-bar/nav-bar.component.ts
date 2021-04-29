@@ -24,4 +24,9 @@ export class NavBarComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
 
+  deleteAccount(): void{
+    this.userService.removeUser().subscribe(data => {
+     this.signOut(); 
+    })
+  }
 }

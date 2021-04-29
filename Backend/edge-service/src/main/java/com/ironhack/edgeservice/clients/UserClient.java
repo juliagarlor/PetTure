@@ -53,7 +53,7 @@ public interface UserClient {
 
 //    Remove user and return username
     @DeleteMapping("/user/{userName}")
-    String removeUser(@PathVariable String userName);
+    Long removeUser(@PathVariable String userName);
 
 //    Register
     @PostMapping("/user/auth/register")

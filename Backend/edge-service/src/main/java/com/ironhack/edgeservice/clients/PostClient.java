@@ -41,6 +41,10 @@ public interface PostClient {
     @DeleteMapping("/posts/picture/{pictureId}")
     void removePostsByPic(@PathVariable Long pictureId);
 
+//    Remove posts by username
+    @DeleteMapping("/posts/username/{username}")
+    List<Long> removePostsByUsername(@PathVariable String username);
+
 //    Get all the commentaries in a post
     @GetMapping("/commentaries/{postId}")
     List<CommentaryDTO> getCommentariesInPost(@PathVariable Long postId);

@@ -208,4 +208,14 @@ public class EdgeService implements IEdgeService {
         }
         return output;
     }
+
+    public void removeUser(String username) {
+//        removing posts
+        List<Long> picturesId = postClient.removePostsByUsername(username);
+//        removing user
+        Long profilePic = userClient.removeUser(username);
+//        removing pictures. Profile and posts
+        picturesId.add(profilePic);
+        pictureClient.removePicsByUser(picturesId);
+    }
 }

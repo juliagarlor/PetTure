@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.*;
 
 import java.io.*;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.PATCH})
@@ -36,5 +37,12 @@ public class PictureController implements IPictureController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removePic(@PathVariable Long id){
         pictureService.removePic(id);
+    }
+
+//    Delete all pictures from a user
+    @DeleteMapping("/pics")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removePicsByUser(@RequestBody List<Long> picsId){
+        pictureService.removePicsByUser(picsId);
     }
 }

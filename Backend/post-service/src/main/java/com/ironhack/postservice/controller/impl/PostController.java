@@ -70,4 +70,11 @@ public class PostController implements IPostController {
     public void removePostsByPic(@PathVariable Long pictureId){
         postService.removePostsByPic(pictureId);
     }
+
+//    Remove posts by username
+    @DeleteMapping("/posts/username/{username}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Long> removePostsByUsername(@PathVariable String username){
+        return postService.removePostsByUsername(username);
+    }
 }

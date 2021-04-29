@@ -165,4 +165,11 @@ public class EdgeController implements IEdgeController {
     public List<ProfileDTO> getPublicProfiles(){
         return edgeService.getPublicProfiles();
     }
+
+//    Remove user. authenticated
+    @DeleteMapping("/user/{username}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeUser(@PathVariable String username){
+        edgeService.removeUser(username);
+    }
 }

@@ -56,7 +56,6 @@ class UserControllerTest {
     void getUserByUserName_existingUsername_UserDTO() throws Exception {
         MvcResult result = mockMvc.perform(get("/user/search/Tenacitas")).andExpect(status().isOk())
                 .andReturn();
-        System.out.println(result.getResponse().getContentAsString());
         assertTrue(result.getResponse().getContentAsString().contains("Tenacitas"));
         assertTrue(result.getResponse().getContentAsString().contains("PUBLIC"));
     }

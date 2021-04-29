@@ -138,10 +138,29 @@ public class UserService implements IUserService {
         return buildUserDTO(userToUpdate);
     }
 
-    public String removeUser(String userName) {
+    public UserDTO removeBuddy(String userName, String buddy) {
+        User userToUpdate = checkUserName(userName);
+        User oldBuddy = checkUserName(buddy);
+
+        List<User> buddies = userToUpdate.getBuddies();
+        if (buddies.contains(oldBuddy)){
+            buddies.remove(oldBuddy);
+            userToUpdate.setRequests(buddies);
+            userRepository.save(userToUpdate);
+        }
+
+        return buildUserDTO(userToUpdate);
+    }
+
+    public Long removeUser(String userName) {
         User userToRemove = checkUserName(userName);
+//        removing any shadow from this user in requests_to_user (both as requesting and requested) and user_buddies
+        userRepository.deleteFromRequests(userName);
+        userRepository.deleteFromBuddies(userName);
+
+        Long profilePic = userToRemove.getProfilePicture();
         userRepository.delete(userToRemove);
-        return userName;
+        return profilePic;
     }
 
     public User checkUserName(String userName){

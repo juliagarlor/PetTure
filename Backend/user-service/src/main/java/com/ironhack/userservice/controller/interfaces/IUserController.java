@@ -18,5 +18,5 @@ public interface IUserController {
     UserDTO addABuddy(String userName, String buddy);
     UserDTO addRequest(String userName, String request);
     UserDTO removeRequest(String userName, String request);
-    String removeUser(String userName);
+    Long removeUser(String userName);
 }

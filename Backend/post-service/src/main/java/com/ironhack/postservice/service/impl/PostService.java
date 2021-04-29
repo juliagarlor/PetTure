@@ -91,6 +91,18 @@ public class PostService implements IPostService {
         }
     }
 
+    public List<Long> removePostsByUsername(String username) {
+        List<Post> postsToRemove = postRepository.findByUserName(username);
+        List<Long> picsId = new ArrayList<>();
+
+        for (Post post : postsToRemove){
+            picsId.add(post.getPictureId());
+            removePost(post.getId());
+        }
+
+        return picsId;
+    }
+
     public Post checkPostId(Long id){
         Optional<Post> output = postRepository.findById(id);
 

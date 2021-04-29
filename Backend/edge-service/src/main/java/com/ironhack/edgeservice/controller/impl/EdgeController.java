@@ -117,6 +117,20 @@ public class EdgeController implements IEdgeController {
         return edgeService.getRequests(userName);
     }
 
+//    Get requested users. authenticated
+    @GetMapping("user/requested/{userName}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<String> getRequested(@PathVariable String userName){
+        return edgeService.getRequested(userName);
+    }
+
+//    Get buddies
+    @GetMapping("/user/buddies/{userName}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProfileDTO> getBuddies(@PathVariable String userName){
+        return edgeService.getBuddies(userName);
+    }
+
 //    Update profile pic. authenticated
     @PutMapping("/user/profile-pic/{userName}")
     public ProfileDTO updateProfilePic(@PathVariable String userName, @RequestBody Long profilePic){

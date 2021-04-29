@@ -27,13 +27,6 @@ FOREIGN KEY(requested_user) REFERENCES `user`(user_name),
 FOREIGN KEY(requesting_user) REFERENCES `user`(user_name)
 );
 
-CREATE TABLE request_from_user(
-requested_user VARCHAR(255),
-requesting_user VARCHAR(255),
-FOREIGN KEY(requested_user) REFERENCES `user`(user_name),
-FOREIGN KEY(requesting_user) REFERENCES `user`(user_name)
-);
-
 -- Picture database. Tables: picture
 
 DROP SCHEMA IF EXISTS picture;

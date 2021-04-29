@@ -2,8 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { Picture } from '../models/picture';
-import { Profile } from '../models/profile';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +47,6 @@ export class UserServiceService {
     return this.http.get<IncomingProfile>( this.url + 'user/search/' + this.getUsername());
   }
 
-
   getRequests(): Observable<BasicProfile[]>{
     this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.getToken());
     return this.http.get<BasicProfile[]>(this.url + 'user/requests/'+ this.getUsername(), {headers: this.headers});
@@ -58,6 +55,16 @@ export class UserServiceService {
   removeRequest(requestId: string): Observable<any>{
     this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.getToken());
     return this.http.put<any>(this.url + 'user/remove/request/' + this.getUsername(), requestId, {headers: this.headers});
+  }
+
+  getRequested(): Observable<string[]>{
+    this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.getToken());
+    return this.http.get<string[]>(this.url + 'user/requested/' + this.getUsername(), {headers: this.headers});
+  }
+
+  getBuddies(): Observable<BasicProfile[]>{
+    this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.getToken());
+    return this.http.get<BasicProfile[]>(this.url + 'user/buddies/'+ this.getUsername(), {headers: this.headers});
   }
 
   addABuddy(buddyId: string): Observable<any>{

@@ -9,6 +9,7 @@ public interface IUserService {
     ProfileDTO getProfileByUserName(String username);
     List<ProfileDTO> getBuddies(String userName);
     List<ProfileDTO> getRequests(String userName);
+    List<String> getRequested(String userName);
     List<String> getPublicProfiles();
     UserDTO registerUser(UserDTO userDTO);
     ProfileDTO updateProfilePic(String userName, String profilePic);

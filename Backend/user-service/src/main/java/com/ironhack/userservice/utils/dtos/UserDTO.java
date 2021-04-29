@@ -19,7 +19,6 @@ public class UserDTO {
     private String visibility;
     private List<ProfileDTO> buddies;
     private List<ProfileDTO> requests;
-    private List<ProfileDTO> requested;
     private String roles;
 
 //    Constructors
@@ -28,14 +27,13 @@ public class UserDTO {
                            String userName, @NotEmpty(message = "Password is compulsory") String password,
                    @NotNull(message = "Pick your favourite pic") Long profilePicture,
                    @NotEmpty(message = "Please, enter a visibility value: public or private") String visibility,
-                   List<ProfileDTO> buddies, List<ProfileDTO> requests, List<ProfileDTO> requested, String roles) {
+                   List<ProfileDTO> buddies, List<ProfileDTO> requests, String roles) {
         this.userName = userName;
         this.password = password;
         this.profilePicture = profilePicture;
         this.visibility = visibility;
         this.buddies = buddies;
         this.requests = requests;
-        this.requested = requested;
         this.roles = roles;
     }
 
@@ -88,14 +86,6 @@ public class UserDTO {
 
     public void setRequests(List<ProfileDTO> requests) {
         this.requests = requests;
-    }
-
-    public List<ProfileDTO> getRequested() {
-        return requested;
-    }
-
-    public void setRequested(List<ProfileDTO> requested) {
-        this.requested = requested;
     }
 
     public String getRoles() {

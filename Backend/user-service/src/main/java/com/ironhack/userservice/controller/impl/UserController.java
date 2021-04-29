@@ -48,6 +48,13 @@ public class UserController implements IUserController {
         return userService.getRequests(userName);
     }
 
+//    Get requested users
+    @GetMapping("user/requested/{userName}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<String> getRequested(@PathVariable String userName){
+        return userService.getRequested(userName);
+    }
+
 //    Get public users
     @GetMapping("/users")
     @ResponseStatus(HttpStatus.OK)

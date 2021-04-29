@@ -42,6 +42,11 @@ public class UserService implements IUserService {
         return buildProfiles(requests);
     }
 
+    public List<String> getRequested(String userName) {
+        User user = checkUserName(userName);
+        return userRepository.findRequestedUsers(userName);
+    }
+
     public List<String> getPublicProfiles() {
         return userRepository.findPublicUserNames(Visibility.PUBLIC);
     }
@@ -111,10 +116,11 @@ public class UserService implements IUserService {
         User newRequest = checkUserName(request);
 
         List<User> requests = userToUpdate.getRequests();
-        requests.add(newRequest);
-        userToUpdate.setRequests(requests);
-        userRepository.save(userToUpdate);
-
+        if (!requests.contains(newRequest)){
+            requests.add(newRequest);
+            userToUpdate.setRequests(requests);
+            userRepository.save(userToUpdate);
+        }
         return buildUserDTO(userToUpdate);
     }
 
@@ -123,9 +129,11 @@ public class UserService implements IUserService {
         User oldRequest = checkUserName(request);
 
         List<User> requests = userToUpdate.getRequests();
-        requests.remove(oldRequest);
-        userToUpdate.setRequests(requests);
-        userRepository.save(userToUpdate);
+        if (requests.contains(oldRequest)){
+            requests.remove(oldRequest);
+            userToUpdate.setRequests(requests);
+            userRepository.save(userToUpdate);
+        }
 
         return buildUserDTO(userToUpdate);
     }
@@ -158,9 +166,8 @@ public class UserService implements IUserService {
     public UserDTO buildUserDTO(User user){
         List<ProfileDTO> buddies = buildProfiles(user.getBuddies());
         List<ProfileDTO> requests = buildProfiles(user.getRequests());
-        List<ProfileDTO> requested = buildProfiles(user.getRequested());
 
         return new UserDTO(user.getUserName(), user.getPassword(), user.getProfilePicture(), user.getVisibility().toString(),
-                buddies, requests, requested, user.getRoles());
+                buddies, requests, user.getRoles());
     }
 }

@@ -158,6 +158,20 @@ public class EdgeService implements IEdgeService {
         return output;
     }
 
+    public List<String> getRequested(String userName) {
+        CircuitBreaker userCircuitBreaker = circuitBreakerFactory.create("user-service");
+        List<String> output = userCircuitBreaker.run(() -> userClient.getRequested(userName),
+                throwable -> fallBack.userNameFallBack());
+        return output;
+    }
+
+    public List<ProfileDTO> getBuddies(String userName) {
+        CircuitBreaker userCircuitBreaker = circuitBreakerFactory.create("user-service");
+        List<ProfileDTO> output = userCircuitBreaker.run(() -> userClient.getBuddies(userName),
+                throwable -> fallBack.profileListFallBack());
+        return output;
+    }
+
     public UserDTO addABuddy(String userName, String buddy) {
         CircuitBreaker userCircuitBreaker = circuitBreakerFactory.create("user-service");
 //        And turning it into a buddy

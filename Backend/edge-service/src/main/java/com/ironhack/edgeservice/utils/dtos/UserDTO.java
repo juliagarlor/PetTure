@@ -11,7 +11,6 @@ public class UserDTO {
     private List<ProfileDTO> buddies;
     private int buddyNum;
     private List<ProfileDTO> requests;
-    private List<ProfileDTO> requested;
     private List<PostDTO> posts;
     private String role;
 
@@ -63,14 +62,6 @@ public class UserDTO {
 
     public void setRequests(List<ProfileDTO> requests) {
         this.requests = requests;
-    }
-
-    public List<ProfileDTO> getRequested() {
-        return requested;
-    }
-
-    public void setRequested(List<ProfileDTO> requested) {
-        this.requested = requested;
     }
 
     public int getBuddyNum() {

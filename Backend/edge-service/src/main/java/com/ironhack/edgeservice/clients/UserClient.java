@@ -27,6 +27,10 @@ public interface UserClient {
     @GetMapping("/user/requests/{userName}")
     List<ProfileDTO> getRequests(@PathVariable String userName);
 
+//    Get requested users
+    @GetMapping("user/requested/{userName}")
+    List<String> getRequested(@PathVariable String userName);
+
 //    Get public users
     @GetMapping("/users")
     List<String> getPublicProfiles();

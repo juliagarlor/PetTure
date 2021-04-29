@@ -12,4 +12,7 @@ import java.util.*;
 public interface UserRepository extends JpaRepository<User, String> {
     @Query("SELECT userName FROM User WHERE visibility = :visibility")
     List<String> findPublicUserNames(@Param("visibility") Visibility visibility);
+
+    @Query(value = "SELECT DISTINCT requested_user FROM request_to_user WHERE requesting_user = :username", nativeQuery = true)
+    List<String> findRequestedUsers(@Param("username") String username);
 }

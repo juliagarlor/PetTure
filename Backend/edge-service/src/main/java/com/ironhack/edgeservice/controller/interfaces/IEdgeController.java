@@ -26,6 +26,8 @@ public interface IEdgeController {
     ResponseEntity<?> registerUser(UserDTO userDTO);
     ProfileDTO updateProfilePic(String userName, Long profilePic);
     List<ProfileDTO> getRequests(String userName);
+    List<String> getRequested(String userName);
+    List<ProfileDTO> getBuddies(String userName);
     UserDTO addABuddy(String userName, String buddy);
     UserDTO addRequest(String userName, String request);
     UserDTO removeRequest(String userName, String request);

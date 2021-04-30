@@ -19,6 +19,11 @@ export class NavBarComponent implements OnInit {
     this.logged = this.userService.getToken().length > 0;
   }
 
+  goToMyProfile(): void {
+    this.userService.updateProfileToCheck(this.userService.getUsername());
+    this.router.navigateByUrl('/profile');
+  }
+
   signOut(): void{
     this.userService.signOut();
     this.router.navigateByUrl('/');

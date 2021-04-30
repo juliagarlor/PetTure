@@ -19,7 +19,7 @@
                 <mat-icon>face</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item [routerLink] = "'/profile'" *ngIf = "logged">
+                <button mat-menu-item (click) = "goToMyProfile()" *ngIf = "logged">
                   <mat-icon>pets</mat-icon>
                   <span>Profile</span>
                 </button>

@@ -18,6 +18,7 @@ import { PostCardComponent } from '../post-card/post-card.component';
   encapsulation: ViewEncapsulation.None
 })
 export class ProfileComponent implements OnInit {
+  username: string = '';
   profile: Profile = new Profile('perryThePlaTypus', '', 1, '', 0);
   postList: Post[] = [];
   pictures: any[] = [];
@@ -38,27 +39,31 @@ export class ProfileComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.userService.getProfile().subscribe(data => {
-      this.profile = new Profile(
-        data.userName, data.password, data.profilePicture, data.visibility, data.buddyNum);
-        
-        this.pictureService.getImage(data.profilePicture).subscribe(res => {
-          this.retrievedResponse = res;
-          this.base64Data = this.retrievedResponse.pic;
-          this.profilePic = 'data:image/jpeg;base64,' + this.base64Data;
+    this.userService.currentProfileToCheck.subscribe(profileName => {
+      this.username = profileName;
 
-          this.postService.getPostsByUser(data.userName).subscribe(result => {
-            result.forEach(post => {
-              this.postList.push(new Post(post.postId, post.postBody, post.pictureId, post.userName, post.licks));
+      this.userService.getProfile(this.username).subscribe(data => {
+        this.profile = new Profile(
+          data.userName, data.password, data.profilePicture, data.visibility, data.buddyNum);
+          
+          this.pictureService.getImage(data.profilePicture).subscribe(res => {
+            this.retrievedResponse = res;
+            this.base64Data = this.retrievedResponse.pic;
+            this.profilePic = 'data:image/jpeg;base64,' + this.base64Data;
 
-              this.pictureService.getImage(post.pictureId).subscribe(res => {
-                this.retrievedResponse = res;
-                this.base64Data = this.retrievedResponse.pic;
-                this.pictures.push( 'data:image/jpeg;base64,' + this.base64Data);
-              });
+            this.postService.getPostsByUser(data.userName).subscribe(result => {
+              result.forEach(post => {
+                this.postList.push(new Post(post.postId, post.postBody, post.pictureId, post.userName, post.licks));
+
+                this.pictureService.getImage(post.pictureId).subscribe(res => {
+                  this.retrievedResponse = res;
+                  this.base64Data = this.retrievedResponse.pic;
+                  this.pictures.push( 'data:image/jpeg;base64,' + this.base64Data);
+                });
+            })
           })
-        })
-        })
+          })
+      })
     })
   }
 

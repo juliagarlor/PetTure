@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,8 @@ export class UserServiceService {
 
   url: string = 'http://localhost:8080/';
   headers = new HttpHeaders();
+  profileToCheck = new BehaviorSubject('');
+  currentProfileToCheck = this.profileToCheck.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -43,8 +45,12 @@ export class UserServiceService {
     return this.http.post<any>(this.url + 'user/auth/register', user);
   }
 
-  getProfile(): Observable<IncomingProfile>{
-    return this.http.get<IncomingProfile>( this.url + 'user/search/' + this.getUsername());
+  updateProfileToCheck(newProfileToCheck: string): void{
+    this.profileToCheck.next(newProfileToCheck);
+  }
+
+  getProfile(username: string): Observable<IncomingProfile>{
+    return this.http.get<IncomingProfile>( this.url + 'user/search/' + username);
   }
 
   getRequests(): Observable<BasicProfile[]>{

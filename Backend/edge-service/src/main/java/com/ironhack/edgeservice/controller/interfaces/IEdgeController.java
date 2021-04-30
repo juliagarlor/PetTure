@@ -18,6 +18,7 @@ public interface IEdgeController {
     List<PostDTO> getPostsByUser(String username);
     List<CommentaryDTO> getCommentariesInPost(Long postId);
     PostDTO newPost(PostDTO postDTO);
+    void removePost(Long postId);
     CommentaryDTO addCommentary(CommentaryDTO commentaryDTO);
 
     ResponseEntity<?> authenticateUser(LoginRequest loginRequest);

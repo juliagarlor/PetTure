@@ -51,6 +51,19 @@ h2, p{
     margin-top: 40px;
 }
 
+mat-grid-tile{
+    position: relative;
+}
+
+mat-grid-tile button{
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+
 .searcher{
     width: 0.1px;
     height: 0.1px;

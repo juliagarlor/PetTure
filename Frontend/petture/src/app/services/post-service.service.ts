@@ -49,6 +49,11 @@ export class PostServiceService {
   getPostsByUser(username: string): Observable<IncomingPost[]>{
     return this.http.get<IncomingPost[]>(this.url + 'post/view/by-user/' + username);
   }
+
+  removePost(postId: number): Observable<any>{
+    this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.userService.getToken());
+    return this.http.delete<any>(this.url + 'post/' + postId, {headers: this.headers});
+  }
 }
 
 interface IncomingPost{

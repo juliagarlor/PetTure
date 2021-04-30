@@ -101,6 +101,11 @@ public class EdgeService implements IEdgeService {
         return postDTO;
     }
 
+    public void removePost(Long postId) {
+        Long picId = postClient.removePost(postId);
+        pictureClient.removePic(picId);
+    }
+
     public CommentaryDTO addCommentary(CommentaryDTO commentaryDTO) {
         CircuitBreaker postCircuitBreaker = circuitBreakerFactory.create("post-service");
 
@@ -210,10 +215,10 @@ public class EdgeService implements IEdgeService {
     }
 
     public void removeUser(String username) {
-//        removing posts
-        List<Long> picturesId = postClient.removePostsByUsername(username);
 //        removing user
         Long profilePic = userClient.removeUser(username);
+//        removing posts
+        List<Long> picturesId = postClient.removePostsByUsername(username);
 //        removing pictures. Profile and posts
         picturesId.add(profilePic);
         pictureClient.removePicsByUser(picturesId);

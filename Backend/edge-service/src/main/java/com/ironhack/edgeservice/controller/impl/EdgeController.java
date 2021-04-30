@@ -9,6 +9,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.*;
 
+import javax.ws.rs.*;
 import java.util.*;
 
 @RestController
@@ -76,6 +77,13 @@ public class EdgeController implements IEdgeController {
         return edgeService.newPost(postDTO);
     }
 
+//    Remove a post and its picture. authenticated
+    @DeleteMapping("/post/{postId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removePost(@PathVariable Long postId){
+        edgeService.removePost(postId);
+    }
+
 //    Add a commentary to a post. authenticated
     @PostMapping("/commentary")
     @ResponseStatus(HttpStatus.OK)
@@ -134,8 +142,6 @@ public class EdgeController implements IEdgeController {
 //    Update profile pic. authenticated
     @PutMapping("/user/profile-pic/{userName}")
     public ProfileDTO updateProfilePic(@PathVariable String userName, @RequestBody Long profilePic){
-        System.out.println("llegamos aquí con esta pic: ");
-        System.out.println(profilePic);
         return edgeService.updateProfilePic(userName, profilePic);
     }
 

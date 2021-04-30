@@ -105,4 +105,12 @@ export class ProfileComponent implements OnInit {
       return image;
     })
   }
+
+  deletePost(postIndex: number): void{
+    let postId = this.postList[postIndex].id;
+    this.postService.removePost(postId).subscribe(data => {
+      this.pictures.splice(postIndex, 1);
+      this.postList.splice(postIndex, 1);
+    })
+  }
 }

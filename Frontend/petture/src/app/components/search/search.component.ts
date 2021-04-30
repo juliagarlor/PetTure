@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Profile } from 'src/app/models/profile';
 import { UserServiceService } from 'src/app/services/user-service.service';
 
@@ -15,7 +16,8 @@ export class SearchComponent implements OnInit {
   unrequestable: string[] = [];
 
   constructor(
-    private userService: UserServiceService
+    private userService: UserServiceService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -57,5 +59,10 @@ export class SearchComponent implements OnInit {
         this.suggestedUsers.push({userName: data.userName, profilePic: data.profilePic, requestable: !this.unrequestable.includes(data.userName)})
       })
     }
+  }
+
+  openProfile(username: string): void{
+    this.userService.updateProfileToCheck(username);
+    this.router.navigateByUrl('/profile');
   }
 }

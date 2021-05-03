@@ -1,6 +1,7 @@
 
 import { RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
+import { BuddiesComponent } from "./components/buddies/buddies.component";
 import { HomeComponent } from "./components/home/home.component";
 import { IncomingRequestsComponent } from "./components/incoming-requests/incoming-requests.component";
 import { LogginComponent } from "./components/loggin/loggin.component";
@@ -31,6 +32,11 @@ const appRoutes = [
       {
         path: 'profile',
         component: ProfileComponent,
+        pathMatch: "full"
+      },
+      {
+        path: 'buddies',
+        component: BuddiesComponent,
         pathMatch: "full"
       }
 ];

@@ -68,9 +68,9 @@ export class UserServiceService {
     return this.http.get<string[]>(this.url + 'user/requested/' + this.getUsername(), {headers: this.headers});
   }
 
-  getBuddies(): Observable<BasicProfile[]>{
+  getBuddies(username: string): Observable<BasicProfile[]>{
     this.headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + this.getToken());
-    return this.http.get<BasicProfile[]>(this.url + 'user/buddies/'+ this.getUsername(), {headers: this.headers});
+    return this.http.get<BasicProfile[]>(this.url + 'user/buddies/'+ username, {headers: this.headers});
   }
 
   addABuddy(buddyId: string): Observable<any>{

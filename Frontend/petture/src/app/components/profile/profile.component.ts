@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { routing } from 'src/app/app.routing';
 import { Picture } from 'src/app/models/picture';
 import { Post } from 'src/app/models/post';
 import { Profile } from 'src/app/models/profile';
@@ -34,7 +36,8 @@ export class ProfileComponent implements OnInit {
     private pictureService: PictureServiceService,
     private userService: UserServiceService,
     private postService: PostServiceService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {
    }
 
@@ -117,5 +120,9 @@ export class ProfileComponent implements OnInit {
       this.pictures.splice(postIndex, 1);
       this.postList.splice(postIndex, 1);
     })
+  }
+
+  seeBuddies(): void{
+    this.router.navigateByUrl('/buddies');
   }
 }

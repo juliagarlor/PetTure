@@ -23,7 +23,7 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.loggedUser = this.userService.getUsername();
     this.unrequestable.push(this.loggedUser);
-    this.userService.getBuddies().subscribe(buddies => {
+    this.userService.getBuddies(this.loggedUser).subscribe(buddies => {
       buddies.forEach(buddy => {
         this.unrequestable.push(buddy.userName);
       })

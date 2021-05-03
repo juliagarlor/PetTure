@@ -46,4 +46,9 @@ export class BuddiesComponent implements OnInit {
     })
   }
 
+  sendRequest(requestTo: string, i: number){
+    this.userService.newRequest(requestTo).subscribe(data => {
+      this.buddies[i].requestable = false;
+    })
+  }
 }

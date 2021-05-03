@@ -38,12 +38,13 @@ export class ProfileComponent implements OnInit {
     private postService: PostServiceService,
     public dialog: MatDialog,
     private router: Router
-  ) {
-   }
+  ) {}
 
   ngOnInit(): void {
     this.userService.currentProfileToCheck.subscribe(profileName => {
       this.username = profileName;
+      this.postList = [];
+      this.pictures = [];
 
       this.userService.getProfile(this.username).subscribe(data => {
         this.profile = new Profile(

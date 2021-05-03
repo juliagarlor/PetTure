@@ -50,6 +50,9 @@ export class UserServiceService {
   }
 
   getProfile(username: string): Observable<IncomingProfile>{
+    if(username.length == 0){
+      username = this.getUsername();
+    }
     return this.http.get<IncomingProfile>( this.url + 'user/search/' + username);
   }
 

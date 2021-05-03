@@ -1,10 +1,15 @@
-<h1>{{username}}'s buddies</h1>
-<div class="searchcard" *ngFor = "let buddy of buddies; let i = index">
-    <div class="details" >
-        <app-profile-card [userProfile] = "buddy"></app-profile-card></div>
-    <div class="buttons" >
-        <button mat-flat-button *ngIf = "loggedUser.length > 0 && buddy.requestable">
-            Send request
-        </button>
+<app-nav-bar></app-nav-bar>
+<div class="container">
+    <h2>{{username}}'s buddies:</h2>
+
+    <div class="searchcard" *ngFor = "let buddy of buddies; let i = index">
+        <div class="details" >
+            <app-profile-card [userProfile] = "buddy"></app-profile-card></div>
+        <div class="buttons" >
+            <button mat-flat-button *ngIf = "loggedUser.length > 0 && buddy.requestable">
+                Send request
+            </button>
+        </div>
     </div>
 </div>
+

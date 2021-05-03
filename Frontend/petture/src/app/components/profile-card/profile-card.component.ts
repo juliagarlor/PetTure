@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PictureServiceService } from 'src/app/services/picture-service.service';
+import { UserServiceService } from 'src/app/services/user-service.service';
 
 @Component({
   selector: 'app-profile-card',
@@ -14,7 +16,9 @@ export class ProfileCardComponent implements OnInit {
   base64Data: any;
 
   constructor(
-    private pictureService: PictureServiceService
+    private pictureService: PictureServiceService,
+    private userService: UserServiceService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -25,4 +29,8 @@ export class ProfileCardComponent implements OnInit {
     })
   }
 
+  openProfile(username: string): void{
+    this.userService.updateProfileToCheck(username);
+    this.router.navigateByUrl('/profile');
+  }
 }

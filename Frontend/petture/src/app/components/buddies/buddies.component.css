@@ -1,0 +1,47 @@
+div{
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container{
+    margin-top: 60px;
+    margin-bottom: 200px; 
+}
+
+h2{
+    margin-top: 10px;
+}
+
+.searchcard{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 60vw;
+    margin: auto;
+    border: 1px solid #8cb3af;
+    border-radius: 5px;
+    padding: 10px;
+    height: 5vw;
+    min-width: 500px;
+    min-height: 100px;
+    margin-top: 10px;
+}
+
+.details, .buttons{
+    margin: 0;
+}
+
+.details{
+    flex: 2;
+}
+
+.buttons{
+    flex: 1;
+}
+
+button{
+    background-color: #b4281e;
+    color: white;
+}

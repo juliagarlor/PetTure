@@ -16,8 +16,7 @@ export class SearchComponent implements OnInit {
   unrequestable: string[] = [];
 
   constructor(
-    private userService: UserServiceService,
-    private router: Router
+    private userService: UserServiceService
   ) { }
 
   ngOnInit(): void {
@@ -59,10 +58,5 @@ export class SearchComponent implements OnInit {
         this.suggestedUsers.push({userName: data.userName, profilePic: data.profilePic, requestable: !this.unrequestable.includes(data.userName)})
       })
     }
-  }
-
-  openProfile(username: string): void{
-    this.userService.updateProfileToCheck(username);
-    this.router.navigateByUrl('/profile');
   }
 }

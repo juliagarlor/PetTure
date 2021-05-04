@@ -90,7 +90,7 @@ Do not forget to check your profile and search for friends to keep your page nea
 ### Edge service
 
 | HTTP verb | Route | Description | Authorization needed |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | POST | /pic | Post a new picture | Bearer Token |
 | GET | /pic/{id} | Get a picture by id | No Auth |
 | GET | /post/view/{postId} | Get a post with its picture | Bearer Token |

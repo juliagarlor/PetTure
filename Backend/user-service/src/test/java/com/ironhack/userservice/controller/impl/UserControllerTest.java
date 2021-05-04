@@ -274,7 +274,7 @@ class UserControllerTest {
     void removeUser_existingUsername_Username() throws Exception {
         MvcResult result = mockMvc.perform(delete("/user/Tenacitas"))
                 .andExpect(status().isOk()).andReturn();
-        assertTrue(result.getResponse().getContentAsString().contains("Tenacitas"));
+        assertTrue(result.getResponse().getContentAsString().contains("1"));
     }
 
     @Test

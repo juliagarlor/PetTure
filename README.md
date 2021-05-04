@@ -84,6 +84,36 @@ Do not forget to check your profile and search for friends to keep your page nea
 
 ![Profile](prints/profile.PNG)
 ![Search](prints/search.PNG)
+---
+## Available routes in backend
+
+### Edge service
+
+| HTTP verb | Route | Description | Authorization needed |
+| --- | --- | --- | --- | --- |
+| POST | /pic | Post a new picture | Bearer Token |
+| GET | /pic/{id} | Get a picture by id | No Auth |
+| GET | /post/view/{postId} | Get a post with its picture | Bearer Token |
+| PUT | /licks/{postId} | Update post's licks | Bearer Token |
+| GET | /post/view/public | Get posts of public users | No Auth |
+| GET | /post/view/by-user/{username} | Get every post from a user | No Auth |
+| GET | /commentaries/{postId} | Get all commentaries from a post | No Auth |
+| POST | /post | Add a new post and picture | Bearer Token |
+| DELETE | /post/{postId} | Remove a post and its picture | Bearer Token |
+| POST | /commentary | Add a commentary to a post | Bearer Token |
+| POST | /user/auth/login | Login | No Auth |
+| GET | /user/search/{username} | Get user by username | No Auth |
+| GET | /user/basic-profile/{username} | Get the basic profile by username | No Auth |
+| POST | /user/auth/register | Register an new user | No Auth |
+| GET | /user/requests/{username} | Get an user's requests | Bearer Token |
+| GET | /user/requested/{username} | Get requested users by a certain user | Bearer Token |
+| GET | /user/buddies/{username} | Get an user's buddies | No Auth |
+| PUT | /user/profile-pic/{username} | Update an user's profile picture | Bearer Token |
+| PUT | /user/buddy/{username} | Add a new buddy | Bearer Token |
+| PUT | /user/request/{username} | Add a new request | Bearer Token |
+| PUT | /user/remove/request/{username} | Remove a request | Bearer Token |
+| GET | /user/search/public-profiles | Get public profiles | No Auth |
+| DELETE | /user/{username} | Remove an user | Bearer Token |
 
 ---
 developed with ❤️ by Julia García

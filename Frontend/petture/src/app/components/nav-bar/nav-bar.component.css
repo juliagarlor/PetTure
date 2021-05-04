@@ -21,7 +21,7 @@ div{
     display: table;
 }
 .links{
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .logo button{

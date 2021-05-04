@@ -48,8 +48,6 @@ export class PostCardComponent implements OnInit {
   newComment: string = '';
 
   constructor(
-    private pictureService: PictureServiceService,
-    private userService: UserServiceService,
     private postService: PostServiceService
   ) { }
 
@@ -62,6 +60,7 @@ export class PostCardComponent implements OnInit {
   }
 
   addALick():void{
+    console.log('lick')
     if(!this.isShown && this.logedUser.length > 0){
       const random = Math.floor(Math.random() * this.lickList.length);
       this.lick = this.lickList[random];
@@ -84,6 +83,7 @@ export class PostCardComponent implements OnInit {
   }
 
   cardClicked(): void{
+    console.log('clicked!')
     if (this.flipped === 'default') {
       this.flipped = 'flipped';
     } else {

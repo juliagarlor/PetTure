@@ -1,5 +1,5 @@
 <div class="card"  [@cardFlip]="flipped">
-    <div class = "front">
+    <div class = "front" (click) = "cardClicked()">
         <div class="body" (click) = "cardClicked()">
             <p><mat-icon>favorite</mat-icon> {{post.licks}}</p>
             <p><b>{{post.userName}}:</b>  {{post.body}}</p>

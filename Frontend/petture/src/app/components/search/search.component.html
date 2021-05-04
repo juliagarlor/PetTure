@@ -1,7 +1,7 @@
 <app-nav-bar></app-nav-bar>
 <div class="container">
     <mat-form-field class="searchinput">
-        <input matInput type="text" [(ngModel)]="value" (keyup) = "search($event)">
+        <input matInput type="text" [(ngModel)]="value" placeholder="Search..." (keyup) = "search($event)">
         <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
           <mat-icon>close</mat-icon>
         </button>

@@ -115,5 +115,53 @@ Do not forget to check your profile and search for friends to keep your page nea
 | GET | /user/search/public-profiles | Get public profiles | No Auth |
 | DELETE | /user/{username} | Remove an user | Bearer Token |
 
+### User service
+
+No authentication needed
+
+| HTTP verb | Route | Description |
+| --- | --- | --- |
+| GET | /user/search/{username} | Get user by username |
+| GET | /user/basic-profile/{username} | Get basic profile by username |
+| GET | /user/buddies/{username} | Get an user's buddies |
+| GET | /user/requests/{username} | Get an user's requests |
+| GET | /user/requested/{username} | Get all users requested by a certain user |
+| GET | /users | Get public users |
+| POST | /user/auth/register | Register a new user |
+| PUT | /user/profile-pic/{username} | Update an user's profile pic |
+| PUT | /user/buddy/{username} | Add a new buddy |
+| PUT | /user/add/request/{username} | Add a new request |
+| PUT | /user/remove/request/{username} | Remove request |
+| DELETE | /user/{username} | Remove a user |
+
+### Picture service
+
+No authentication needed
+
+| HTTP verb | Route | Description |
+| --- | --- | --- |
+| GET | /pic/{id} | Get a picture by id |
+| POST | /pic | Post a new picture |
+| DELETE | /pic/{id} | Remove picture by id |
+| DELETE | /pics | Remove all pictures from an user |
+
+### Post service
+
+No authentication needed
+
+| HTTP verb | Route | Description |
+| --- | --- | --- |
+| GET | /post/{id} | Get post by id |
+| GET | /posts/picture/{pictureId} | Get post by picture id |
+| GET | /posts/user/{username} | Get posts by username |
+| GET | /posts | Get all posts |
+| POST | /post | Post a new post |
+| PUT | /licks/{postId} | Update licks |
+| DELETE | /post/{postId} | Remove a post by post id |
+| DELETE | /posts/picture/{pictureId} | Remove posts by picture id |
+| DELETE | /posts/username/{username} | Remove posts by username |
+| GET | /commentaries/{postId} | Get all the commentaries in a post |
+| POST | /commentary | Add a new commentary |
+
 ---
 developed with ❤️ by Julia García
